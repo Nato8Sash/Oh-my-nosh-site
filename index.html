@@ -2,17 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Oh My Nosh</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4PP7QY7N8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-B4PP7QY7N8');
-  </script>
   <style>
+    /* (Same styles as before - carousel, buttons, layout etc.) */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -51,7 +44,6 @@
       color: #d48fa4;
       margin-top: 2rem;
     }
-    /* Carousel styles */
     .carousel {
       position: relative;
       max-width: 900px;
@@ -80,7 +72,6 @@
       pointer-events: auto;
       user-select: none;
     }
-    /* Arrows */
     .carousel-button {
       position: absolute;
       top: 50%;
@@ -105,7 +96,6 @@
     .carousel-button.next {
       right: 10px;
     }
-    /* Dots */
     .carousel-dots {
       text-align: center;
       margin-top: 10px;
@@ -163,23 +153,6 @@
         padding: 1rem;
       }
     }
-    /* Back to top button */
-    .back-to-top {
-      position: fixed;
-      bottom: 3rem;
-      right: 1rem;
-      background: #d48fa4;
-      color: white;
-      padding: 0.75rem 1rem;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.5rem;
-      display: none;
-      z-index: 2000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      user-select: none;
-      line-height: 1;
-    }
   </style>
 </head>
 <body>
@@ -214,80 +187,59 @@
   <section id="gallery">
     <h2>Gallery</h2>
 
+    <!-- Carousel containers with data attributes for dynamic loading -->
     <h3>Cakes</h3>
-    <div class="carousel" aria-label="Cakes Carousel">
+    <div class="carousel" data-prefix="Cake" aria-label="Cakes Carousel">
       <button class="carousel-button prev" aria-label="Previous Cake">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="Cake1.jpg" alt="Cake 1" draggable="false" /></div>
-        <!-- Add more cake images as needed -->
-        <div class="carousel-slide"><img src="Cake30.jpg" alt="Cake 30" draggable="false" /></div>
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Cake">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Cake Carousel Navigation"></div>
     </div>
 
     <h3>Cookies</h3>
-    <div class="carousel" aria-label="Cookies Carousel">
+    <div class="carousel" data-prefix="Cookies" aria-label="Cookies Carousel">
       <button class="carousel-button prev" aria-label="Previous Cookie">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="Cookies1.jpg" alt="Cookies 1" draggable="false" /></div>
-        <!-- Add more cookie images as needed -->
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Cookie">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Cookies Carousel Navigation"></div>
     </div>
 
     <h3>Cupcakes</h3>
-    <div class="carousel" aria-label="Cupcakes Carousel">
+    <div class="carousel" data-prefix="Cupcake" aria-label="Cupcakes Carousel">
       <button class="carousel-button prev" aria-label="Previous Cupcake">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="Cupcake1.jpg" alt="Cupcake 1" draggable="false" /></div>
-        <!-- Add more cupcake images as needed -->
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Cupcake">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Cupcakes Carousel Navigation"></div>
     </div>
 
     <h3>Cake & Cookies</h3>
-    <div class="carousel" aria-label="Cake and Cookies Carousel">
+    <div class="carousel" data-prefix="Cake&Cookies" aria-label="Cake and Cookies Carousel">
       <button class="carousel-button prev" aria-label="Previous Cake and Cookies">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="Cake&Cookies1.jpg" alt="Cake and Cookies 1" draggable="false" /></div>
-        <!-- Add more images as needed -->
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Cake and Cookies">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Cake and Cookies Carousel Navigation"></div>
     </div>
 
     <h3>Cake & Cupcakes</h3>
-    <div class="carousel" aria-label="Cake and Cupcakes Carousel">
+    <div class="carousel" data-prefix="Cake&Cupcakes" aria-label="Cake and Cupcakes Carousel">
       <button class="carousel-button prev" aria-label="Previous Cake and Cupcakes">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="Cake&Cupcakes1.jpg" alt="Cake and Cupcakes 1" draggable="false" /></div>
-        <!-- Add more images as needed -->
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Cake and Cupcakes">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Cake and Cupcakes Carousel Navigation"></div>
     </div>
 
     <h3>Dessert Jars</h3>
-    <div class="carousel" aria-label="Dessert Jars Carousel">
+    <div class="carousel" data-prefix="DessertJars" aria-label="Dessert Jars Carousel">
       <button class="carousel-button prev" aria-label="Previous Dessert Jar">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="DessertJars1.jpg" alt="Dessert Jars 1" draggable="false" /></div>
-        <!-- Add more images as needed -->
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Dessert Jar">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Dessert Jars Carousel Navigation"></div>
     </div>
 
     <h3>Cake Pops</h3>
-    <div class="carousel" aria-label="Cake Pops Carousel">
+    <div class="carousel" data-prefix="CakePops" aria-label="Cake Pops Carousel">
       <button class="carousel-button prev" aria-label="Previous Cake Pop">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-slide"><img src="CakePops1.jpg" alt="Cake Pops 1" draggable="false" /></div>
-        <!-- Add more images as needed -->
-      </div>
+      <div class="carousel-track"></div>
       <button class="carousel-button next" aria-label="Next Cake Pop">&#10095;</button>
       <div class="carousel-dots" role="tablist" aria-label="Cake Pops Carousel Navigation"></div>
     </div>
@@ -345,52 +297,91 @@
     <p>© 2025 Oh My Nosh. All rights reserved.</p>
   </footer>
 
-  <!-- Back to top button -->
   <div class="back-to-top" title="Back to top" onclick="scrollToTop()">⬆️</div>
 
   <script>
-    // Scroll to top functionality
+    // Scroll to top button
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-
-    // Show/hide back to top button on scroll
     window.addEventListener("scroll", () => {
       const btn = document.querySelector(".back-to-top");
       btn.style.display = window.scrollY > 300 ? "block" : "none";
     });
 
-    // Carousel functionality for multiple carousels
+    // Function to check if image exists by trying to load it
+    function imageExists(url) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+    }
+
+    // Dynamically load images for each carousel
+    async function loadCarouselImages(carousel, prefix) {
+      const track = carousel.querySelector('.carousel-track');
+      const dotsNav = carousel.querySelector('.carousel-dots');
+
+      let index = 1;
+      const maxImages = 50; // max tries to avoid infinite loops
+      while (index <= maxImages) {
+        const imageUrl = `${prefix}${index}.jpg`;
+        // eslint-disable-next-line no-await-in-loop
+        const exists = await imageExists(imageUrl);
+        if (!exists) break;
+
+        // Create slide
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = `${prefix} ${index}`;
+        img.draggable = false;
+
+        slide.appendChild(img);
+        track.appendChild(slide);
+        index++;
+      }
+
+      if (index === 1) {
+        // No images found
+        track.innerHTML = '<p style="padding:1rem; text-align:center; color:#999;">No images available.</p>';
+      }
+    }
+
+    // Carousel setup
     function initCarousel(carousel) {
       const track = carousel.querySelector('.carousel-track');
-      const slides = Array.from(track.children);
       const prevButton = carousel.querySelector('.carousel-button.prev');
       const nextButton = carousel.querySelector('.carousel-button.next');
       const dotsNav = carousel.querySelector('.carousel-dots');
 
       let currentIndex = 0;
+      const slides = track.children;
       const slideCount = slides.length;
 
-      // Clear dotsNav before adding (important if re-initializing)
+      // Create dots based on number of slides
       dotsNav.innerHTML = '';
-
-      // Create dots
-      slides.forEach((_, index) => {
-        const button = document.createElement('button');
-        button.setAttribute('aria-label', `Slide ${index + 1}`);
-        if (index === 0) button.classList.add('active');
-        button.addEventListener('click', () => {
-          currentIndex = index;
+      for (let i = 0; i < slideCount; i++) {
+        const dot = document.createElement('button');
+        dot.setAttribute('aria-label', `Slide ${i + 1}`);
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          currentIndex = i;
           updateCarousel();
         });
-        dotsNav.appendChild(button);
-      });
-      const dots = Array.from(dotsNav.children);
+        dotsNav.appendChild(dot);
+      }
+      const dots = dotsNav.children;
 
       function updateCarousel() {
         track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[currentIndex].classList.add('active');
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].classList.toggle('active', i === currentIndex);
+        }
       }
 
       function nextSlide() {
@@ -406,38 +397,41 @@
       nextButton.addEventListener('click', nextSlide);
       prevButton.addEventListener('click', prevSlide);
 
-      // Touch/swipe support for mobile
+      // Touch support
       let startX = 0;
       let isDragging = false;
 
-      track.addEventListener('touchstart', e => {
+      track.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         isDragging = true;
       });
 
-      track.addEventListener('touchmove', e => {
-        if (!isDragging) return;
-        // Could add drag feedback here if desired
-      });
-
-      track.addEventListener('touchend', e => {
+      track.addEventListener('touchend', (e) => {
         if (!isDragging) return;
         const endX = e.changedTouches[0].clientX;
         const diff = endX - startX;
-        if (diff > 50) {
-          prevSlide();
-        } else if (diff < -50) {
-          nextSlide();
-        }
+        if (diff > 50) prevSlide();
+        else if (diff < -50) nextSlide();
         isDragging = false;
       });
 
-      // Initialize position
       updateCarousel();
     }
 
-    // Initialize all carousels on page load
-    document.querySelectorAll('.carousel').forEach(initCarousel);
+    // Initialize all carousels by loading images first, then init carousel
+    async function setupAllCarousels() {
+      const carousels = document.querySelectorAll('.carousel');
+      for (const carousel of carousels) {
+        const prefix = carousel.getAttribute('data-prefix');
+        await loadCarouselImages(carousel, prefix);
+        initCarousel(carousel);
+      }
+    }
+
+    // Run on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      setupAllCarousels();
+    });
 
     // WhatsApp enquiry form send
     function sendWhatsAppEnquiry() {
