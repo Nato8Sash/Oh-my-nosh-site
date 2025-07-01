@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oh My Nosh</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4PP7QY7N8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B4PP7QY7N8');
+  </script>
   <style>
-    /* (Same styles as before - carousel, buttons, layout etc.) */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -17,9 +24,6 @@
       background-color: #f5e6ed;
       text-align: center;
       padding: 2rem 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
     header img {
       max-width: 300px;
@@ -42,78 +46,18 @@
     }
     h2 {
       color: #d48fa4;
-      margin-top: 2rem;
     }
-    .carousel {
-      position: relative;
-      max-width: 900px;
-      margin: 1rem auto 2rem auto;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(212, 143, 164, 0.3);
-      background: white;
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 1rem;
     }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s ease-in-out;
-      touch-action: pan-y;
-    }
-    .carousel-slide {
-      min-width: 100%;
-      user-select: none;
-      pointer-events: none;
-      position: relative;
-    }
-    .carousel-slide img {
+    .gallery-grid img {
       width: 100%;
       height: auto;
-      display: block;
       border-radius: 10px;
-      pointer-events: auto;
-      user-select: none;
-    }
-    .carousel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(212, 143, 164, 0.8);
-      border: none;
-      color: white;
-      font-size: 2rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 50%;
-      cursor: pointer;
-      user-select: none;
-      z-index: 10;
-      transition: background 0.3s;
-    }
-    .carousel-button:hover {
-      background: #d48fa4;
-    }
-    .carousel-button.prev {
-      left: 10px;
-    }
-    .carousel-button.next {
-      right: 10px;
-    }
-    .carousel-dots {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .carousel-dots button {
-      border: none;
-      background: #d48fa4;
-      width: 12px;
-      height: 12px;
-      margin: 0 5px;
-      border-radius: 50%;
-      cursor: pointer;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-    }
-    .carousel-dots button.active {
-      opacity: 1;
-      box-shadow: 0 0 5px #d48fa4;
+      object-fit: cover;
     }
     .contact-button {
       display: inline-block;
@@ -187,61 +131,48 @@
   <section id="gallery">
     <h2>Gallery</h2>
 
-    <!-- Carousel containers with data attributes for dynamic loading -->
     <h3>Cakes</h3>
-    <div class="carousel" data-prefix="Cake" aria-label="Cakes Carousel">
-      <button class="carousel-button prev" aria-label="Previous Cake">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Cake">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Cake Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <!-- Image list -->
+      <img src="Cake1.jpg" alt="Cake 1">
+      <!-- ... Add remaining cakes here ... -->
+      <img src="Cake30.jpg" alt="Cake 30">
     </div>
 
     <h3>Cookies</h3>
-    <div class="carousel" data-prefix="Cookies" aria-label="Cookies Carousel">
-      <button class="carousel-button prev" aria-label="Previous Cookie">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Cookie">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Cookies Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <img src="Cookies1.jpg" alt="Cookies 1">
+      <!-- ... -->
     </div>
 
     <h3>Cupcakes</h3>
-    <div class="carousel" data-prefix="Cupcake" aria-label="Cupcakes Carousel">
-      <button class="carousel-button prev" aria-label="Previous Cupcake">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Cupcake">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Cupcakes Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <img src="Cupcake1.jpg" alt="Cupcake 1">
+      <!-- ... -->
     </div>
 
     <h3>Cake & Cookies</h3>
-    <div class="carousel" data-prefix="Cake&Cookies" aria-label="Cake and Cookies Carousel">
-      <button class="carousel-button prev" aria-label="Previous Cake and Cookies">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Cake and Cookies">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Cake and Cookies Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <img src="Cake&Cookies1.jpg" alt="Cake and Cookies 1">
+      <!-- ... -->
     </div>
 
     <h3>Cake & Cupcakes</h3>
-    <div class="carousel" data-prefix="Cake&Cupcakes" aria-label="Cake and Cupcakes Carousel">
-      <button class="carousel-button prev" aria-label="Previous Cake and Cupcakes">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Cake and Cupcakes">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Cake and Cupcakes Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <img src="Cake&Cupcakes1.jpg" alt="Cake and Cupcakes 1">
+      <!-- ... -->
     </div>
 
     <h3>Dessert Jars</h3>
-    <div class="carousel" data-prefix="DessertJars" aria-label="Dessert Jars Carousel">
-      <button class="carousel-button prev" aria-label="Previous Dessert Jar">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Dessert Jar">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Dessert Jars Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <img src="DessertJars1.jpg" alt="Dessert Jars 1">
+      <!-- ... -->
     </div>
 
     <h3>Cake Pops</h3>
-    <div class="carousel" data-prefix="CakePops" aria-label="Cake Pops Carousel">
-      <button class="carousel-button prev" aria-label="Previous Cake Pop">&#10094;</button>
-      <div class="carousel-track"></div>
-      <button class="carousel-button next" aria-label="Next Cake Pop">&#10095;</button>
-      <div class="carousel-dots" role="tablist" aria-label="Cake Pops Carousel Navigation"></div>
+    <div class="gallery-grid">
+      <img src="CakePops1.jpg" alt="Cake Pops 1">
+      <!-- ... -->
     </div>
   </section>
 
@@ -265,10 +196,10 @@
 
     <h3>Place an Order</h3>
     <form id="whatsapp-enquiry-form" onsubmit="event.preventDefault(); sendWhatsAppEnquiry();">
-      <label for="name">Your Name:</label><br />
-      <input type="text" id="name" name="name" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;" /><br />
+      <label for="name">Your Name:</label><br>
+      <input type="text" id="name" name="name" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
 
-      <label for="product">What would you like to order?</label><br />
+      <label for="product">What would you like to order?</label><br>
       <select id="product" name="product" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;">
         <option value="">--Select a Product--</option>
         <option value="Custom Cake">Custom Cake</option>
@@ -278,167 +209,31 @@
         <option value="Dessert Jars">Dessert Jars</option>
         <option value="DIY Kit">DIY Kit</option>
         <option value="Other">Other</option>
-      </select><br />
+      </select><br>
 
-      <label for="budget">Budget (ZAR):</label><br />
-      <input type="number" id="budget" name="budget" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;" /><br />
+      <label for="budget">Budget (ZAR):</label><br>
+      <input type="number" id="budget" name="budget" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
 
-      <label for="order-date">Preferred Date:</label><br />
-      <input type="date" id="order-date" name="order-date" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;" /><br />
+      <label for="order-date">Preferred Date:</label><br>
+      <input type="date" id="order-date" name="order-date" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
 
       <button class="contact-button" type="submit">Send Enquiry via WhatsApp</button>
     </form>
 
-    <a class="contact-button" href="https://www.instagram.com/ohmynoshh" target="_blank" rel="noopener">Instagram</a>
-    <a class="contact-button" href="https://www.facebook.com/share/1Eq7thDPyU/" target="_blank" rel="noopener">Facebook</a>
+    <a class="contact-button" href="https://www.instagram.com/ohmynoshh">Instagram</a>
+    <a class="contact-button" href="https://www.facebook.com/share/1Eq7thDPyU/">Facebook</a>
   </section>
 
   <footer>
     <p>© 2025 Oh My Nosh. All rights reserved.</p>
   </footer>
 
-  <div class="back-to-top" title="Back to top" onclick="scrollToTop()">⬆️</div>
-
   <script>
-    // Scroll to top button
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    window.addEventListener("scroll", () => {
-      const btn = document.querySelector(".back-to-top");
-      btn.style.display = window.scrollY > 300 ? "block" : "none";
-    });
-
-    // Function to check if image exists by trying to load it
-    function imageExists(url) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-      });
-    }
-
-    // Dynamically load images for each carousel
-    async function loadCarouselImages(carousel, prefix) {
-      const track = carousel.querySelector('.carousel-track');
-      const dotsNav = carousel.querySelector('.carousel-dots');
-
-      let index = 1;
-      const maxImages = 50; // max tries to avoid infinite loops
-      while (index <= maxImages) {
-        const imageUrl = `${prefix}${index}.jpg`;
-        // eslint-disable-next-line no-await-in-loop
-        const exists = await imageExists(imageUrl);
-        if (!exists) break;
-
-        // Create slide
-        const slide = document.createElement('div');
-        slide.className = 'carousel-slide';
-
-        const img = document.createElement('img');
-        img.src = imageUrl;
-        img.alt = `${prefix} ${index}`;
-        img.draggable = false;
-
-        slide.appendChild(img);
-        track.appendChild(slide);
-        index++;
-      }
-
-      if (index === 1) {
-        // No images found
-        track.innerHTML = '<p style="padding:1rem; text-align:center; color:#999;">No images available.</p>';
-      }
-    }
-
-    // Carousel setup
-    function initCarousel(carousel) {
-      const track = carousel.querySelector('.carousel-track');
-      const prevButton = carousel.querySelector('.carousel-button.prev');
-      const nextButton = carousel.querySelector('.carousel-button.next');
-      const dotsNav = carousel.querySelector('.carousel-dots');
-
-      let currentIndex = 0;
-      const slides = track.children;
-      const slideCount = slides.length;
-
-      // Create dots based on number of slides
-      dotsNav.innerHTML = '';
-      for (let i = 0; i < slideCount; i++) {
-        const dot = document.createElement('button');
-        dot.setAttribute('aria-label', `Slide ${i + 1}`);
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-          currentIndex = i;
-          updateCarousel();
-        });
-        dotsNav.appendChild(dot);
-      }
-      const dots = dotsNav.children;
-
-      function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        for (let i = 0; i < dots.length; i++) {
-          dots[i].classList.toggle('active', i === currentIndex);
-        }
-      }
-
-      function nextSlide() {
-        currentIndex = (currentIndex + 1) % slideCount;
-        updateCarousel();
-      }
-
-      function prevSlide() {
-        currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-        updateCarousel();
-      }
-
-      nextButton.addEventListener('click', nextSlide);
-      prevButton.addEventListener('click', prevSlide);
-
-      // Touch support
-      let startX = 0;
-      let isDragging = false;
-
-      track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-      });
-
-      track.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        const endX = e.changedTouches[0].clientX;
-        const diff = endX - startX;
-        if (diff > 50) prevSlide();
-        else if (diff < -50) nextSlide();
-        isDragging = false;
-      });
-
-      updateCarousel();
-    }
-
-    // Initialize all carousels by loading images first, then init carousel
-    async function setupAllCarousels() {
-      const carousels = document.querySelectorAll('.carousel');
-      for (const carousel of carousels) {
-        const prefix = carousel.getAttribute('data-prefix');
-        await loadCarouselImages(carousel, prefix);
-        initCarousel(carousel);
-      }
-    }
-
-    // Run on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      setupAllCarousels();
-    });
-
-    // WhatsApp enquiry form send
     function sendWhatsAppEnquiry() {
-      const name = document.getElementById("name").value.trim();
-      const product = document.getElementById("product").value;
-      const budget = document.getElementById("budget").value;
-      const date = document.getElementById("order-date").value;
+      const name = document.getElementById('name').value.trim();
+      const product = document.getElementById('product').value;
+      const budget = document.getElementById('budget').value;
+      const date = document.getElementById('order-date').value;
 
       if (!name || !product || !budget || !date) {
         alert("Please fill in all fields.");
@@ -448,7 +243,7 @@
       const formattedDate = new Date(date).toLocaleDateString("en-ZA", {
         day: "numeric",
         month: "long",
-        year: "numeric",
+        year: "numeric"
       });
 
       const message = `Hi! My name is ${name}. I'd like to enquire about ordering a ${product} for ${formattedDate}. My budget is R${budget}. Can you assist?`;
