@@ -1,108 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oh My Nosh</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4PP7QY7N8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-B4PP7QY7N8');
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
+    :root {
+      --bg-color: #fff8f9;
+      --text-color: #333;
+      --primary: #d48fa4;
+      --dark-bg: #121212;
+      --dark-text: #f1f1f1;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #fff8f9;
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
     }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
     header {
       background-color: #f5e6ed;
       text-align: center;
       padding: 2rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
     header img {
       max-width: 300px;
     }
-    nav {
-      text-align: center;
+
+    nav, .bottom-nav {
       background-color: #ffeef4;
+      text-align: center;
       padding: 1rem;
     }
-    nav a {
+
+    nav {
+      position: sticky;
+      top: 150px;
+      z-index: 999;
+    }
+
+    nav a, .bottom-nav a {
       margin: 0 1rem;
       text-decoration: none;
-      color: #d48fa4;
+      color: var(--primary);
       font-weight: bold;
     }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      z-index: 1000;
+    }
+
+    .hero {
+      background: url('hero-banner.webp') center/cover no-repeat;
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero a {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
     section {
       padding: 2rem 1rem;
       max-width: 900px;
       margin: auto;
     }
+
     h2 {
-      color: #d48fa4;
+      color: var(--primary);
     }
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 10px;
-      margin-top: 1rem;
     }
+
     .gallery-grid img {
       width: 100%;
-      height: auto;
       border-radius: 10px;
-      object-fit: cover;
+      cursor: pointer;
     }
+
     .contact-button {
       display: inline-block;
       margin: 0.5rem 0;
       padding: 0.75rem 1.5rem;
-      background-color: #d48fa4;
+      background-color: var(--primary);
       color: white;
       border: none;
       border-radius: 5px;
       text-decoration: none;
       cursor: pointer;
     }
+
     footer {
       text-align: center;
       padding: 1rem;
       background-color: #ffeef4;
     }
-    input, select {
-      border: 1px solid #ccc;
-      border-radius: 5px;
+
+    .back-to-top {
+      position: fixed;
+      bottom: 4rem;
+      right: 1rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
     }
-    @media (max-width: 768px) {
-      header img {
-        max-width: 90%;
-      }
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
-      }
-      .contact-button {
-        display: block;
-        width: 90%;
-        margin: 10px auto;
-        text-align: center;
-      }
-      section {
-        padding: 1rem;
-      }
+
+    .dark-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
   <header>
-    <img src="logo.jpg" alt="Oh My Nosh Logo" />
+    <img src="logo.webp" alt="Oh My Nosh Logo">
   </header>
+
   <nav>
     <a href="#about">About</a>
     <a href="#services">Products</a>
@@ -111,146 +169,86 @@
     <a href="#contact">Contact</a>
   </nav>
 
+  <div class="hero animate__animated animate__fadeIn">
+    <h1>Welcome to Oh My Nosh</h1>
+    <a href="#contact">Order Now</a>
+  </div>
+
   <section id="about">
     <h2>About Us</h2>
-    <p>Oh My Nosh specializes in custom cake designs, delightful cupcakes, cookies, cake pops, and dessert jars for every sweet occasion—be it weddings, birthdays, gender reveals, or DIY fun at home. We bring captivating cakes and other sweet necessities to life with creativity and love!</p>
+    <p>Custom cake designs, cupcakes, cookies, cake pops, dessert jars—creativity and love in every bite!</p>
   </section>
 
   <section id="services">
     <h2>Our Treats</h2>
     <ul>
-      <li>Cakes (custom and celebration)</li>
+      <li>Cakes</li>
       <li>Cupcakes</li>
-      <li>Cookies (custom & DIY)</li>
+      <li>Cookies</li>
       <li>Cake Pops</li>
       <li>Dessert Jars</li>
-      <li>DIY Kits: Cookies & Cakes</li>
+      <li>DIY Kits</li>
     </ul>
   </section>
 
   <section id="gallery">
     <h2>Gallery</h2>
-
-    <h3>Cakes</h3>
     <div class="gallery-grid">
-      <!-- Image list -->
-      <img src="Cake1.jpg" alt="Cake 1">
-      <!-- ... Add remaining cakes here ... -->
-      <img src="Cake30.jpg" alt="Cake 30">
-    </div>
-
-    <h3>Cookies</h3>
-    <div class="gallery-grid">
-      <img src="Cookies1.jpg" alt="Cookies 1">
-      <!-- ... -->
-    </div>
-
-    <h3>Cupcakes</h3>
-    <div class="gallery-grid">
-      <img src="Cupcake1.jpg" alt="Cupcake 1">
-      <!-- ... -->
-    </div>
-
-    <h3>Cake & Cookies</h3>
-    <div class="gallery-grid">
-      <img src="Cake&Cookies1.jpg" alt="Cake and Cookies 1">
-      <!-- ... -->
-    </div>
-
-    <h3>Cake & Cupcakes</h3>
-    <div class="gallery-grid">
-      <img src="Cake&Cupcakes1.jpg" alt="Cake and Cupcakes 1">
-      <!-- ... -->
-    </div>
-
-    <h3>Dessert Jars</h3>
-    <div class="gallery-grid">
-      <img src="DessertJars1.jpg" alt="Dessert Jars 1">
-      <!-- ... -->
-    </div>
-
-    <h3>Cake Pops</h3>
-    <div class="gallery-grid">
-      <img src="CakePops1.jpg" alt="Cake Pops 1">
-      <!-- ... -->
+      <img src="Cake1.webp" alt="Cake 1" onclick="openLightbox(this.src)">
+      <img src="Cookies1.webp" alt="Cookies 1" onclick="openLightbox(this.src)">
+      <img src="Cupcake1.webp" alt="Cupcake 1" onclick="openLightbox(this.src)">
     </div>
   </section>
 
   <section id="classes">
-    <h2>Kids' Baking Classes</h2>
-    <p>Oh My Nosh now offers fun and interactive baking classes for children! Whether it’s cupcakes, cookies, or cake kits, your little one can learn the basics of baking in a safe, exciting environment.</p>
-    <ul>
-      <li>💸 <strong>R100 per child, per lesson</strong></li>
-      <li>📝 <strong>R170 once-off sign-up fee per child</strong></li>
-      <li>📍 Based in the general surrounds of Silvamonte, Johannesburg</li>
-      <li>🚗 Additional travel costs may apply for locations further out</li>
-    </ul>
-    <p>To find out more or to book a class, get in touch with us!</p>
+    <h2>Baking Classes</h2>
+    <p>Fun, interactive sessions teaching kids how to bake treats in a safe, exciting environment.</p>
   </section>
 
   <section id="contact">
-    <h2>Get in Touch</h2>
-    <p>Email: <a href="mailto:rameysasha@gmail.com">rameysasha@gmail.com</a></p>
-    <p>Phone: <a href="tel:+27799750908">(+27) 79 975 0908</a></p>
-    <p>Location: Silvamonte, Johannesburg, Gauteng</p>
-
-    <h3>Place an Order</h3>
-    <form id="whatsapp-enquiry-form" onsubmit="event.preventDefault(); sendWhatsAppEnquiry();">
-      <label for="name">Your Name:</label><br>
-      <input type="text" id="name" name="name" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
-
-      <label for="product">What would you like to order?</label><br>
-      <select id="product" name="product" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;">
-        <option value="">--Select a Product--</option>
-        <option value="Custom Cake">Custom Cake</option>
-        <option value="Cupcakes">Cupcakes</option>
-        <option value="Cookies">Cookies</option>
-        <option value="Cake Pops">Cake Pops</option>
-        <option value="Dessert Jars">Dessert Jars</option>
-        <option value="DIY Kit">DIY Kit</option>
-        <option value="Other">Other</option>
-      </select><br>
-
-      <label for="budget">Budget (ZAR):</label><br>
-      <input type="number" id="budget" name="budget" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
-
-      <label for="order-date">Preferred Date:</label><br>
-      <input type="date" id="order-date" name="order-date" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
-
-      <button class="contact-button" type="submit">Send Enquiry via WhatsApp</button>
-    </form>
-
-    <a class="contact-button" href="https://www.instagram.com/ohmynoshh">Instagram</a>
-    <a class="contact-button" href="https://www.facebook.com/share/1Eq7thDPyU/">Facebook</a>
+    <h2>Contact Us</h2>
+    <p>Email: rameysasha@gmail.com</p>
+    <p>Phone: (+27) 79 975 0908</p>
+    <a class="contact-button" href="https://wa.me/27799750908">WhatsApp Us</a>
   </section>
 
   <footer>
     <p>© 2025 Oh My Nosh. All rights reserved.</p>
   </footer>
 
+  <div class="bottom-nav">
+    <a href="#about">About</a>
+    <a href="#services">Products</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="back-to-top" onclick="scrollToTop()">⬆️</div>
+
+  <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000a;justify-content:center;align-items:center;z-index:9999;">
+    <img id="lightbox-img" src="" style="max-width:90%;max-height:90%;">
+  </div>
+
   <script>
-    function sendWhatsAppEnquiry() {
-      const name = document.getElementById('name').value.trim();
-      const product = document.getElementById('product').value;
-      const budget = document.getElementById('budget').value;
-      const date = document.getElementById('order-date').value;
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-      if (!name || !product || !budget || !date) {
-        alert("Please fill in all fields.");
-        return;
-      }
+    window.onscroll = function () {
+      document.querySelector('.back-to-top').style.display = window.scrollY > 300 ? 'block' : 'none';
+    }
 
-      const formattedDate = new Date(date).toLocaleDateString("en-ZA", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      });
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
 
-      const message = `Hi! My name is ${name}. I'd like to enquire about ordering a ${product} for ${formattedDate}. My budget is R${budget}. Can you assist?`;
-      const encodedMessage = encodeURIComponent(message);
-      const phone = "27799750908";
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
 
-      window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
+    document.getElementById('lightbox').onclick = function () {
+      this.style.display = 'none';
     }
   </script>
 </body>
