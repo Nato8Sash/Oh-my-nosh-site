@@ -132,48 +132,25 @@
     <h2>Gallery</h2>
 
     <h3>Cakes</h3>
-    <div class="gallery-grid">
-      <!-- Image list -->
-      <img src="Cake1.jpg" alt="Cake 1">
-      <!-- ... Add remaining cakes here ... -->
-      <img src="Cake30.jpg" alt="Cake 30">
-    </div>
+    <div class="gallery-grid" id="cakes-gallery"></div>
 
     <h3>Cookies</h3>
-    <div class="gallery-grid">
-      <img src="Cookies1.jpg" alt="Cookies 1">
-      <!-- ... -->
-    </div>
+    <div class="gallery-grid" id="cookies-gallery"></div>
 
     <h3>Cupcakes</h3>
-    <div class="gallery-grid">
-      <img src="Cupcake1.jpg" alt="Cupcake 1">
-      <!-- ... -->
-    </div>
+    <div class="gallery-grid" id="cupcakes-gallery"></div>
 
     <h3>Cake & Cookies</h3>
-    <div class="gallery-grid">
-      <img src="Cake&Cookies1.jpg" alt="Cake and Cookies 1">
-      <!-- ... -->
-    </div>
+    <div class="gallery-grid" id="cakecookies-gallery"></div>
 
     <h3>Cake & Cupcakes</h3>
-    <div class="gallery-grid">
-      <img src="Cake&Cupcakes1.jpg" alt="Cake and Cupcakes 1">
-      <!-- ... -->
-    </div>
+    <div class="gallery-grid" id="cakecupcakes-gallery"></div>
 
     <h3>Dessert Jars</h3>
-    <div class="gallery-grid">
-      <img src="DessertJars1.jpg" alt="Dessert Jars 1">
-      <!-- ... -->
-    </div>
+    <div class="gallery-grid" id="dessertjars-gallery"></div>
 
     <h3>Cake Pops</h3>
-    <div class="gallery-grid">
-      <img src="CakePops1.jpg" alt="Cake Pops 1">
-      <!-- ... -->
-    </div>
+    <div class="gallery-grid" id="cakepops-gallery"></div>
   </section>
 
   <section id="classes">
@@ -251,6 +228,29 @@
       const phone = "27799750908";
 
       window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
+    }
+
+    function loadImages(prefix, containerId) {
+      const container = document.getElementById(containerId);
+      let i = 1;
+      while (true) {
+        const img = new Image();
+        img.src = `${prefix}${i}.jpg`;
+        img.onload = () => container.appendChild(img);
+        img.onerror = () => {};
+        i++;
+        if (i > 100) break; // safety cap
+      }
+    }
+
+    window.onload = function () {
+      loadImages('Cake', 'cakes-gallery');
+      loadImages('Cookies', 'cookies-gallery');
+      loadImages('Cupcake', 'cupcakes-gallery');
+      loadImages('Cake&Cookies', 'cakecookies-gallery');
+      loadImages('Cake&Cupcakes', 'cakecupcakes-gallery');
+      loadImages('DessertJars', 'dessertjars-gallery');
+      loadImages('CakePops', 'cakepops-gallery');
     }
   </script>
 </body>
