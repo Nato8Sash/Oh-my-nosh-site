@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oh My Nosh</title>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4PP7QY7N8"></script>
+  <script async src="="https://www.googletagmanager.com/gtag/js?id=G-B4PP7QY7N8"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -75,7 +75,7 @@
       padding: 1rem;
       background-color: #ffeef4;
     }
-    input, select {
+    input, select, textarea {
       border: 1px solid #ccc;
       border-radius: 5px;
     }
@@ -162,7 +162,26 @@
       <li>📍 Based in the general surrounds of Silvamonte, Johannesburg</li>
       <li>🚗 Additional travel costs may apply for locations further out</li>
     </ul>
-    <p>To find out more or to book a class, get in touch with us!</p>
+
+    <h3>Book a Class</h3>
+    <form id="class-booking-form" onsubmit="event.preventDefault(); sendClassBooking();">
+      <label for="parent-name">Your Name:</label><br>
+      <input type="text" id="parent-name" name="parent-name" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
+
+      <label for="child-name">Child's Name:</label><br>
+      <input type="text" id="child-name" name="child-name" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
+
+      <label for="class-date">Preferred Date:</label><br>
+      <input type="date" id="class-date" name="class-date" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
+
+      <label for="num-children">Number of Children:</label><br>
+      <input type="number" id="num-children" name="num-children" min="1" required style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"><br>
+
+      <label for="class-notes">Any notes (optional):</label><br>
+      <textarea id="class-notes" name="class-notes" rows="3" style="padding: 0.5rem; width: 100%; margin: 0.5rem 0;"></textarea><br>
+
+      <button class="contact-button" type="submit">Send Booking via WhatsApp</button>
+    </form>
   </section>
 
   <section id="contact">
@@ -227,6 +246,31 @@
       const encodedMessage = encodeURIComponent(message);
       const phone = "27799750908";
 
+      window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
+    }
+
+    function sendClassBooking() {
+      const parentName = document.getElementById('parent-name').value.trim();
+      const childName = document.getElementById('child-name').value.trim();
+      const classDate = document.getElementById('class-date').value;
+      const numChildren = document.getElementById('num-children').value;
+      const notes = document.getElementById('class-notes').value.trim();
+
+      if (!parentName || !childName || !classDate || !numChildren) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const formattedDate = new Date(classDate).toLocaleDateString("en-ZA", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+      const message = `Hi! I'd like to book a Kids' Baking Class.\n\n👤 Parent: ${parentName}\n🧁 Child: ${childName}\n📅 Date: ${formattedDate}\n👶 Number of Children: ${numChildren}${notes ? `\n📝 Notes: ${notes}` : ""}`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const phone = "27799750908";
       window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
     }
 
