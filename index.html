@@ -260,27 +260,32 @@
       window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
     }
 
-    // Auto-generate gallery images by numeric sequence
-    function generateGalleryImages(containerId, baseName, count) {
+    // This function tries to load images and only adds them if they exist (onload fires)
+    function loadExistingImages(containerId, baseName, maxCount) {
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      for (let i = 1; i <= count; i++) {
-        const img = document.createElement('img');
+      for(let i = 1; i <= maxCount; i++) {
+        const img = new Image();
         img.src = `${baseName}${i}.jpg`;
         img.alt = `${baseName} ${i}`;
-        container.appendChild(img);
+        img.onload = () => {
+          container.appendChild(img);
+        };
+        img.onerror = () => {
+          // Do nothing, image doesn't exist
+        };
       }
     }
 
-    window.onload = function() {
-      generateGalleryImages('gallery-cakes', 'Cake', 50);
-      generateGalleryImages('gallery-cookies', 'Cookies', 30);
-      generateGalleryImages('gallery-cupcakes', 'Cupcake', 25);
-      generateGalleryImages('gallery-cakecookies', 'Cake&Cookies', 20);
-      generateGalleryImages('gallery-cakecupcakes', 'Cake&Cupcakes', 20);
-      generateGalleryImages('gallery-dessertjars', 'DessertJars', 15);
-      generateGalleryImages('gallery-cakepops', 'CakePops', 15);
+    window.onload = () => {
+      loadExistingImages('gallery-cakes', 'Cake', 50);
+      loadExistingImages('gallery-cookies', 'Cookies', 50);
+      loadExistingImages('gallery-cupcakes', 'Cupcake', 30);
+      loadExistingImages('gallery-cakecookies', 'Cake&Cookies', 20);
+      loadExistingImages('gallery-cakecupcakes', 'Cake&Cupcakes', 20);
+      loadExistingImages('gallery-dessertjars', 'DessertJars', 15);
+      loadExistingImages('gallery-cakepops', 'CakePops', 15);
     };
   </script>
 </body>
