@@ -132,40 +132,25 @@
     <h2>Gallery</h2>
 
     <h3>Cakes</h3>
-    <div class="gallery-grid">
-      <img src="Cake1.jpg" alt="Cake 1">
-      <img src="Cake30.jpg" alt="Cake 30">
-    </div>
+    <div id="gallery-cakes" class="gallery-grid"></div>
 
     <h3>Cookies</h3>
-    <div class="gallery-grid">
-      <img src="Cookies1.jpg" alt="Cookies 1">
-    </div>
+    <div id="gallery-cookies" class="gallery-grid"></div>
 
     <h3>Cupcakes</h3>
-    <div class="gallery-grid">
-      <img src="Cupcake1.jpg" alt="Cupcake 1">
-    </div>
+    <div id="gallery-cupcakes" class="gallery-grid"></div>
 
     <h3>Cake & Cookies</h3>
-    <div class="gallery-grid">
-      <img src="Cake&Cookies1.jpg" alt="Cake and Cookies 1">
-    </div>
+    <div id="gallery-cakecookies" class="gallery-grid"></div>
 
     <h3>Cake & Cupcakes</h3>
-    <div class="gallery-grid">
-      <img src="Cake&Cupcakes1.jpg" alt="Cake and Cupcakes 1">
-    </div>
+    <div id="gallery-cakecupcakes" class="gallery-grid"></div>
 
     <h3>Dessert Jars</h3>
-    <div class="gallery-grid">
-      <img src="DessertJars1.jpg" alt="Dessert Jars 1">
-    </div>
+    <div id="gallery-dessertjars" class="gallery-grid"></div>
 
     <h3>Cake Pops</h3>
-    <div class="gallery-grid">
-      <img src="CakePops1.jpg" alt="Cake Pops 1">
-    </div>
+    <div id="gallery-cakepops" class="gallery-grid"></div>
   </section>
 
   <section id="classes">
@@ -274,6 +259,29 @@
 
       window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
     }
+
+    // Auto-generate gallery images by numeric sequence
+    function generateGalleryImages(containerId, baseName, count) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      for (let i = 1; i <= count; i++) {
+        const img = document.createElement('img');
+        img.src = `${baseName}${i}.jpg`;
+        img.alt = `${baseName} ${i}`;
+        container.appendChild(img);
+      }
+    }
+
+    window.onload = function() {
+      generateGalleryImages('gallery-cakes', 'Cake', 50);
+      generateGalleryImages('gallery-cookies', 'Cookies', 30);
+      generateGalleryImages('gallery-cupcakes', 'Cupcake', 25);
+      generateGalleryImages('gallery-cakecookies', 'Cake&Cookies', 20);
+      generateGalleryImages('gallery-cakecupcakes', 'Cake&Cupcakes', 20);
+      generateGalleryImages('gallery-dessertjars', 'DessertJars', 15);
+      generateGalleryImages('gallery-cakepops', 'CakePops', 15);
+    };
   </script>
 </body>
 </html>
