@@ -59,6 +59,28 @@
       border-radius: 10px;
       object-fit: cover;
     }
+    /* Carousel styles for kids baking classes */
+    #kids-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      margin-top: 1rem;
+      padding-bottom: 10px;
+      scroll-behavior: smooth;
+    }
+    #kids-carousel img {
+      flex: 0 0 auto;
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    #kids-carousel img:hover {
+      transform: scale(1.05);
+    }
     .contact-button {
       display: inline-block;
       margin: 0.5rem 0;
@@ -79,25 +101,6 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-    .carousel-kids {
-      display: none;
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 10px 0;
-      margin-top: 20px;
-      text-align: center;
-    }
-    .carousel-kids img {
-      width: 250px;
-      height: auto;
-      margin: 0 8px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-    }
-    .carousel-kids img:hover {
-      transform: scale(1.05);
-    }
     @media (max-width: 768px) {
       header img {
         max-width: 90%;
@@ -114,6 +117,9 @@
       }
       section {
         padding: 1rem;
+      }
+      #kids-carousel {
+        width: 100%;
       }
     }
   </style>
@@ -197,7 +203,7 @@
     </form>
 
     <h3>Kids Classes Gallery</h3>
-    <div id="kids-carousel" class="carousel-kids"></div>
+    <div id="kids-carousel"></div>
   </section>
 
   <section id="contact">
@@ -289,22 +295,23 @@
           container.appendChild(img);
         };
         img.onerror = () => {
-          // Do nothing if image does not exist
+          // Ignore missing images silently
         };
       }
     }
 
-    function loadKidsClassCarousel() {
+    function loadKidsCarousel() {
       const container = document.getElementById('kids-carousel');
-      const baseUrl = 'https://raw.githubusercontent.com/Nato8Sash/Oh-my-nosh-site/main/images/'; // GitHub repo raw URL
-      for (let i = 1; i <= 10; i++) {
-        const imgUrl = `${baseUrl}Class${i}.jpg`;
+      const baseUrl = 'https://raw.githubusercontent.com/Nato8Sash/Oh-my-nosh-site/main/images/';
+      for(let i=1; i <= 15; i++) {
         const img = new Image();
-        img.src = imgUrl;
-        img.alt = `Class ${i}`;
+        img.src = `${baseUrl}Class${i}.jpg`;
+        img.alt = `Kids Class ${i}`;
         img.onload = () => {
           container.appendChild(img);
-          container.style.display = 'block';
+        };
+        img.onerror = () => {
+          // ignore missing images
         };
       }
     }
@@ -317,7 +324,7 @@
       loadExistingImages('gallery-cakecupcakes', 'Cake&Cupcakes', 20);
       loadExistingImages('gallery-dessertjars', 'DessertJars', 15);
       loadExistingImages('gallery-cakepops', 'CakePops', 15);
-      loadKidsClassCarousel();
+      loadKidsCarousel();
     };
   </script>
 </body>
