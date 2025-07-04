@@ -79,6 +79,42 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+    .carousel-kids {
+      display: none;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 10px 0;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .carousel-kids img {
+      width: 250px;
+      height: auto;
+      margin: 0 8px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+    .carousel-kids img:hover {
+      transform: scale(1.05);
+    }
+    .whatsapp-floating {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 1000;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .whatsapp-floating:hover {
+      background-color: #1ebc5b;
+    }
     @media (max-width: 768px) {
       header img {
         max-width: 90%;
@@ -179,6 +215,9 @@
 
     <h3>Kids Classes Gallery</h3>
     <div id="gallery-kidsclasses" class="gallery-grid"></div>
+
+    <!-- NEW IMAGE CAROUSEL -->
+    <div id="kids-carousel" class="carousel-kids"></div>
   </section>
 
   <section id="contact">
@@ -221,22 +260,24 @@
     <p>© 2025 Oh My Nosh. All rights reserved.</p>
   </footer>
 
+  <!-- WhatsApp Sticky Button -->
+  <a
+    href="https://wa.me/27799750908?text=Hi!%20I'm%20interested%20in%20the%20Kids%20Baking%20Classes.%20Please%20share%20more%20details."
+    class="whatsapp-floating"
+    target="_blank"
+  >
+    Kids Classes – WhatsApp
+  </a>
+
   <script>
-    // Function to load existing images if they exist
     function loadExistingImages(containerId, baseName, maxCount) {
       const container = document.getElementById(containerId);
       if (!container) return;
-
       for(let i = 1; i <= maxCount; i++) {
         const img = new Image();
         img.src = `${baseName}${i}.jpg`;
         img.alt = `${baseName} ${i}`;
-        img.onload = () => {
-          container.appendChild(img);
-        };
-        img.onerror = () => {
-          // Do nothing if image does not exist
-        };
+        img.onload = () => container.appendChild(img);
       }
     }
 
@@ -245,23 +286,15 @@
       const product = document.getElementById('product').value;
       const budget = document.getElementById('budget').value;
       const date = document.getElementById('order-date').value;
-
       if (!name || !product || !budget || !date) {
         alert("Please fill in all fields.");
         return;
       }
-
       const formattedDate = new Date(date).toLocaleDateString("en-ZA", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
+        day: "numeric", month: "long", year: "numeric"
       });
-
       const message = `Hi! My name is ${name}. I'd like to enquire about ordering a ${product} for ${formattedDate}. My budget is R${budget}. Can you assist?`;
-      const encodedMessage = encodeURIComponent(message);
-      const phone = "27799750908";
-
-      window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
+      window.open(`https://wa.me/27799750908?text=${encodeURIComponent(message)}`, "_blank");
       gtag('event', 'order_form_submit', {
         event_category: 'engagement',
         event_label: product
@@ -272,24 +305,18 @@
       const parentName = document.getElementById('parent-name').value.trim();
       const childrenAge = document.getElementById('children-age').value.trim();
       const preferredDay = document.getElementById('preferred-day').value.trim();
-
       if (!parentName || !childrenAge || !preferredDay) {
         alert("Please fill in all fields for the kids' class enquiry.");
         return;
       }
-
       const message = `Hi! I'm ${parentName} and I'm interested in the kids' baking classes. My child's age group is ${childrenAge}, and we're available on ${preferredDay}. Can you send more info?`;
-      const encodedMessage = encodeURIComponent(message);
-      const phone = "27799750908";
-
-      window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
+      window.open(`https://wa.me/27799750908?text=${encodeURIComponent(message)}`, "_blank");
       gtag('event', 'class_form_submit', {
         event_category: 'engagement',
         event_label: childrenAge
       });
     }
 
-    // Event Tracking for social links
     document.querySelectorAll('[data-event]').forEach(el => {
       if(el.tagName.toLowerCase() === 'a'){
         el.addEventListener('click', () => {
@@ -301,6 +328,21 @@
       }
     });
 
+    function loadKidsClassCarousel() {
+      const container = document.getElementById('kids-carousel');
+      const baseUrl = 'https://yourusername.github.io/your-repo/images/';
+      for (let i = 1; i <= 10; i++) {
+        const imgUrl = `${baseUrl}Class${i}.jpg`;
+        const img = new Image();
+        img.src = imgUrl;
+        img.alt = `Class ${i}`;
+        img.onload = () => {
+          container.appendChild(img);
+          container.style.display = 'block';
+        };
+      }
+    }
+
     window.onload = () => {
       loadExistingImages('gallery-cakes', 'Cake', 50);
       loadExistingImages('gallery-cookies', 'Cookies', 50);
@@ -310,6 +352,7 @@
       loadExistingImages('gallery-dessertjars', 'DessertJars', 15);
       loadExistingImages('gallery-cakepops', 'CakePops', 15);
       loadExistingImages('gallery-kidsclasses', 'KidsClass', 15);
+      loadKidsClassCarousel();
     };
   </script>
 </body>
