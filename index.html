@@ -98,23 +98,6 @@
     .carousel-kids img:hover {
       transform: scale(1.05);
     }
-    .whatsapp-floating {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 14px;
-      z-index: 1000;
-      text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    .whatsapp-floating:hover {
-      background-color: #1ebc5b;
-    }
     @media (max-width: 768px) {
       header img {
         max-width: 90%;
@@ -214,9 +197,6 @@
     </form>
 
     <h3>Kids Classes Gallery</h3>
-    <div id="gallery-kidsclasses" class="gallery-grid"></div>
-
-    <!-- NEW IMAGE CAROUSEL -->
     <div id="kids-carousel" class="carousel-kids"></div>
   </section>
 
@@ -260,27 +240,7 @@
     <p>© 2025 Oh My Nosh. All rights reserved.</p>
   </footer>
 
-  <!-- WhatsApp Sticky Button -->
-  <a
-    href="https://wa.me/27799750908?text=Hi!%20I'm%20interested%20in%20the%20Kids%20Baking%20Classes.%20Please%20share%20more%20details."
-    class="whatsapp-floating"
-    target="_blank"
-  >
-    Kids Classes – WhatsApp
-  </a>
-
   <script>
-    function loadExistingImages(containerId, baseName, maxCount) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      for(let i = 1; i <= maxCount; i++) {
-        const img = new Image();
-        img.src = `${baseName}${i}.jpg`;
-        img.alt = `${baseName} ${i}`;
-        img.onload = () => container.appendChild(img);
-      }
-    }
-
     function sendWhatsAppEnquiry() {
       const name = document.getElementById('name').value.trim();
       const product = document.getElementById('product').value;
@@ -295,10 +255,6 @@
       });
       const message = `Hi! My name is ${name}. I'd like to enquire about ordering a ${product} for ${formattedDate}. My budget is R${budget}. Can you assist?`;
       window.open(`https://wa.me/27799750908?text=${encodeURIComponent(message)}`, "_blank");
-      gtag('event', 'order_form_submit', {
-        event_category: 'engagement',
-        event_label: product
-      });
     }
 
     function sendKidsClassForm() {
@@ -311,26 +267,28 @@
       }
       const message = `Hi! I'm ${parentName} and I'm interested in the kids' baking classes. My child's age group is ${childrenAge}, and we're available on ${preferredDay}. Can you send more info?`;
       window.open(`https://wa.me/27799750908?text=${encodeURIComponent(message)}`, "_blank");
-      gtag('event', 'class_form_submit', {
-        event_category: 'engagement',
-        event_label: childrenAge
-      });
     }
 
-    document.querySelectorAll('[data-event]').forEach(el => {
-      if(el.tagName.toLowerCase() === 'a'){
-        el.addEventListener('click', () => {
-          gtag('event', el.dataset.event, {
-            event_category: 'engagement',
-            event_label: el.href
-          });
-        });
+    function loadExistingImages(containerId, baseName, maxCount) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      for(let i = 1; i <= maxCount; i++) {
+        const img = new Image();
+        img.src = `${baseName}${i}.jpg`;
+        img.alt = `${baseName} ${i}`;
+        img.onload = () => {
+          container.appendChild(img);
+        };
+        img.onerror = () => {
+          // Do nothing if image does not exist
+        };
       }
-    });
+    }
 
     function loadKidsClassCarousel() {
       const container = document.getElementById('kids-carousel');
-      const baseUrl = 'https://yourusername.github.io/your-repo/images/';
+      const baseUrl = 'https://yourusername.github.io/your-repo/images/'; // Replace with your actual GitHub Pages images path
       for (let i = 1; i <= 10; i++) {
         const imgUrl = `${baseUrl}Class${i}.jpg`;
         const img = new Image();
@@ -351,7 +309,6 @@
       loadExistingImages('gallery-cakecupcakes', 'Cake&Cupcakes', 20);
       loadExistingImages('gallery-dessertjars', 'DessertJars', 15);
       loadExistingImages('gallery-cakepops', 'CakePops', 15);
-      loadExistingImages('gallery-kidsclasses', 'KidsClass', 15);
       loadKidsClassCarousel();
     };
   </script>
