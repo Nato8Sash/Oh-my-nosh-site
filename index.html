@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Oh My Nosh</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-B4PP7QY7N8"></script>
@@ -295,23 +295,25 @@
           container.appendChild(img);
         };
         img.onerror = () => {
-          // Ignore missing images silently
+          // silently ignore missing images
         };
       }
     }
 
     function loadKidsCarousel() {
       const container = document.getElementById('kids-carousel');
-      const baseUrl = 'https://raw.githubusercontent.com/Nato8Sash/Oh-my-nosh-site/main/images/';
+      if (!container) return;
+      const baseUrl = 'https://raw.githubusercontent.com/Nato8Sash/Oh-my-nosh-site/main/';
       for(let i=1; i <= 15; i++) {
         const img = new Image();
         img.src = `${baseUrl}Class${i}.jpg`;
         img.alt = `Kids Class ${i}`;
         img.onload = () => {
+          console.log(`Loaded image: Class${i}.jpg`);
           container.appendChild(img);
         };
         img.onerror = () => {
-          // ignore missing images
+          console.warn(`Failed to load image: Class${i}.jpg`);
         };
       }
     }
