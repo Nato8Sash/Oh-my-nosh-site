@@ -255,6 +255,10 @@
       });
       const message = `Hi! My name is ${name}. I'd like to enquire about ordering a ${product} for ${formattedDate}. My budget is R${budget}. Can you assist?`;
       window.open(`https://wa.me/27799750908?text=${encodeURIComponent(message)}`, "_blank");
+      gtag('event', 'order_form_submit', {
+        event_category: 'engagement',
+        event_label: product
+      });
     }
 
     function sendKidsClassForm() {
@@ -267,6 +271,10 @@
       }
       const message = `Hi! I'm ${parentName} and I'm interested in the kids' baking classes. My child's age group is ${childrenAge}, and we're available on ${preferredDay}. Can you send more info?`;
       window.open(`https://wa.me/27799750908?text=${encodeURIComponent(message)}`, "_blank");
+      gtag('event', 'class_form_submit', {
+        event_category: 'engagement',
+        event_label: childrenAge
+      });
     }
 
     function loadExistingImages(containerId, baseName, maxCount) {
@@ -288,7 +296,7 @@
 
     function loadKidsClassCarousel() {
       const container = document.getElementById('kids-carousel');
-      const baseUrl = 'https://yourusername.github.io/your-repo/images/'; // Replace with your actual GitHub Pages images path
+      const baseUrl = 'https://raw.githubusercontent.com/Nato8Sash/Oh-my-nosh-site/main/images/'; // GitHub repo raw URL
       for (let i = 1; i <= 10; i++) {
         const imgUrl = `${baseUrl}Class${i}.jpg`;
         const img = new Image();
