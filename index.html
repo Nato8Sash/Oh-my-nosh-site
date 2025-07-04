@@ -176,6 +176,9 @@
 
       <button class="contact-button" type="submit" data-event="class_form_submit">Send Class Enquiry via WhatsApp</button>
     </form>
+
+    <h3>Kids Classes Gallery</h3>
+    <div id="gallery-kidsclasses" class="gallery-grid"></div>
   </section>
 
   <section id="contact">
@@ -212,7 +215,6 @@
 
     <a class="contact-button" href="https://www.instagram.com/ohmynoshh" target="_blank" data-event="instagram_click">Instagram</a>
     <a class="contact-button" href="https://www.facebook.com/share/1Eq7thDPyU/" target="_blank" data-event="facebook_click">Facebook</a>
-    <a class="contact-button" href="https://wa.me/27799750908" target="_blank" data-event="whatsapp_click">WhatsApp</a>
   </section>
 
   <footer>
@@ -220,6 +222,24 @@
   </footer>
 
   <script>
+    // Function to load existing images if they exist
+    function loadExistingImages(containerId, baseName, maxCount) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      for(let i = 1; i <= maxCount; i++) {
+        const img = new Image();
+        img.src = `${baseName}${i}.jpg`;
+        img.alt = `${baseName} ${i}`;
+        img.onload = () => {
+          container.appendChild(img);
+        };
+        img.onerror = () => {
+          // Do nothing if image does not exist
+        };
+      }
+    }
+
     function sendWhatsAppEnquiry() {
       const name = document.getElementById('name').value.trim();
       const product = document.getElementById('product').value;
@@ -269,7 +289,7 @@
       });
     }
 
-    // Event Tracking for social and WhatsApp links
+    // Event Tracking for social links
     document.querySelectorAll('[data-event]').forEach(el => {
       if(el.tagName.toLowerCase() === 'a'){
         el.addEventListener('click', () => {
@@ -280,6 +300,17 @@
         });
       }
     });
+
+    window.onload = () => {
+      loadExistingImages('gallery-cakes', 'Cake', 50);
+      loadExistingImages('gallery-cookies', 'Cookies', 50);
+      loadExistingImages('gallery-cupcakes', 'Cupcake', 30);
+      loadExistingImages('gallery-cakecookies', 'Cake&Cookies', 20);
+      loadExistingImages('gallery-cakecupcakes', 'Cake&Cupcakes', 20);
+      loadExistingImages('gallery-dessertjars', 'DessertJars', 15);
+      loadExistingImages('gallery-cakepops', 'CakePops', 15);
+      loadExistingImages('gallery-kidsclasses', 'KidsClass', 15);
+    };
   </script>
 </body>
 </html>
