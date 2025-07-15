@@ -99,13 +99,12 @@
     margin-bottom: 60px;
   }
 
-  h1, h2, h3 {
+  h1, h2 {
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     color: var(--dusty-rose);
     margin-bottom: 15px;
   }
 
-  /* Products / Menu Section */
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
@@ -141,59 +140,6 @@
   .product-card p {
     font-size: 1rem;
     color: var(--dark-text);
-  }
-
-  /* Kids Baking Class */
-  .kids-baking {
-    background-color: var(--sage-green);
-    padding: 30px 20px;
-    border-radius: 14px;
-    color: var(--light-text);
-  }
-
-  .kids-baking h2 {
-    color: var(--light-text);
-    margin-bottom: 25px;
-  }
-
-  /* Carousel for images */
-  .carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    scroll-behavior: smooth;
-    padding-bottom: 10px;
-  }
-
-  .carousel::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .carousel::-webkit-scrollbar-thumb {
-    background: var(--dusty-rose);
-    border-radius: 10px;
-  }
-
-  .carousel img {
-    max-height: 160px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    border: 3px solid var(--cream);
-  }
-
-  .carousel img:hover {
-    transform: scale(1.1);
-    border-color: var(--dusty-rose);
-  }
-
-  /* Dessert Jars Section */
-  .dessert-jars {
-    background-color: var(--cream);
-    padding: 20px;
-    border-radius: 14px;
-    border: 1.5px solid var(--dusty-rose);
   }
 
   /* Contact Form */
@@ -286,21 +232,22 @@
 <header>
   <img src="logo.png" alt="Oh My Nosh Logo" />
   <nav>
-    <a href="#products">Our Treats</a>
-    <a href="#kids-baking">Kids Baking Class</a>
+    <a href="#cakes">Cakes</a>
+    <a href="#cookies">Cookies</a>
+    <a href="#cupcakes">Cupcakes</a>
+    <a href="#cakes-cookies">Cakes & Cookies</a>
+    <a href="#cake-pops">Cake Pops</a>
     <a href="#dessert-jars">Dessert Jars</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <div class="social-icons" aria-label="Social media links">
     <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener" aria-label="Instagram">
-      <!-- Instagram SVG icon -->
       <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013 16.25v-8.5A4.25 4.25 0 017.75 3.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5zm0 1.5a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zm4.86-.66a1.04 1.04 0 11-2.08 0 1.04 1.04 0 012.08 0z"/>
       </svg>
     </a>
     <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener" aria-label="Facebook">
-      <!-- Facebook SVG icon -->
       <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/>
       </svg>
@@ -310,143 +257,43 @@
 
 <main>
 
-  <section id="products" aria-label="Products and Menu">
-    <h1>Our Delicious Treats</h1>
-    
-    <!-- Cakes Gallery -->
-    <h2>Cakes</h2>
-    <div class="products-grid">
-      <article class="product-card">
-        <img src="Cake1.jpg" alt="Cake 1" />
-        <h3>Classic Cake</h3>
-        <p>Beautifully decorated classic cake for weddings and birthdays.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cake2.jpg" alt="Cake 2" />
-        <h3>Custom Design Cake</h3>
-        <p>Custom designed cake with elegant decorations.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cake3.jpg" alt="Cake 3" />
-        <h3>Chocolate Delight Cake</h3>
-        <p>Rich chocolate layered cake with exquisite finishing.</p>
-      </article>
-    </div>
-
-    <!-- Cupcakes Gallery -->
-    <h2>Cupcakes</h2>
-    <div class="products-grid">
-      <article class="product-card">
-        <img src="Cupcake1.jpg" alt="Cupcake 1" />
-        <h3>Vanilla Cupcake</h3>
-        <p>Mini vanilla cupcakes with elegant frosting.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cupcake2.jpg" alt="Cupcake 2" />
-        <h3>Chocolate Cupcake</h3>
-        <p>Decadent chocolate cupcakes topped with cream.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cupcake3.jpg" alt="Cupcake 3" />
-        <h3>Red Velvet Cupcake</h3>
-        <p>Classic red velvet cupcakes with cream cheese frosting.</p>
-      </article>
-    </div>
-
-    <!-- Cookies Gallery -->
-    <h2>Cookies</h2>
-    <div class="products-grid">
-      <article class="product-card">
-        <img src="Cookies1.jpg" alt="Cookie 1" />
-        <h3>Decorated Sugar Cookies</h3>
-        <p>Handcrafted sugar cookies with delicate decorations.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cookies2.jpg" alt="Cookie 2" />
-        <h3>Chocolate Chip Cookies</h3>
-        <p>Classic chocolate chip cookies baked fresh daily.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cookies3.jpg" alt="Cookie 3" />
-        <h3>Oatmeal Raisin Cookies</h3>
-        <p>Delicious oatmeal raisin cookies with a soft center.</p>
-      </article>
-    </div>
-
-    <!-- Cake & Cookies Gallery -->
-    <h2>Cake & Cookies Combo</h2>
-    <div class="products-grid">
-      <article class="product-card">
-        <img src="Cake&Cookies1.jpg" alt="Cake and Cookies Combo 1" />
-        <h3>Sweet Combo Pack</h3>
-        <p>A perfect mix of cake and cookies for parties.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cake&Cookies2.jpg" alt="Cake and Cookies Combo 2" />
-        <h3>Birthday Special Combo</h3>
-        <p>Cake and cookies specially made for birthdays.</p>
-      </article>
-      <article class="product-card">
-        <img src="Cake&Cookies3.jpg" alt="Cake and Cookies Combo 3" />
-        <h3>Custom Combo Box</h3>
-        <p>Choose your favorite cake and cookie flavors.</p>
-      </article>
-    </div>
-
-    <!-- Cake Pops Gallery -->
-    <h2>Cake Pops</h2>
-    <div class="products-grid">
-      <article class="product-card">
-        <img src="CakePops1.jpg" alt="Cake Pop 1" />
-        <h3>Classic Cake Pop</h3>
-        <p>Delicious cake pops with a variety of coatings.</p>
-      </article>
-      <article class="product-card">
-        <img src="CakePops2.jpg" alt="Cake Pop 2" />
-        <h3>Chocolate Cake Pop</h3>
-        <p>Rich chocolate cake pops perfect for parties.</p>
-      </article>
-      <article class="product-card">
-        <img src="CakePops3.jpg" alt="Cake Pop 3" />
-        <h3>Vanilla Cake Pop</h3>
-        <p>Vanilla cake pops with colorful sprinkles.</p>
-      </article>
-    </div>
+  <!-- Cakes Section -->
+  <section id="cakes" aria-label="Cakes">
+    <h1>Cakes</h1>
+    <div class="products-grid" id="cakes-grid"></div>
   </section>
 
-  <section id="kids-baking" class="kids-baking" aria-label="Kids Baking Class">
-    <h2>Kids Baking Class</h2>
-    <p>Join our fun and educational baking classes designed especially for kids. Learn, bake, and create sweet memories!</p>
-    <div class="carousel" aria-label="Kids Baking Class Gallery">
-      <img src="Class1.jpg" alt="Kids decorating cupcakes" />
-      <img src="Class2.jpg" alt="Kids rolling dough in class" />
-      <img src="Class3.jpg" alt="Baking instructor helping kids" />
-      <img src="Class4.jpg" alt="Finished decorated cookies by kids" />
-    </div>
+  <!-- Cookies Section -->
+  <section id="cookies" aria-label="Cookies">
+    <h1>Cookies</h1>
+    <div class="products-grid" id="cookies-grid"></div>
   </section>
 
-  <section id="dessert-jars" class="dessert-jars" aria-label="Dessert Jars">
-    <h2>Dessert Jars</h2>
-    <p>Beautifully layered desserts in jars – perfect for gifts, parties, or a personal treat.</p>
-    <div class="products-grid">
-      <article class="product-card">
-        <img src="DessertJars1.jpg" alt="Chocolate dessert jar" />
-        <h3>Chocolate Dream</h3>
-        <p>Layers of rich chocolate mousse and cake with whipped cream topping.</p>
-      </article>
-      <article class="product-card">
-        <img src="DessertJars2.jpg" alt="Fruit dessert jar" />
-        <h3>Fresh Fruit Medley</h3>
-        <p>Light vanilla cream with seasonal fresh fruits and crumble.</p>
-      </article>
-      <article class="product-card">
-        <img src="DessertJars3.jpg" alt="Cheesecake dessert jar" />
-        <h3>Cheesecake Delight</h3>
-        <p>Creamy cheesecake layers with a buttery biscuit base.</p>
-      </article>
-    </div>
+  <!-- Cupcakes Section -->
+  <section id="cupcakes" aria-label="Cupcakes">
+    <h1>Cupcakes</h1>
+    <div class="products-grid" id="cupcakes-grid"></div>
   </section>
 
+  <!-- Cakes & Cookies Section -->
+  <section id="cakes-cookies" aria-label="Cakes and Cookies">
+    <h1>Cakes & Cookies</h1>
+    <div class="products-grid" id="cakes-cookies-grid"></div>
+  </section>
+
+  <!-- Cake Pops Section -->
+  <section id="cake-pops" aria-label="Cake Pops">
+    <h1>Cake Pops</h1>
+    <div class="products-grid" id="cake-pops-grid"></div>
+  </section>
+
+  <!-- Dessert Jars Section -->
+  <section id="dessert-jars" aria-label="Dessert Jars">
+    <h1>Dessert Jars</h1>
+    <div class="products-grid" id="dessert-jars-grid"></div>
+  </section>
+
+  <!-- Contact Section -->
   <section id="contact" aria-label="Contact Oh My Nosh">
     <h2>Contact Us</h2>
     <form action="https://formspree.io/f/your-form-id" method="POST" aria-label="Contact form">
@@ -475,6 +322,72 @@
 >
   &#x2709;
 </a>
+
+<script>
+  // Load images with skipping missing files up to maxCount = 50.
+  // Stops after maxConsecutiveMisses = 5 images fail in a row.
+  function loadImages(sectionId, baseName, maxCount = 50, maxConsecutiveMisses = 5) {
+    const container = document.getElementById(sectionId);
+    if (!container) return;
+
+    let count = 1;
+    let consecutiveMisses = 0;
+
+    function tryLoadNext() {
+      if (count > maxCount || consecutiveMisses >= maxConsecutiveMisses) return;
+
+      const img = new Image();
+      const fileName = baseName + count + '.jpg';
+      img.src = fileName;
+      img.alt = baseName.replace(/[^a-zA-Z]/g, ' ') + ' ' + count;
+      img.className = 'product-img';
+      img.style.borderRadius = '10px';
+      img.style.width = '100%';
+      img.style.marginBottom = '15px';
+
+      img.onload = function() {
+        // Reset misses counter
+        consecutiveMisses = 0;
+
+        const card = document.createElement('article');
+        card.className = 'product-card';
+
+        card.appendChild(img);
+
+        const title = document.createElement('h3');
+        title.textContent = baseName.replace(/[^a-zA-Z]/g, ' ').trim() + ' ' + count;
+        card.appendChild(title);
+
+        const desc = document.createElement('p');
+        desc.textContent = 'Delicious and beautifully crafted ' + baseName.replace(/[^a-zA-Z]/g, ' ').toLowerCase().trim() + '.';
+        card.appendChild(desc);
+
+        container.appendChild(card);
+
+        count++;
+        tryLoadNext();
+      };
+
+      img.onerror = function() {
+        // Increase misses but continue trying next number
+        consecutiveMisses++;
+        count++;
+        tryLoadNext();
+      };
+    }
+
+    tryLoadNext();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    loadImages('cakes-grid', 'Cake');
+    loadImages('cookies-grid', 'Cookies');
+    loadImages('cupcakes-grid', 'Cupcake');
+    loadImages('cakes-cookies-grid', 'Cake&Cookies');
+    loadImages('cake-pops-grid', 'CakePops');
+    loadImages('dessert-jars-grid', 'DessertJars');
+  });
+</script>
 
 </body>
 </html>
