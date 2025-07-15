@@ -116,7 +116,7 @@
     border: 1.5px solid var(--sage-green);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(156, 137, 137, 0.15);
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     transition: transform 0.3s ease;
   }
@@ -129,17 +129,8 @@
   .product-card img {
     max-width: 100%;
     border-radius: 10px;
-    margin-bottom: 15px;
-  }
-
-  .product-card h3 {
-    margin-bottom: 8px;
-    font-size: 1.3rem;
-  }
-
-  .product-card p {
-    font-size: 1rem;
-    color: var(--dark-text);
+    margin: 0 auto;
+    display: block;
   }
 
   /* Contact Form */
@@ -242,12 +233,12 @@
   </nav>
 
   <div class="social-icons" aria-label="Social media links">
-    <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener" aria-label="Instagram">
+    <a href="https://www.instagram.com/ohmynoshh?igsh=eWVsbW05Nzh0b25t" target="_blank" rel="noopener" aria-label="Instagram">
       <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013 16.25v-8.5A4.25 4.25 0 017.75 3.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5zm0 1.5a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zm4.86-.66a1.04 1.04 0 11-2.08 0 1.04 1.04 0 012.08 0z"/>
+        <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013 16.25v-8.5A4.25 4.25 0 007.75 3.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5zm0 1.5a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zm4.86-.66a1.04 1.04 0 11-2.08 0 1.04 1.04 0 012.08 0z"/>
       </svg>
     </a>
-    <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener" aria-label="Facebook">
+    <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" rel="noopener" aria-label="Facebook">
       <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/>
       </svg>
@@ -314,7 +305,7 @@
 
 <!-- WhatsApp Floating Button -->
 <a
-  href="https://wa.me/2760XXXXXXX"
+  href="https://wa.me/27799750908"
   target="_blank"
   rel="noopener"
   aria-label="Chat with Oh My Nosh on WhatsApp"
@@ -346,21 +337,11 @@
       img.style.marginBottom = '15px';
 
       img.onload = function() {
-        // Reset misses counter
         consecutiveMisses = 0;
 
         const card = document.createElement('article');
         card.className = 'product-card';
-
         card.appendChild(img);
-
-        const title = document.createElement('h3');
-        title.textContent = baseName.replace(/[^a-zA-Z]/g, ' ').trim() + ' ' + count;
-        card.appendChild(title);
-
-        const desc = document.createElement('p');
-        desc.textContent = 'Delicious and beautifully crafted ' + baseName.replace(/[^a-zA-Z]/g, ' ').toLowerCase().trim() + '.';
-        card.appendChild(desc);
 
         container.appendChild(card);
 
@@ -369,7 +350,6 @@
       };
 
       img.onerror = function() {
-        // Increase misses but continue trying next number
         consecutiveMisses++;
         count++;
         tryLoadNext();
