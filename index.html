@@ -40,7 +40,7 @@
 
   header {
     background-color: var(--sage-green);
-    padding: 20px 0;
+    padding: 20px 0 10px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
@@ -61,9 +61,37 @@
     letter-spacing: 0.05em;
   }
 
+  /* Social Icons Container */
+  .social-icons {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .social-icons a {
+    display: inline-block;
+    margin: 0 12px;
+    transition: transform 0.3s ease;
+    color: var(--dark-text);
+  }
+
+  .social-icons svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--dusty-rose);
+    filter: grayscale(80%);
+    transition: filter 0.3s ease, fill 0.3s ease;
+    vertical-align: middle;
+  }
+
+  .social-icons a:hover svg {
+    filter: none;
+    fill: var(--sage-green);
+    transform: scale(1.1);
+  }
+
   main {
     max-width: 960px;
-    margin: 40px auto;
+    margin: 40px auto 80px;
     padding: 0 15px;
   }
 
@@ -232,7 +260,7 @@
     height: 60px;
     border-radius: 50%;
     text-align: center;
-    font-size: 30px;
+    font-size: 34px;
     line-height: 60px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.3);
     transition: background-color 0.3s ease;
@@ -252,9 +280,9 @@
     }
   }
 </style>
-<!-- Google tag (gtag.js) can be added here if needed -->
 </head>
 <body>
+
 <header>
   <img src="logo.png" alt="Oh My Nosh Logo" />
   <nav>
@@ -263,32 +291,125 @@
     <a href="#dessert-jars">Dessert Jars</a>
     <a href="#contact">Contact</a>
   </nav>
+
+  <div class="social-icons" aria-label="Social media links">
+    <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener" aria-label="Instagram">
+      <!-- Instagram SVG icon -->
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013 16.25v-8.5A4.25 4.25 0 017.75 3.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5zm0 1.5a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zm4.86-.66a1.04 1.04 0 11-2.08 0 1.04 1.04 0 012.08 0z"/>
+      </svg>
+    </a>
+    <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener" aria-label="Facebook">
+      <!-- Facebook SVG icon -->
+      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/>
+      </svg>
+    </a>
+  </div>
 </header>
 
 <main>
 
   <section id="products" aria-label="Products and Menu">
     <h1>Our Delicious Treats</h1>
+    
+    <!-- Cakes Gallery -->
+    <h2>Cakes</h2>
     <div class="products-grid">
       <article class="product-card">
-        <img src="cakes.jpg" alt="Beautifully decorated cakes" />
-        <h3>Cakes</h3>
-        <p>From classic to custom designs, perfect for weddings, birthdays, and celebrations.</p>
+        <img src="Cake1.jpg" alt="Cake 1" />
+        <h3>Classic Cake</h3>
+        <p>Beautifully decorated classic cake for weddings and birthdays.</p>
       </article>
       <article class="product-card">
-        <img src="cupcakes.jpg" alt="Assorted cupcakes" />
-        <h3>Cupcakes</h3>
-        <p>Mini delights in a variety of flavors and elegant decorations.</p>
+        <img src="Cake2.jpg" alt="Cake 2" />
+        <h3>Custom Design Cake</h3>
+        <p>Custom designed cake with elegant decorations.</p>
       </article>
       <article class="product-card">
-        <img src="cookies.jpg" alt="Decorated cookies" />
-        <h3>Cookies</h3>
-        <p>Handcrafted and decorated cookies, ideal as gifts or party favors.</p>
+        <img src="Cake3.jpg" alt="Cake 3" />
+        <h3>Chocolate Delight Cake</h3>
+        <p>Rich chocolate layered cake with exquisite finishing.</p>
+      </article>
+    </div>
+
+    <!-- Cupcakes Gallery -->
+    <h2>Cupcakes</h2>
+    <div class="products-grid">
+      <article class="product-card">
+        <img src="Cupcake1.jpg" alt="Cupcake 1" />
+        <h3>Vanilla Cupcake</h3>
+        <p>Mini vanilla cupcakes with elegant frosting.</p>
       </article>
       <article class="product-card">
-        <img src="diy-cookie-kit.jpg" alt="DIY cookie decorating kit" />
-        <h3>DIY Cookie Kit</h3>
-        <p>Everything you need to decorate cookies at home – fun for all ages!</p>
+        <img src="Cupcake2.jpg" alt="Cupcake 2" />
+        <h3>Chocolate Cupcake</h3>
+        <p>Decadent chocolate cupcakes topped with cream.</p>
+      </article>
+      <article class="product-card">
+        <img src="Cupcake3.jpg" alt="Cupcake 3" />
+        <h3>Red Velvet Cupcake</h3>
+        <p>Classic red velvet cupcakes with cream cheese frosting.</p>
+      </article>
+    </div>
+
+    <!-- Cookies Gallery -->
+    <h2>Cookies</h2>
+    <div class="products-grid">
+      <article class="product-card">
+        <img src="Cookies1.jpg" alt="Cookie 1" />
+        <h3>Decorated Sugar Cookies</h3>
+        <p>Handcrafted sugar cookies with delicate decorations.</p>
+      </article>
+      <article class="product-card">
+        <img src="Cookies2.jpg" alt="Cookie 2" />
+        <h3>Chocolate Chip Cookies</h3>
+        <p>Classic chocolate chip cookies baked fresh daily.</p>
+      </article>
+      <article class="product-card">
+        <img src="Cookies3.jpg" alt="Cookie 3" />
+        <h3>Oatmeal Raisin Cookies</h3>
+        <p>Delicious oatmeal raisin cookies with a soft center.</p>
+      </article>
+    </div>
+
+    <!-- Cake & Cookies Gallery -->
+    <h2>Cake & Cookies Combo</h2>
+    <div class="products-grid">
+      <article class="product-card">
+        <img src="Cake&Cookies1.jpg" alt="Cake and Cookies Combo 1" />
+        <h3>Sweet Combo Pack</h3>
+        <p>A perfect mix of cake and cookies for parties.</p>
+      </article>
+      <article class="product-card">
+        <img src="Cake&Cookies2.jpg" alt="Cake and Cookies Combo 2" />
+        <h3>Birthday Special Combo</h3>
+        <p>Cake and cookies specially made for birthdays.</p>
+      </article>
+      <article class="product-card">
+        <img src="Cake&Cookies3.jpg" alt="Cake and Cookies Combo 3" />
+        <h3>Custom Combo Box</h3>
+        <p>Choose your favorite cake and cookie flavors.</p>
+      </article>
+    </div>
+
+    <!-- Cake Pops Gallery -->
+    <h2>Cake Pops</h2>
+    <div class="products-grid">
+      <article class="product-card">
+        <img src="CakePops1.jpg" alt="Cake Pop 1" />
+        <h3>Classic Cake Pop</h3>
+        <p>Delicious cake pops with a variety of coatings.</p>
+      </article>
+      <article class="product-card">
+        <img src="CakePops2.jpg" alt="Cake Pop 2" />
+        <h3>Chocolate Cake Pop</h3>
+        <p>Rich chocolate cake pops perfect for parties.</p>
+      </article>
+      <article class="product-card">
+        <img src="CakePops3.jpg" alt="Cake Pop 3" />
+        <h3>Vanilla Cake Pop</h3>
+        <p>Vanilla cake pops with colorful sprinkles.</p>
       </article>
     </div>
   </section>
@@ -309,17 +430,17 @@
     <p>Beautifully layered desserts in jars – perfect for gifts, parties, or a personal treat.</p>
     <div class="products-grid">
       <article class="product-card">
-        <img src="dessert-jar-chocolate.jpg" alt="Chocolate dessert jar" />
+        <img src="DessertJars1.jpg" alt="Chocolate dessert jar" />
         <h3>Chocolate Dream</h3>
         <p>Layers of rich chocolate mousse and cake with whipped cream topping.</p>
       </article>
       <article class="product-card">
-        <img src="dessert-jar-fruit.jpg" alt="Fruit dessert jar" />
+        <img src="DessertJars2.jpg" alt="Fruit dessert jar" />
         <h3>Fresh Fruit Medley</h3>
         <p>Light vanilla cream with seasonal fresh fruits and crumble.</p>
       </article>
       <article class="product-card">
-        <img src="dessert-jar-cheesecake.jpg" alt="Cheesecake dessert jar" />
+        <img src="DessertJars3.jpg" alt="Cheesecake dessert jar" />
         <h3>Cheesecake Delight</h3>
         <p>Creamy cheesecake layers with a buttery biscuit base.</p>
       </article>
@@ -341,6 +462,7 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
+
 </main>
 
 <!-- WhatsApp Floating Button -->
