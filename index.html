@@ -12,65 +12,54 @@
     --dark-text: #4b4b3f;
     --light-text: #ffffff;
   }
-
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-
   body {
     font-family: 'Georgia', serif;
     background-color: var(--cream);
     color: var(--dark-text);
     line-height: 1.6;
   }
-
   a {
     color: var(--dusty-rose);
     text-decoration: none;
     transition: color 0.3s ease;
   }
-
   a:hover {
     color: var(--sage-green);
   }
-
   header {
     background-color: var(--sage-green);
     padding: 20px 0 10px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
-
   header img {
     max-width: 180px;
     height: auto;
   }
-
   nav {
     margin-top: 10px;
   }
-
   nav a {
     font-weight: 600;
     margin: 0 15px;
     font-size: 1.1rem;
     letter-spacing: 0.05em;
   }
-
   .social-icons {
     margin-top: 20px;
     text-align: center;
   }
-
   .social-icons a {
     display: inline-block;
     margin: 0 12px;
     transition: transform 0.3s ease;
     color: var(--dark-text);
   }
-
   .social-icons svg {
     width: 26px;
     height: 26px;
@@ -79,35 +68,29 @@
     transition: filter 0.3s ease, fill 0.3s ease;
     vertical-align: middle;
   }
-
   .social-icons a:hover svg {
     filter: none;
     fill: var(--sage-green);
     transform: scale(1.1);
   }
-
   main {
     max-width: 960px;
     margin: 40px auto 80px;
     padding: 0 15px;
   }
-
   section {
     margin-bottom: 60px;
   }
-
   h1, h2 {
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     color: var(--dusty-rose);
     margin-bottom: 15px;
   }
-
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
     gap: 20px;
   }
-
   .product-card {
     background-color: var(--light-text);
     border: 1.5px solid var(--sage-green);
@@ -117,19 +100,16 @@
     text-align: center;
     transition: transform 0.3s ease;
   }
-
   .product-card:hover {
     transform: scale(1.03);
     box-shadow: 0 8px 20px rgba(156, 137, 137, 0.3);
   }
-
   .product-card img {
     max-width: 100%;
     border-radius: 10px;
     display: block;
     margin: 0 auto;
   }
-
   form {
     background-color: var(--light-text);
     padding: 25px;
@@ -138,14 +118,12 @@
     max-width: 600px;
     margin: 0 auto;
   }
-
   form label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
     color: var(--dusty-rose);
   }
-
   form input,
   form textarea,
   form select {
@@ -158,7 +136,6 @@
     font-family: inherit;
     transition: border-color 0.3s ease;
   }
-
   form input:focus,
   form textarea:focus,
   form select:focus {
@@ -166,7 +143,6 @@
     border-color: var(--dusty-rose);
     box-shadow: 0 0 8px var(--dusty-rose);
   }
-
   form button {
     background-color: var(--dusty-rose);
     color: var(--light-text);
@@ -179,11 +155,9 @@
     letter-spacing: 0.05em;
     transition: background-color 0.3s ease;
   }
-
   form button:hover {
     background-color: var(--sage-green);
   }
-
   /* WhatsApp Floating Button */
   .whatsapp-float {
     position: fixed;
@@ -205,7 +179,6 @@
   .whatsapp-float:hover {
     background-color: var(--dusty-rose);
   }
-
   /* Modal Overlay */
   .modal-overlay {
     position: fixed;
@@ -216,11 +189,9 @@
     justify-content: center;
     align-items: center;
   }
-
   .modal-overlay.active {
     display: flex;
   }
-
   /* Modal Content */
   .modal {
     background: var(--light-text);
@@ -231,23 +202,19 @@
     box-shadow: 0 6px 15px rgba(156, 137, 137, 0.3);
     position: relative;
   }
-
   .modal h3 {
     margin-bottom: 20px;
     color: var(--dusty-rose);
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
   }
-
   .modal form label {
     font-weight: 600;
     margin-bottom: 6px;
     display: block;
   }
-
   .modal form input {
     margin-bottom: 15px;
   }
-
   .modal .close-btn {
     position: absolute;
     top: 10px;
@@ -257,7 +224,6 @@
     color: var(--dusty-rose);
     cursor: pointer;
   }
-
   /* Responsive */
   @media (max-width: 480px) {
     nav a {
@@ -328,7 +294,7 @@
     <div class="products-grid" id="kids-baking-grid"></div>
 
     <h3>Book a Kids Baking Class</h3>
-    <form action="https://formspree.io/f/your-form-id" method="POST" aria-label="Kids baking class booking form">
+    <form id="kidsBookingForm" aria-label="Kids baking class booking form" novalidate>
       <label for="child-name">Child's Name</label>
       <input type="text" id="child-name" name="child-name" required placeholder="Child's full name" />
 
@@ -350,24 +316,24 @@
       <label for="message-kids">Additional Message (Optional)</label>
       <textarea id="message-kids" name="message-kids" rows="4" placeholder="Any special requests or info"></textarea>
 
-      <button type="submit">Book Class</button>
+      <button type="submit">Book Class via WhatsApp</button>
     </form>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" aria-label="Contact Oh My Nosh">
     <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/your-form-id" method="POST" aria-label="Contact form">
+    <form id="contactForm" aria-label="Contact form" novalidate>
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required placeholder="Your full name" />
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="_replyto" required placeholder="your.email@example.com" />
+      <input type="email" id="email" name="email" required placeholder="your.email@example.com" />
 
       <label for="message">Message</label>
       <textarea id="message" name="message" rows="5" required placeholder="Your message or order enquiry"></textarea>
 
-      <button type="submit">Send Message</button>
+      <button type="submit">Send Message via WhatsApp</button>
     </form>
 
     <div class="social-icons" aria-label="Social media links">
@@ -460,7 +426,6 @@
     dateInput.min = today;
   }
 
-  // Initialize image loading for all sections
   document.addEventListener('DOMContentLoaded', () => {
     loadImages('cakes-grid', 'Cake');
     loadImages('cookies-grid', 'Cookies');
@@ -513,7 +478,6 @@
     whatsappForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Validate inputs
       const name = document.getElementById('wa-name').value.trim();
       const date = document.getElementById('wa-date').value;
       const budget = document.getElementById('wa-budget').value.trim();
@@ -523,8 +487,9 @@
         return;
       }
 
-      // Construct WhatsApp URL with message
-      const phoneNumber = '27979750908'; // South Africa country code (27) + number without leading 0
+      // South Africa country code 27 + phone number without leading 0
+      const phoneNumber = '27979750908';
+
       const message = encodeURIComponent(
         `Hello Oh My Nosh! I would like to enquire about your services.\nName: ${name}\nDesired Date: ${date}\nBudget: ${budget}`
       );
@@ -535,6 +500,62 @@
 
       modalOverlay.classList.remove('active');
       whatsappForm.reset();
+    });
+
+    // Kids Baking Class form submission
+    const kidsBookingForm = document.getElementById('kidsBookingForm');
+    kidsBookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const childName = document.getElementById('child-name').value.trim();
+      const ageGroup = document.getElementById('age-group').value;
+      const classDate = document.getElementById('class-date').value;
+      const parentEmail = document.getElementById('parent-email').value.trim();
+      const messageKids = document.getElementById('message-kids').value.trim();
+
+      if (!childName || !ageGroup || !classDate || !parentEmail) {
+        alert('Please fill all the required fields.');
+        return;
+      }
+
+      const phoneNumber = '27979750908';
+
+      const message = encodeURIComponent(
+        `Hello Oh My Nosh! I'd like to book a Kids Baking Class.\nChild's Name: ${childName}\nAge Group: ${ageGroup}\nDesired Class Date: ${classDate}\nParent's Email: ${parentEmail}\nAdditional Message: ${messageKids}`
+      );
+
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+      window.open(whatsappURL, '_blank');
+
+      kidsBookingForm.reset();
+    });
+
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        alert('Please fill all the fields.');
+        return;
+      }
+
+      const phoneNumber = '27979750908';
+
+      const whatsappMessage = encodeURIComponent(
+        `Hello Oh My Nosh! I have a message.\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
+      );
+
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
+      window.open(whatsappURL, '_blank');
+
+      contactForm.reset();
     });
   });
 </script>
