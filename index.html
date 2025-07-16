@@ -23,6 +23,14 @@
     color: var(--dark-text);
     line-height: 1.6;
   }
+  a {
+    color: var(--dusty-rose);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: var(--sage-green);
+  }
   header {
     background-color: var(--sage-green);
     padding: 20px 0 10px;
@@ -35,18 +43,35 @@
   }
   nav {
     margin-top: 10px;
-    text-align: center;
   }
   nav a {
     font-weight: 600;
     margin: 0 15px;
     font-size: 1.1rem;
     letter-spacing: 0.05em;
-    color: var(--dark-text);
-    text-decoration: none;
   }
-  nav a:hover {
-    color: var(--dusty-rose);
+  .social-icons {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .social-icons a {
+    display: inline-block;
+    margin: 0 12px;
+    transition: transform 0.3s ease;
+    color: var(--dark-text);
+  }
+  .social-icons svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--dusty-rose);
+    filter: grayscale(80%);
+    transition: filter 0.3s ease, fill 0.3s ease;
+    vertical-align: middle;
+  }
+  .social-icons a:hover svg {
+    filter: none;
+    fill: var(--sage-green);
+    transform: scale(1.1);
   }
   main {
     max-width: 960px;
@@ -60,6 +85,78 @@
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     color: var(--dusty-rose);
     margin-bottom: 15px;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background-color: var(--light-text);
+    border: 1.5px solid var(--sage-green);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(156, 137, 137, 0.15);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(156, 137, 137, 0.3);
+  }
+  .product-card img {
+    max-width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+  }
+  form {
+    background-color: var(--light-text);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(156, 137, 137, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dusty-rose);
+  }
+  form input,
+  form textarea,
+  form select {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    border: 1.5px solid var(--sage-green);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+  form input:focus,
+  form textarea:focus,
+  form select:focus {
+    outline: none;
+    border-color: var(--dusty-rose);
+    box-shadow: 0 0 8px var(--dusty-rose);
+  }
+  form button {
+    background-color: var(--dusty-rose);
+    color: var(--light-text);
+    font-weight: 700;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+  }
+  form button:hover {
+    background-color: var(--sage-green);
   }
   /* WhatsApp Floating Button */
   .whatsapp-float {
@@ -109,50 +206,16 @@
     margin-bottom: 20px;
     color: var(--dusty-rose);
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-    text-align: center;
   }
-  .modal label {
+  .modal form label {
     font-weight: 600;
     margin-bottom: 6px;
     display: block;
-    color: var(--dusty-rose);
   }
-  .modal input,
-  .modal textarea,
-  .modal select {
-    width: 100%;
-    padding: 10px 14px;
+  .modal form input {
     margin-bottom: 15px;
-    border: 1.5px solid var(--sage-green);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
   }
-  .modal input:focus,
-  .modal textarea:focus,
-  .modal select:focus {
-    outline: none;
-    border-color: var(--dusty-rose);
-    box-shadow: 0 0 8px var(--dusty-rose);
-  }
-  .modal button {
-    background-color: var(--dusty-rose);
-    color: var(--light-text);
-    font-weight: 700;
-    padding: 14px 30px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-    transition: background-color 0.3s ease;
-    width: 100%;
-  }
-  .modal button:hover {
-    background-color: var(--sage-green);
-  }
-  .close-btn {
+  .modal .close-btn {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -160,6 +223,14 @@
     font-weight: 700;
     color: var(--dusty-rose);
     cursor: pointer;
+  }
+  /* Responsive */
+  @media (max-width: 480px) {
+    nav a {
+      display: block;
+      margin: 8px 0;
+      font-size: 1rem;
+    }
   }
 </style>
 </head>
@@ -171,6 +242,8 @@
     <a href="#cakes">Cakes</a>
     <a href="#cookies">Cookies</a>
     <a href="#cupcakes">Cupcakes</a>
+    <a href="#cakes-cookies">Cakes & Cookies</a>
+    <a href="#cake-pops">Cake Pops</a>
     <a href="#dessert-jars">Dessert Jars</a>
     <a href="#kids-baking">Kids Baking Class</a>
     <a href="#contact">Contact</a>
@@ -178,292 +251,291 @@
 </header>
 
 <main>
-  <!-- Example content sections -->
-  <section id="cakes"><h1>Cakes</h1></section>
-  <section id="cookies"><h1>Cookies</h1></section>
-  <section id="cupcakes"><h1>Cupcakes</h1></section>
-  <section id="dessert-jars"><h1>Dessert Jars</h1></section>
-  <section id="kids-baking"><h1>Kids Baking Class</h1></section>
-  <section id="contact"><h1>Contact Us</h1></section>
+
+  <!-- Cakes Section -->
+  <section id="cakes" aria-label="Cakes">
+    <h1>Cakes</h1>
+    <div class="products-grid" id="cakes-grid"></div>
+  </section>
+
+  <!-- Cookies Section -->
+  <section id="cookies" aria-label="Cookies">
+    <h1>Cookies</h1>
+    <div class="products-grid" id="cookies-grid"></div>
+  </section>
+
+  <!-- Cupcakes Section -->
+  <section id="cupcakes" aria-label="Cupcakes">
+    <h1>Cupcakes</h1>
+    <div class="products-grid" id="cupcakes-grid"></div>
+  </section>
+
+  <!-- Cakes & Cookies Section -->
+  <section id="cakes-cookies" aria-label="Cakes and Cookies">
+    <h1>Cakes & Cookies</h1>
+    <div class="products-grid" id="cakes-cookies-grid"></div>
+  </section>
+
+  <!-- Cake Pops Section -->
+  <section id="cake-pops" aria-label="Cake Pops">
+    <h1>Cake Pops</h1>
+    <div class="products-grid" id="cake-pops-grid"></div>
+  </section>
+
+  <!-- Dessert Jars Section -->
+  <section id="dessert-jars" aria-label="Dessert Jars">
+    <h1>Dessert Jars</h1>
+    <div class="products-grid" id="dessert-jars-grid"></div>
+  </section>
+
+  <!-- Kids Baking Class Section -->
+  <section id="kids-baking" aria-label="Kids Baking Class">
+    <h2>Kids Baking Class</h2>
+    <div class="products-grid" id="kids-baking-grid"></div>
+
+    <h3>Book a Kids Baking Class</h3>
+    <form id="kidsBookingForm" aria-label="Kids baking class booking form" novalidate>
+      <label for="child-name">Child's Name</label>
+      <input type="text" id="child-name" name="child-name" required placeholder="Child's full name" />
+
+      <label for="age-group">Age Group</label>
+      <select id="age-group" name="age-group" required>
+        <option value="" disabled selected>Select age group</option>
+        <option value="3-5 years">3-5 years</option>
+        <option value="6-8 years">6-8 years</option>
+        <option value="9-12 years">9-12 years</option>
+        <option value="13+ years">13+ years</option>
+      </select>
+
+      <label for="class-date">Desired Class Date</label>
+      <input type="date" id="class-date" name="class-date" required min="" />
+
+      <label for="parent-email">Parent's Email</label>
+      <input type="email" id="parent-email" name="parent-email" required placeholder="Parent or guardian email" />
+
+      <label for="message-kids">Additional Message (Optional)</label>
+      <textarea id="message-kids" name="message-kids" rows="4" placeholder="Any special requests or info"></textarea>
+
+      <button type="submit" aria-label="Book Kids Baking Class via WhatsApp">Book Class via WhatsApp</button>
+    </form>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" aria-label="Contact Oh My Nosh">
+    <h2>Contact Us</h2>
+    <form id="contactForm" aria-label="Contact form" novalidate>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required placeholder="Your full name" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="your.email@example.com" />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Your message or order enquiry"></textarea>
+
+      <button type="submit" aria-label="Send message via WhatsApp">Send Message via WhatsApp</button>
+    </form>
+
+    <div class="social-icons" aria-label="Social media links">
+      <a href="https://www.instagram.com/ohmynoshh?igsh=eWVsbW05Nzh0b25t" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013 16.25v-8.5A4.25 4.25 0 007.75 3.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5zm0 1.5a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zm4.86-.66a1.04 1.04 0 11-2.08 0 1.04 1.04 0 012.08 0z"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
 </main>
 
 <!-- WhatsApp Floating Button -->
 <div class="whatsapp-float" id="whatsappBtn" aria-label="Open WhatsApp enquiry form" role="button" tabindex="0">&#x2709;</div>
 
 <!-- WhatsApp Enquiry Modal -->
-<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal" role="document">
+<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="whatsappModalTitle">
+  <div class="modal">
     <div class="close-btn" id="closeModalBtn" role="button" tabindex="0" aria-label="Close WhatsApp enquiry form">&times;</div>
-    <h3 id="modalTitle">Send an Enquiry</h3>
-
+    <h3 id="whatsappModalTitle">WhatsApp Enquiry</h3>
     <form id="whatsappForm" novalidate>
-      <label for="enquiry-type">Select Enquiry Type</label>
-      <select id="enquiry-type" name="enquiry-type" required>
-        <option value="" disabled selected>Select an option</option>
-        <option value="wedding">Wedding Cake Enquiry</option>
-        <option value="kids">Kids Baking Class</option>
-        <option value="birthday">Birthday Order</option>
-        <option value="general">General Enquiry</option>
-      </select>
+      <label for="wa-name">Name</label>
+      <input type="text" id="wa-name" name="wa-name" required placeholder="Your full name" />
 
-      <!-- Common fields -->
-      <label for="user-name">Your Name</label>
-      <input type="text" id="user-name" name="user-name" required placeholder="Full name" />
+      <label for="wa-date">Desired Date</label>
+      <input type="date" id="wa-date" name="wa-date" required min="" />
 
-      <!-- Wedding Fields -->
-      <div id="wedding-fields" style="display:none;">
-        <label for="wedding-date">Wedding Date</label>
-        <input type="date" id="wedding-date" name="wedding-date" />
+      <label for="wa-budget">Budget</label>
+      <input type="text" id="wa-budget" name="wa-budget" required placeholder="Your budget" />
 
-        <label for="wedding-budget">Budget</label>
-        <input type="text" id="wedding-budget" name="wedding-budget" placeholder="e.g., R5000 - R10000" />
-
-        <label for="wedding-ideas">Describe your wedding cake idea</label>
-        <textarea id="wedding-ideas" name="wedding-ideas" rows="3" placeholder="Your ideas or special requests"></textarea>
-
-        <label for="wedding-image">Upload an Image (optional)</label>
-        <input type="file" id="wedding-image" name="wedding-image" accept="image/*" />
-      </div>
-
-      <!-- Kids Baking Class Fields -->
-      <div id="kids-fields" style="display:none;">
-        <label for="child-name">Child's Name</label>
-        <input type="text" id="child-name" name="child-name" placeholder="Child's full name" />
-
-        <label for="age-group">Age Group</label>
-        <select id="age-group" name="age-group">
-          <option value="" disabled selected>Select age group</option>
-          <option value="3-5 years">3-5 years</option>
-          <option value="6-8 years">6-8 years</option>
-          <option value="9-12 years">9-12 years</option>
-          <option value="13+ years">13+ years</option>
-        </select>
-
-        <label for="class-date">Desired Class Date</label>
-        <input type="date" id="class-date" name="class-date" />
-        
-        <label for="parent-email">Parent's Email</label>
-        <input type="email" id="parent-email" name="parent-email" placeholder="Parent or guardian email" />
-        
-        <label for="kids-message">Additional Message (Optional)</label>
-        <textarea id="kids-message" name="kids-message" rows="3" placeholder="Any special requests or info"></textarea>
-      </div>
-
-      <!-- Birthday Fields -->
-      <div id="birthday-fields" style="display:none;">
-        <label for="birthday-date">Birthday Date</label>
-        <input type="date" id="birthday-date" name="birthday-date" />
-        <label for="birthday-message">Additional Message</label>
-        <textarea id="birthday-message" name="birthday-message" rows="3" placeholder="Birthday details or requests"></textarea>
-      </div>
-
-      <!-- General Enquiry Fields -->
-      <div id="general-fields" style="display:none;">
-        <label for="general-message">Message</label>
-        <textarea id="general-message" name="general-message" rows="4" placeholder="Write your message here"></textarea>
-      </div>
-
-      <button type="submit">Send via WhatsApp</button>
+      <button type="submit" aria-label="Send WhatsApp enquiry">Send via WhatsApp</button>
     </form>
   </div>
 </div>
 
 <script>
-  const phoneNumber = '27799750908';
+  function loadImages(sectionId, baseName, maxCount = 50, maxConsecutiveMisses = 5) {
+    const container = document.getElementById(sectionId);
+    if (!container) return;
 
-  const whatsappBtn = document.getElementById('whatsappBtn');
-  const modal = document.getElementById('whatsappModal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const enquiryTypeSelect = document.getElementById('enquiry-type');
+    let count = 1;
+    let consecutiveMisses = 0;
 
-  // Field containers
-  const weddingFields = document.getElementById('wedding-fields');
-  const kidsFields = document.getElementById('kids-fields');
-  const birthdayFields = document.getElementById('birthday-fields');
-  const generalFields = document.getElementById('general-fields');
+    function tryLoadNext() {
+      if (count > maxCount || consecutiveMisses >= maxConsecutiveMisses) return;
 
-  // Show/hide fields based on enquiry type
-  enquiryTypeSelect.addEventListener('change', () => {
-    const val = enquiryTypeSelect.value;
+      const img = new Image();
+      const fileName = baseName + count + '.jpg';
+      img.src = fileName;
+      img.alt = baseName.replace(/[^a-zA-Z]/g, ' ') + ' ' + count;
+      img.className = 'product-img';
+      img.style.borderRadius = '10px';
+      img.style.width = '100%';
+      img.style.marginBottom = '15px';
 
-    weddingFields.style.display = val === 'wedding' ? 'block' : 'none';
-    kidsFields.style.display = val === 'kids' ? 'block' : 'none';
-    birthdayFields.style.display = val === 'birthday' ? 'block' : 'none';
-    generalFields.style.display = val === 'general' ? 'block' : 'none';
+      img.onload = function() {
+        consecutiveMisses = 0;
 
-    toggleRequiredFields(val);
-  });
+        const card = document.createElement('article');
+        card.className = 'product-card';
+        card.appendChild(img);
 
-  function toggleRequiredFields(type) {
-    // Remove all required first
-    weddingFields.querySelectorAll('input,textarea,select').forEach(el => el.required = false);
-    kidsFields.querySelectorAll('input,textarea,select').forEach(el => el.required = false);
-    birthdayFields.querySelectorAll('input,textarea,select').forEach(el => el.required = false);
-    generalFields.querySelectorAll('textarea').forEach(el => el.required = false);
+        container.appendChild(card);
 
-    switch(type) {
-      case 'wedding':
-        document.getElementById('wedding-date').required = true;
-        document.getElementById('wedding-budget').required = true;
-        break;
-      case 'kids':
-        document.getElementById('child-name').required = true;
-        document.getElementById('age-group').required = true;
-        document.getElementById('class-date').required = true;
-        document.getElementById('parent-email').required = true;
-        break;
-      case 'birthday':
-        document.getElementById('birthday-date').required = true;
-        break;
-      case 'general':
-        document.getElementById('general-message').required = true;
-        break;
+        count++;
+        tryLoadNext();
+      };
+
+      img.onerror = function() {
+        consecutiveMisses++;
+        count++;
+        tryLoadNext();
+      };
     }
+
+    tryLoadNext();
   }
 
-  // Open modal
-  whatsappBtn.addEventListener('click', () => {
-    modal.classList.add('active');
-    enquiryTypeSelect.focus();
-  });
-
-  // Close modal
-  closeModalBtn.addEventListener('click', () => {
-    closeModal();
-  });
-
-  // Close modal on clicking outside modal content
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-
-  // Keyboard accessibility for close button and whatsapp button
-  closeModalBtn.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      closeModal();
-    }
-  });
-  whatsappBtn.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      whatsappBtn.click();
-    }
-  });
-
-  function closeModal() {
-    modal.classList.remove('active');
-    document.getElementById('whatsappForm').reset();
-    weddingFields.style.display = 'none';
-    kidsFields.style.display = 'none';
-    birthdayFields.style.display = 'none';
-    generalFields.style.display = 'none';
+  // Set minimum date for date inputs as today
+  function setMinDate(id) {
+    const dateInput = document.getElementById(id);
+    if (!dateInput) return;
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
   }
 
-  // Form submission
-  document.getElementById('whatsappForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  document.addEventListener('DOMContentLoaded', () => {
+    loadImages('cakes-grid', 'Cake');
+    loadImages('cookies-grid', 'Cookie');
+    loadImages('cupcakes-grid', 'Cupcake');
+    loadImages('cakes-cookies-grid', 'Cake_Cookie');
+    loadImages('cake-pops-grid', 'CakePop');
+    loadImages('dessert-jars-grid', 'DessertJar');
+    loadImages('kids-baking-grid', 'KidsBaking');
 
-    const enquiryType = enquiryTypeSelect.value;
-    const userName = document.getElementById('user-name').value.trim();
+    setMinDate('class-date');
+    setMinDate('wa-date');
 
-    if (!enquiryType) {
-      alert('Please select an enquiry type.');
-      enquiryTypeSelect.focus();
-      return;
+    // WhatsApp Modal Handling
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const whatsappModal = document.getElementById('whatsappModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    function openModal() {
+      whatsappModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('wa-name').focus();
     }
-    if (!userName) {
-      alert('Please enter your name.');
-      document.getElementById('user-name').focus();
-      return;
+
+    function closeModal() {
+      whatsappModal.classList.remove('active');
+      document.body.style.overflow = '';
+      whatsappBtn.focus();
     }
 
-    let message = `Hello Oh My Nosh! I have a ${enquiryType.charAt(0).toUpperCase() + enquiryType.slice(1)} enquiry.%0AName: ${encodeURIComponent(userName)}%0A`;
+    whatsappBtn.addEventListener('click', openModal);
+    whatsappBtn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') openModal();
+    });
 
-    if (enquiryType === 'wedding') {
-      const weddingDate = document.getElementById('wedding-date').value;
-      const weddingBudget = document.getElementById('wedding-budget').value.trim();
-      const weddingIdeas = document.getElementById('wedding-ideas').value.trim();
-      const imageFile = document.getElementById('wedding-image').files[0];
+    closeModalBtn.addEventListener('click', closeModal);
+    closeModalBtn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') closeModal();
+    });
 
-      if (!weddingDate) {
-        alert('Please enter the wedding date.');
-        document.getElementById('wedding-date').focus();
-        return;
-      }
-      if (!weddingBudget) {
-        alert('Please enter the wedding budget.');
-        document.getElementById('wedding-budget').focus();
+    whatsappModal.addEventListener('click', (e) => {
+      if (e.target === whatsappModal) closeModal();
+    });
+
+    // WhatsApp enquiry form submission
+    document.getElementById('whatsappForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('wa-name').value.trim();
+      const date = document.getElementById('wa-date').value;
+      const budget = document.getElementById('wa-budget').value.trim();
+
+      if (!name || !date || !budget) {
+        alert('Please fill all the fields.');
         return;
       }
 
-      message += `Wedding Date: ${encodeURIComponent(weddingDate)}%0ABudget: ${encodeURIComponent(weddingBudget)}%0AIdeas: ${encodeURIComponent(weddingIdeas || 'N/A')}`;
+      const message = encodeURIComponent(`Hello Oh My Nosh! I would like to enquire about your services.\nName: ${name}\nDesired Date: ${date}\nBudget: ${budget}`);
+      const whatsappNumber = '27799750908';
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-      if (imageFile) {
-        alert('Note: Images cannot be sent via this form. After submitting, please upload the image directly inside WhatsApp.');
-      }
-    }
-    else if (enquiryType === 'kids') {
+      window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+      closeModal();
+      e.target.reset();
+    });
+
+    // Kids baking class booking form submission
+    document.getElementById('kidsBookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
       const childName = document.getElementById('child-name').value.trim();
       const ageGroup = document.getElementById('age-group').value;
       const classDate = document.getElementById('class-date').value;
       const parentEmail = document.getElementById('parent-email').value.trim();
-      const kidsMsg = document.getElementById('kids-message').value.trim();
+      const messageExtra = document.getElementById('message-kids').value.trim();
 
-      if (!childName) {
-        alert("Please enter the child's name.");
-        document.getElementById('child-name').focus();
-        return;
-      }
-      if (!ageGroup) {
-        alert("Please select the child's age group.");
-        document.getElementById('age-group').focus();
-        return;
-      }
-      if (!classDate) {
-        alert('Please enter the desired class date.');
-        document.getElementById('class-date').focus();
-        return;
-      }
-      if (!parentEmail) {
-        alert("Please enter the parent's email.");
-        document.getElementById('parent-email').focus();
+      if (!childName || !ageGroup || !classDate || !parentEmail) {
+        alert('Please fill all required fields.');
         return;
       }
 
-      message += `Child's Name: ${encodeURIComponent(childName)}%0AAge Group: ${encodeURIComponent(ageGroup)}%0AClass Date: ${encodeURIComponent(classDate)}%0AParent's Email: ${encodeURIComponent(parentEmail)}%0AAdditional Message: ${encodeURIComponent(kidsMsg || 'N/A')}`;
-    }
-    else if (enquiryType === 'birthday') {
-      const birthdayDate = document.getElementById('birthday-date').value;
-      const birthdayMsg = document.getElementById('birthday-message').value.trim();
+      const message = encodeURIComponent(
+        `Hello Oh My Nosh! I would like to book a Kids Baking Class.\nChild's Name: ${childName}\nAge Group: ${ageGroup}\nDesired Date: ${classDate}\nParent's Email: ${parentEmail}\nAdditional Info: ${messageExtra}`
+      );
+      const whatsappNumber = '27799750908';
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-      if (!birthdayDate) {
-        alert('Please enter the birthday date.');
-        document.getElementById('birthday-date').focus();
+      window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+      e.target.reset();
+    });
+
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const messageText = document.getElementById('message').value.trim();
+
+      if (!name || !email || !messageText) {
+        alert('Please fill all fields.');
         return;
       }
 
-      message += `Birthday Date: ${encodeURIComponent(birthdayDate)}%0AAdditional Message: ${encodeURIComponent(birthdayMsg || 'N/A')}`;
-    }
-    else if (enquiryType === 'general') {
-      const generalMsg = document.getElementById('general-message').value.trim();
-      if (!generalMsg) {
-        alert('Please enter your message.');
-        document.getElementById('general-message').focus();
-        return;
-      }
-      message += `Message: ${encodeURIComponent(generalMsg)}`;
-    }
+      const message = encodeURIComponent(`Hello Oh My Nosh! New enquiry:\nName: ${name}\nEmail: ${email}\nMessage: ${messageText}`);
+      const whatsappNumber = '27799750908';
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-    // Construct WhatsApp URL
-    const url = `https://wa.me/${phoneNumber}?text=${message}`;
-
-    // Open WhatsApp link in new tab/window
-    window.open(url, '_blank');
-
-    closeModal();
+      window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+      e.target.reset();
+    });
   });
 </script>
 
