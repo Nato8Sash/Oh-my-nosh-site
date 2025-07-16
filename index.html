@@ -22,6 +22,7 @@
       background-color: var(--cream);
       color: var(--dark-text);
       line-height: 1.6;
+      padding: 10px;
     }
     a {
       color: var(--dusty-rose);
@@ -43,37 +44,75 @@
     }
     nav {
       margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
     }
     nav a {
       font-weight: 600;
-      margin: 0 15px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       letter-spacing: 0.05em;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background-color: var(--light-text);
+      color: var(--sage-green);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--dusty-rose);
+      color: var(--light-text);
+      outline: none;
     }
     .social-icons {
-      margin-top: 20px;
+      margin-top: 30px;
       text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .social-icon-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Georgia', serif;
+      color: var(--dusty-rose);
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .social-icon-wrapper:hover,
+    .social-icon-wrapper:focus {
+      color: var(--sage-green);
+      outline: none;
     }
     .social-icons a {
-      display: inline-block;
-      margin: 0 18px;
-      transition: transform 0.3s ease;
-      color: var(--dark-text);
+      color: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
     }
     .social-icons svg {
-      width: 34px;
-      height: 34px;
-      fill: var(--dusty-rose);
+      width: 40px;
+      height: 40px;
+      fill: currentColor;
       filter: grayscale(80%);
-      transition: filter 0.3s ease, fill 0.3s ease, transform 0.3s ease;
-      vertical-align: middle;
+      transition: filter 0.3s ease, transform 0.3s ease;
     }
-    .social-icons a:hover svg {
+    .social-icon-wrapper:hover svg,
+    .social-icon-wrapper:focus svg {
       filter: none;
-      fill: var(--sage-green);
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
-
+    .social-label {
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
     main {
       max-width: 960px;
       margin: 40px auto 80px;
@@ -86,6 +125,7 @@
       font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
       color: var(--dusty-rose);
       margin-bottom: 15px;
+      font-weight: normal;
     }
     .products-grid {
       display: grid;
@@ -101,9 +141,11 @@
       text-align: center;
       transition: transform 0.3s ease;
     }
-    .product-card:hover {
+    .product-card:hover,
+    .product-card:focus-within {
       transform: scale(1.03);
       box-shadow: 0 8px 20px rgba(156, 137, 137, 0.3);
+      outline: none;
     }
     .product-card img {
       max-width: 100%;
@@ -121,6 +163,7 @@
       z-index: 2000;
       justify-content: center;
       align-items: center;
+      padding: 15px;
     }
     .modal-overlay.active {
       display: flex;
@@ -132,7 +175,7 @@
       border-radius: 12px;
       padding: 25px;
       max-width: 420px;
-      width: 90%;
+      width: 100%;
       box-shadow: 0 6px 15px rgba(156, 137, 137, 0.3);
       position: relative;
     }
@@ -176,9 +219,12 @@
       font-size: 1.1rem;
       letter-spacing: 0.05em;
       transition: background-color 0.3s ease;
+      width: 100%;
     }
-    .modal form button:hover {
+    .modal form button:hover,
+    .modal form button:focus {
       background-color: var(--sage-green);
+      outline: none;
     }
     .modal .close-btn {
       position: absolute;
@@ -188,6 +234,52 @@
       font-weight: 700;
       color: var(--dusty-rose);
       cursor: pointer;
+    }
+    .modal .close-btn:focus {
+      outline: 2px solid var(--dusty-rose);
+    }
+
+    /* Responsive Nav for small screens */
+    @media (max-width: 600px) {
+      nav a {
+        font-size: 1rem;
+        margin: 5px 8px;
+        padding: 8px 12px;
+      }
+      .products-grid {
+        grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+        gap: 15px;
+      }
+      .social-icons {
+        gap: 30px;
+      }
+      .social-icons svg {
+        width: 32px;
+        height: 32px;
+      }
+      .social-label {
+        font-size: 0.85rem;
+      }
+      main {
+        margin: 20px auto 60px;
+        padding: 0 10px;
+      }
+    }
+
+    /* Larger screens adjustments */
+    @media (min-width: 1200px) {
+      nav a {
+        font-size: 1.15rem;
+        margin: 0 20px;
+        padding: 10px 16px;
+      }
+      .social-icons svg {
+        width: 44px;
+        height: 44px;
+      }
+      .social-label {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -216,29 +308,41 @@
   <section id="dessert-jars"><h1>Dessert Jars</h1><div class="products-grid" id="dessert-jars-grid"></div></section>
   <section id="kids-baking"><h2>Kids Baking Class</h2><div class="products-grid" id="kids-baking-grid"></div></section>
 
-  <section id="contact"><h2>Contact Us</h2>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/ohmynoshh" target="_blank" aria-label="Instagram">
-        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" aria-label="Facebook">
-        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/></svg>
-      </a>
-      <a href="javascript:void(0);" id="whatsappBtn" aria-label="WhatsApp">
-        <svg role="img" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.01 2.99c-7.27 0-13.15 5.88-13.15 13.15 0 2.31.61 4.56 1.77 6.55L2 30l7.5-2.48a13.05 13.05 0 006.5 1.73h.01c7.27 0 13.15-5.88 13.15-13.15S23.28 2.99 16.01 2.99z"/></svg>
-      </a>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="social-icons" role="list" aria-label="Social media contacts">
+      <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Instagram">
+        <a href="https://www.instagram.com/ohmynoshh" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5z"/></svg>
+        </a>
+        <span class="social-label">Instagram</span>
+      </div>
+
+      <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Facebook">
+        <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/></svg>
+        </a>
+        <span class="social-label">Facebook</span>
+      </div>
+
+      <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="WhatsApp">
+        <a href="javascript:void(0);" id="whatsappBtn" aria-hidden="true" tabindex="-1">
+          <svg role="img" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.01 2.99c-7.27 0-13.15 5.88-13.15 13.15 0 2.31.61 4.56 1.77 6.55L2 30l7.5-2.48a13.05 13.05 0 006.5 1.73h.01c7.27 0 13.15-5.88 13.15-13.15S23.28 2.99 16.01 2.99z"/></svg>
+        </a>
+        <span class="social-label">WhatsApp</span>
+      </div>
     </div>
   </section>
 </main>
 
 <!-- WhatsApp Modal -->
-<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="whatsappModalTitle">
+<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="whatsappModalTitle" tabindex="-1">
   <div class="modal">
     <div class="close-btn" id="closeModalBtn" role="button" tabindex="0" aria-label="Close form">&times;</div>
     <h3 id="whatsappModalTitle">WhatsApp Enquiry</h3>
     <form id="whatsappForm">
       <label for="enquiry-type">Select Enquiry Type</label>
-      <select id="enquiry-type" required>
+      <select id="enquiry-type" required aria-required="true">
         <option value="" disabled selected>Select an option</option>
         <option value="Weddings">Weddings</option>
         <option value="Kids Baking Class">Kids Baking Class</option>
@@ -282,38 +386,100 @@
   });
 
   // WhatsApp Modal JS
-  document.getElementById('whatsappBtn').addEventListener('click', () => {
-    document.getElementById('whatsappModal').classList.add('active');
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const whatsappModal = document.getElementById('whatsappModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const enquiryTypeSelect = document.getElementById('enquiry-type');
+  const dynamicFieldsDiv = document.getElementById('dynamic-fields');
+  const whatsappForm = document.getElementById('whatsappForm');
+
+  whatsappBtn.addEventListener('click', () => {
+    whatsappModal.classList.add('active');
+    whatsappModal.focus();
   });
-  document.getElementById('closeModalBtn').addEventListener('click', () => {
-    document.getElementById('whatsappModal').classList.remove('active');
-    document.getElementById('whatsappForm').reset();
-    document.getElementById('dynamic-fields').innerHTML = '';
+  closeModalBtn.addEventListener('click', () => {
+    whatsappModal.classList.remove('active');
+    whatsappForm.reset();
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappBtn.focus();
   });
 
-  document.getElementById('enquiry-type').addEventListener('change', function() {
-    const val = this.value;
-    const df = document.getElementById('dynamic-fields');
-    df.innerHTML = '';
-    if (val === 'General Enquiry') {
-      df.innerHTML = '<label for="msg">Message</label><textarea id="msg" required></textarea>';
-    } else {
-      df.innerHTML = '<label for="name">Name</label><input id="name" required /><label for="date">Date</label><input type="date" id="date" required />';
+  // Close modal on overlay click
+  whatsappModal.addEventListener('click', (e) => {
+    if (e.target === whatsappModal) {
+      closeModalBtn.click();
     }
   });
 
-  document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+  // Close modal on ESC key
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+      closeModalBtn.click();
+    }
+  });
+
+  enquiryTypeSelect.addEventListener('change', function() {
+    const val = this.value;
+    dynamicFieldsDiv.innerHTML = '';
+
+    if(val === 'Weddings') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="name">Name</label>
+        <input id="name" name="name" required />
+
+        <label for="date">Wedding Date</label>
+        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
+
+        <label for="details">Details (optional)</label>
+        <textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>
+      `;
+    } else if(val === 'Kids Baking Class' || val === 'Birthday') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="name">Name</label>
+        <input id="name" name="name" required />
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
+      `;
+    } else if(val === 'General Enquiry') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="msg">Message</label>
+        <textarea id="msg" name="msg" required rows="4"></textarea>
+      `;
+    }
+  });
+
+  whatsappForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const type = document.getElementById('enquiry-type').value;
+    const type = enquiryTypeSelect.value;
     let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`;
-    if (type === 'General Enquiry') {
-      text += `%0A%0AMessage: ${encodeURIComponent(document.getElementById('msg').value.trim())}`;
+
+    if(type === 'General Enquiry') {
+      const msg = document.getElementById('msg').value.trim();
+      if(!msg) {
+        alert('Please enter your message.');
+        return;
+      }
+      text += `%0A%0AMessage: ${encodeURIComponent(msg)}`;
     } else {
-      text += `%0AName: ${encodeURIComponent(document.getElementById('name').value.trim())}`;
-      text += `%0ADate: ${encodeURIComponent(document.getElementById('date').value.trim())}`;
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value.trim();
+      if(!name || !date) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      text += `%0AName: ${encodeURIComponent(name)}`;
+      text += `%0ADate: ${encodeURIComponent(date)}`;
+      if(type === 'Weddings') {
+        const details = document.getElementById('details').value.trim();
+        if(details) text += `%0ADetails: ${encodeURIComponent(details)}`;
+      }
     }
     window.open(`https://wa.me/27799750908?text=${text}`, '_blank');
-    document.getElementById('whatsappModal').classList.remove('active');
+    whatsappModal.classList.remove('active');
+    whatsappForm.reset();
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappBtn.focus();
   });
 </script>
 
