@@ -300,31 +300,30 @@
 </header>
 
 <main>
-
   <!-- Cake Cart Teaser Section -->
   <section id="cake-cart" style="margin-bottom: 60px; text-align: center; max-width: 420px; margin-left: auto; margin-right: auto; background-color: var(--light-text); border: 1.5px solid var(--sage-green); border-radius: 12px; box-shadow: 0 4px 12px rgba(156,137,137,0.15); padding: 25px;">
-  <img src="cake-cart.png" alt="Oh My Nosh Cake Cart" style="max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;" />
-  <h2 style="color: var(--dusty-rose); font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; margin-bottom: 18px;">COMING SOON:</h2>
-  <h3 style="color: var(--dusty-rose); font-family: 'Georgia', serif; margin-bottom: 20px; font-weight: 600;">Oh My Nosh Cake Cart</h3>
-  <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
-    A mobile slice of heaven is about to roll in...
-  </p>
-  <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
-    Elegant design. Gourmet treats. Unforgettable moments.
-  </p>
-  <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
-    Perfect for birthdays, weddings, pop-ups — and all things sweet!
-  </p>
-  <p style="font-family: 'Georgia', serif; color: var(--dusty-rose); font-weight: 600; margin-bottom: 20px;">
-    Get early access & launch-day specials
-  </p>
-  <a href="#contact" style="display: inline-block; padding: 12px 28px; background-color: var(--dusty-rose); color: var(--light-text); border-radius: 25px; font-weight: 700; font-family: 'Georgia', serif; text-decoration: none; letter-spacing: 0.05em; transition: background-color 0.3s ease;">
-    Join the VIP List
-  </a>
-  <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.4; margin-top: 25px; font-style: italic;">
-    Stay tuned. Something seriously delicious is headed your way!
-  </p>
-</section>
+    <img src="cake-cart.png" alt="Oh My Nosh Cake Cart" style="max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;" />
+    <h2 style="color: var(--dusty-rose); font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; margin-bottom: 18px;">COMING SOON:</h2>
+    <h3 style="color: var(--dusty-rose); font-family: 'Georgia', serif; margin-bottom: 20px; font-weight: 600;">Oh My Nosh Cake Cart</h3>
+    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
+      A mobile slice of heaven is about to roll in...
+    </p>
+    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
+      Elegant design. Gourmet treats. Unforgettable moments.
+    </p>
+    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
+      Perfect for birthdays, weddings, pop-ups — and all things sweet!
+    </p>
+    <p style="font-family: 'Georgia', serif; color: var(--dusty-rose); font-weight: 600; margin-bottom: 20px;">
+      Get early access & launch-day specials
+    </p>
+    <a href="javascript:void(0);" id="vipListBtn" style="display: inline-block; padding: 12px 28px; background-color: var(--dusty-rose); color: var(--light-text); border-radius: 25px; font-weight: 700; font-family: 'Georgia', serif; text-decoration: none; letter-spacing: 0.05em; transition: background-color 0.3s ease;">
+      Join the VIP List
+    </a>
+    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.4; margin-top: 25px; font-style: italic;">
+      Stay tuned. Something seriously delicious is headed your way!
+    </p>
+  </section>
 
   <section id="cakes"><h1>Cakes</h1><div class="products-grid" id="cakes-grid"></div></section>
   <section id="cookies"><h1>Cookies</h1><div class="products-grid" id="cookies-grid"></div></section>
@@ -374,6 +373,7 @@
         <option value="Kids Baking Class">Kids Baking Class</option>
         <option value="Birthday">Birthday</option>
         <option value="General Enquiry">General Enquiry</option>
+        <option value="VIP List">VIP List</option>
       </select>
       <div id="dynamic-fields"></div>
       <button type="submit">Send via WhatsApp</button>
@@ -382,146 +382,171 @@
 </div>
 
 <script>
-  const imageSections = [
-    { id: 'cakes-grid', base: 'Cake' },
-    { id: 'cookies-grid', base: 'Cookies' },
-    { id: 'cupcakes-grid', base: 'Cupcake' },
-    { id: 'cakes-cookies-grid', base: 'Cake&Cookies' },
-    { id: 'cake-pops-grid', base: 'CakePops' },
-    { id: 'dessert-jars-grid', base: 'DessertJars' },
-    { id: 'kids-baking-grid', base: 'Class' }
-  ];
-  document.addEventListener('DOMContentLoaded', () => {
-    imageSections.forEach(({id, base}) => {
-      let count = 1, fail = 0;
-      const load = () => {
-        if (fail >= 5) return;
-        const img = new Image();
-        img.src = `${base}${count}.jpg`;
-        img.onload = () => {
-          const card = document.createElement('div');
-          card.className = 'product-card';
-          card.appendChild(img);
-          document.getElementById(id).appendChild(card);
-          count++; fail = 0; load();
-        };
-        img.onerror = () => { fail++; count++; load(); };
-      };
-      load();
-    });
-  });
-
-  // WhatsApp Modal JS
+  // Modal references
+  const whatsappModal = document.getElementById('whatsappModal');
   const whatsappBtn = document.getElementById('whatsappBtn');
-  const modal = document.getElementById('whatsappModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
-  const enquiryType = document.getElementById('enquiry-type');
-  const dynamicFields = document.getElementById('dynamic-fields');
+  const enquiryTypeSelect = document.getElementById('enquiry-type');
+  const dynamicFieldsDiv = document.getElementById('dynamic-fields');
   const whatsappForm = document.getElementById('whatsappForm');
 
+  // Open modal from WhatsApp icon
   whatsappBtn.addEventListener('click', () => {
-    modal.classList.add('active');
-    modal.focus();
+    whatsappModal.classList.add('active');
+    enquiryTypeSelect.value = "";
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappModal.focus();
   });
+
+  // Close modal events
   closeModalBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-    resetForm();
-  });
-  closeModalBtn.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      closeModalBtn.click();
-    }
-  });
-  modal.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-      resetForm();
-    }
-  });
-
-  function resetForm() {
+    whatsappModal.classList.remove('active');
     whatsappForm.reset();
-    dynamicFields.innerHTML = '';
-  }
-
-  enquiryType.addEventListener('change', () => {
-    dynamicFields.innerHTML = '';
-    switch (enquiryType.value) {
-      case 'Weddings':
-        addInput('Name', 'text');
-        addInput('Email', 'email');
-        addInput('Phone', 'tel');
-        addInput('Event Date', 'date');
-        break;
-      case 'Kids Baking Class':
-        addInput('Name', 'text');
-        addInput('Child Age', 'number', { min:1, max:16 });
-        addInput('Preferred Date', 'date');
-        addInput('Parent Contact', 'tel');
-        break;
-      case 'Birthday':
-        addInput('Name', 'text');
-        addInput('Age', 'number', { min:1 });
-        addInput('Party Date', 'date');
-        addInput('Phone', 'tel');
-        break;
-      case 'General Enquiry':
-        addInput('Name', 'text');
-        addInput('Message', 'textarea');
-        break;
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappBtn.focus();
+  });
+  whatsappModal.addEventListener('click', (e) => {
+    if (e.target === whatsappModal) {
+      whatsappModal.classList.remove('active');
+      whatsappForm.reset();
+      dynamicFieldsDiv.innerHTML = '';
+      whatsappBtn.focus();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape" && whatsappModal.classList.contains('active')) {
+      whatsappModal.classList.remove('active');
+      whatsappForm.reset();
+      dynamicFieldsDiv.innerHTML = '';
+      whatsappBtn.focus();
     }
   });
 
-  function addInput(labelText, type, attributes={}) {
-    const label = document.createElement('label');
-    label.textContent = labelText;
-    const id = labelText.toLowerCase().replace(/\s+/g, '-');
-    label.setAttribute('for', id);
-
-    let input;
-    if(type === 'textarea') {
-      input = document.createElement('textarea');
-      input.rows = 4;
+  // Show dynamic fields based on enquiry type
+  enquiryTypeSelect.addEventListener('change', () => {
+    const value = enquiryTypeSelect.value;
+    if (value === "Weddings") {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="wedding-date">Date</label>
+        <input type="date" id="wedding-date" name="wedding-date" required />
+        <label for="wedding-guestcount">Number of Guests</label>
+        <input type="number" id="wedding-guestcount" name="wedding-guestcount" min="1" required />
+      `;
+    } else if (value === "Kids Baking Class") {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="child-name">Child's Name</label>
+        <input type="text" id="child-name" name="child-name" required />
+        <label for="class-date">Preferred Date</label>
+        <input type="date" id="class-date" name="class-date" required />
+      `;
+    } else if (value === "Birthday") {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="birthday-name">Name</label>
+        <input type="text" id="birthday-name" name="birthday-name" required />
+        <label for="birthday-date">Date</label>
+        <input type="date" id="birthday-date" name="birthday-date" required />
+      `;
+    } else if (value === "VIP List") {
+      // VIP List only requires Name and Surname
+      dynamicFieldsDiv.innerHTML = `
+        <label for="vip-name">Name</label>
+        <input type="text" id="vip-name" name="vip-name" required autocomplete="given-name" />
+        <label for="vip-surname">Surname</label>
+        <input type="text" id="vip-surname" name="vip-surname" required autocomplete="family-name" />
+      `;
+    } else if (value === "General Enquiry") {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="general-message">Your Message</label>
+        <textarea id="general-message" name="general-message" rows="4" required></textarea>
+      `;
     } else {
-      input = document.createElement('input');
-      input.type = type;
-      for(const attr in attributes) {
-        input.setAttribute(attr, attributes[attr]);
-      }
+      dynamicFieldsDiv.innerHTML = '';
     }
-    input.id = id;
-    input.name = id;
-    input.required = true;
-    input.setAttribute('aria-required', 'true');
-
-    dynamicFields.appendChild(label);
-    dynamicFields.appendChild(input);
-  }
-
-  whatsappForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const type = enquiryType.value;
-    if (!type) return alert('Please select an enquiry type.');
-
-    let message = `Hello Oh My Nosh! I have an enquiry for: ${type}.%0A`;
-
-    const inputs = dynamicFields.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-      message += `${capitalize(input.name.replace(/-/g, ' '))}: ${encodeURIComponent(input.value)}%0A`;
-    });
-
-    const phoneNumber = '27799750908'; // Your WhatsApp number with country code, no plus or spaces
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-
-    window.open(whatsappURL, '_blank');
-    modal.classList.remove('active');
-    resetForm();
   });
 
-  function capitalize(str) {
-    return str.replace(/\b\w/g, l => l.toUpperCase());
-  }
+  // VIP List button from teaser section
+  const vipListBtn = document.getElementById('vipListBtn');
+  vipListBtn.addEventListener('click', () => {
+    whatsappModal.classList.add('active');
+    whatsappModal.focus();
+
+    enquiryTypeSelect.value = 'VIP List';
+    enquiryTypeSelect.dispatchEvent(new Event('change'));
+  });
+
+  // Submit handler
+  whatsappForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const type = enquiryTypeSelect.value;
+    if (!type) {
+      alert('Please select an enquiry type.');
+      return;
+    }
+
+    let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`
+
+    if (type === "VIP List") {
+      const name = document.getElementById('vip-name').value.trim();
+      const surname = document.getElementById('vip-surname').value.trim();
+      if (!name || !surname) {
+        alert('Please enter both your name and surname.');
+        return;
+      }
+      text += `%0AName: ${encodeURIComponent(name)}`;
+      text += `%0ASurname: ${encodeURIComponent(surname)}`;
+    }
+    else if (type === "Weddings") {
+      const date = document.getElementById('wedding-date').value;
+      const guests = document.getElementById('wedding-guestcount').value;
+      if (!date || !guests) {
+        alert('Please fill all the required fields.');
+        return;
+      }
+      text += `%0ADate: ${encodeURIComponent(date)}`;
+      text += `%0ANumber of Guests: ${encodeURIComponent(guests)}`;
+    }
+    else if (type === "Kids Baking Class") {
+      const childName = document.getElementById('child-name').value.trim();
+      const classDate = document.getElementById('class-date').value;
+      if (!childName || !classDate) {
+        alert('Please fill all the required fields.');
+        return;
+      }
+      text += `%0AChild's Name: ${encodeURIComponent(childName)}`;
+      text += `%0APreferred Date: ${encodeURIComponent(classDate)}`;
+    }
+    else if (type === "Birthday") {
+      const bName = document.getElementById('birthday-name').value.trim();
+      const bDate = document.getElementById('birthday-date').value;
+      if (!bName || !bDate) {
+        alert('Please fill all the required fields.');
+        return;
+      }
+      text += `%0AName: ${encodeURIComponent(bName)}`;
+      text += `%0ADate: ${encodeURIComponent(bDate)}`;
+    }
+    else if (type === "General Enquiry") {
+      const message = document.getElementById('general-message').value.trim();
+      if (!message) {
+        alert('Please enter your message.');
+        return;
+      }
+      text += `%0AMessage: ${encodeURIComponent(message)}`;
+    }
+
+    // WhatsApp number with country code +27 79 975 0908
+    const waNumber = "27799750908";
+
+    // Open WhatsApp chat in new tab
+    window.open(`https://wa.me/${waNumber}?text=${text}`, '_blank');
+
+    // Reset form and close modal
+    whatsappModal.classList.remove('active');
+    whatsappForm.reset();
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappBtn.focus();
+  });
 </script>
 
 </body>
