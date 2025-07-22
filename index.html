@@ -290,6 +290,31 @@
       outline: 2px solid var(--dusty-rose);
     }
 
+    /* WhatsApp Modal */
+    #whatsappModal .modal form label,
+    #whatsappModal .modal form input,
+    #whatsappModal .modal form select,
+    #whatsappModal .modal form textarea,
+    #whatsappModal .modal form button {
+      font-family: inherit;
+    }
+    #whatsappModal .modal form select,
+    #whatsappModal .modal form textarea {
+      width: 100%;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      border: 1.5px solid var(--sage-green);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    #whatsappModal .modal form select:focus,
+    #whatsappModal .modal form textarea:focus {
+      outline: none;
+      border-color: var(--dusty-rose);
+      box-shadow: 0 0 8px var(--dusty-rose);
+    }
+
     /* Responsive Nav for small screens */
     @media (max-width: 600px) {
       nav a {
@@ -402,94 +427,276 @@
 <!-- VIP Modal -->
 <div class="modal-overlay" id="vipModal" role="dialog" aria-modal="true" aria-labelledby="vipModalTitle" tabindex="-1">
   <div class="modal">
-    <div class="close-btn" id="vipCloseBtn" role="button" tabindex="0" aria-label="Close VIP form">×</div>
-    <h3 id="vipModalTitle">Join Our VIP List</h3>
+    <button class="close-btn" id="closeVipModalBtn" aria-label="Close VIP form">×</button>
+    <h3 id="vipModalTitle">Join the Cake Cart VIP List</h3>
     <form id="vipForm">
       <label for="vip-name">Name</label>
-      <input type="text" id="vip-name" name="vip-name" required aria-required="true" placeholder="Your full name" />
+      <input type="text" id="vip-name" name="vip-name" required autocomplete="name" />
 
       <label for="vip-email">Email</label>
-      <input type="email" id="vip-email" name="vip-email" required aria-required="true" placeholder="you@example.com" />
+      <input type="email" id="vip-email" name="vip-email" required autocomplete="email" />
 
-      <button type="submit">Join Now</button>
+      <button type="submit">Join VIP List</button>
+    </form>
+  </div>
+</div>
+
+<!-- WhatsApp Modal -->
+<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="whatsappModalTitle" tabindex="-1">
+  <div class="modal">
+    <button class="close-btn" id="closeModalBtn" aria-label="Close WhatsApp form">×</button>
+    <h3 id="whatsappModalTitle">WhatsApp Enquiry</h3>
+    <form id="whatsappForm">
+      <label for="enquiry-type">Select Enquiry Type</label>
+      <select id="enquiry-type" required aria-required="true">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Weddings">Weddings</option>
+        <option value="Kids Baking Class">Kids Baking Class</option>
+        <option value="Birthday">Birthday</option>
+        <option value="General Enquiry">General Enquiry</option>
+      </select>
+      <div id="dynamic-fields"></div>
+      <button type="submit">Send via WhatsApp</button>
     </form>
   </div>
 </div>
 
 <script>
-  // Countdown setup
+  // Auto image loader for product grids
+  const imageSections = [
+    { id: 'cakes-grid', base: 'Cake' },
+    { id: 'cookies-grid', base: 'Cookies' },
+    { id: 'cupcakes-grid', base: 'Cupcake' },
+    { id: 'cakes-cookies-grid', base: 'Cake&Cookies' },
+    { id: 'cake-pops-grid', base: 'CakePops' },
+    { id: 'dessert-jars-grid', base: 'DessertJars' },
+    { id: 'kids-baking-grid', base: 'Class' }
+  ];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    imageSections.forEach(({id, base}) => {
+      let count = 1, fail = 0;
+      const load = () => {
+        if (fail >= 5) return; // stop after 5 missing images in a row
+        const img = new Image();
+        img.src = `main/${base}${count}.jpg`; // load from main folder
+        img.onload = () => {
+          const card = document.createElement('div');
+          card.className = 'product-card';
+          card.appendChild(img);
+          document.getElementById(id).appendChild(card);
+          count++; fail = 0; load();
+        };
+        img.onerror = () => {
+          fail++; count++; load();
+        };
+      };
+      load();
+    });
+  });
+
+  // Cake Cart Countdown & Live toggle
+  const launchDate = new Date('2025-09-01T12:00:00'); // Adjust launch date/time here
   const countdownEl = document.getElementById('countdown');
   const nowLiveEl = document.getElementById('now-live');
-  const joinVipBtn = document.getElementById('join-vip-btn');
-  const vipModal = document.getElementById('vipModal');
-  const vipCloseBtn = document.getElementById('vipCloseBtn');
-  const vipForm = document.getElementById('vipForm');
-
-  // Set your launch date/time here (adjust timezone as needed)
-  const launchDate = new Date('2025-08-15T12:00:00Z').getTime();
 
   function updateCountdown() {
-    const now = new Date().getTime();
+    const now = new Date();
     const diff = launchDate - now;
-
     if (diff <= 0) {
       countdownEl.style.display = 'none';
       nowLiveEl.style.display = 'block';
-      joinVipBtn.disabled = true;
       clearInterval(countdownInterval);
       return;
     }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((diff % (1000*60)) / 1000);
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    countdownEl.textContent = `Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    countdownEl.textContent = `Launch in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
-
-  const countdownInterval = setInterval(updateCountdown, 1000);
   updateCountdown();
+  const countdownInterval = setInterval(updateCountdown, 1000);
 
-  // VIP Modal toggle
-  joinVipBtn.addEventListener('click', () => {
+  // VIP Modal controls
+  const vipBtn = document.getElementById('join-vip-btn');
+  const vipModal = document.getElementById('vipModal');
+  const closeVipBtn = document.getElementById('closeVipModalBtn');
+  const vipForm = document.getElementById('vipForm');
+
+  vipBtn.addEventListener('click', () => {
     vipModal.classList.add('active');
-    joinVipBtn.setAttribute('aria-expanded', 'true');
-    document.getElementById('vip-name').focus();
+    vipBtn.setAttribute('aria-expanded', 'true');
+    vipModal.querySelector('input').focus();
   });
-  vipCloseBtn.addEventListener('click', closeVipModal);
-  vipCloseBtn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      closeVipModal();
+  closeVipBtn.addEventListener('click', () => {
+    vipModal.classList.remove('active');
+    vipBtn.setAttribute('aria-expanded', 'false');
+    vipForm.reset();
+    vipBtn.focus();
+  });
+  vipModal.addEventListener('click', e => {
+    if(e.target === vipModal) closeVipBtn.click();
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && vipModal.classList.contains('active')) {
+      closeVipBtn.click();
     }
   });
-  function closeVipModal() {
-    vipModal.classList.remove('active');
-    joinVipBtn.setAttribute('aria-expanded', 'false');
-    joinVipBtn.focus();
-  }
-
-  // Close modal on click outside modal content
-  vipModal.addEventListener('click', e => {
-    if (e.target === vipModal) closeVipModal();
-  });
-
-  // VIP form submit handler (dummy for now)
   vipForm.addEventListener('submit', e => {
     e.preventDefault();
-    alert(`Thank you, ${vipForm['vip-name'].value}! You have joined our VIP list.`);
+    alert(`Thanks for joining the VIP list, ${vipForm['vip-name'].value.trim()}! We will contact you at ${vipForm['vip-email'].value.trim()}.`);
     vipForm.reset();
-    closeVipModal();
+    closeVipBtn.click();
   });
 
-  // WhatsApp button open WhatsApp Web with predefined number
+  // WhatsApp Modal controls
   const whatsappBtn = document.getElementById('whatsappBtn');
+  const whatsappModal = document.getElementById('whatsappModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const enquiryTypeSelect = document.getElementById('enquiry-type');
+  const dynamicFieldsDiv = document.getElementById('dynamic-fields');
+  const whatsappForm = document.getElementById('whatsappForm');
+
   whatsappBtn.addEventListener('click', () => {
-    const phone = '+27799750908'; // Use your WhatsApp number in international format
-    const message = encodeURIComponent('Hello, I would like to make an enquiry.');
-    const url = `https://wa.me/${phone.replace(/\D/g, '')}?text=${message}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+    whatsappModal.classList.add('active');
+    whatsappModal.focus();
+  });
+  closeModalBtn.addEventListener('click', () => {
+    whatsappModal.classList.remove('active');
+    whatsappForm.reset();
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappBtn.focus();
+  });
+  whatsappModal.addEventListener('click', (e) => {
+    if (e.target === whatsappModal) {
+      closeModalBtn.click();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+      closeModalBtn.click();
+    }
+  });
+
+  enquiryTypeSelect.addEventListener('change', function() {
+    const val = this.value;
+    dynamicFieldsDiv.innerHTML = '';
+
+    if(val === 'Weddings') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="name">Name</label>
+        <input id="name" name="name" required />
+
+        <label for="date">Wedding Date</label>
+        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
+
+        <label for="budget">Budget</label>
+        <input type="text" id="budget" name="budget" placeholder="e.g. R5000 - R10000" />
+
+        <label for="details">Details (optional)</label>
+        <textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>
+      `;
+    } else if(val === 'Kids Baking Class') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="name">Name</label>
+        <input id="name" name="name" required />
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
+
+        <label for="age-group">Age Group</label>
+        <select id="age-group" name="age-group" required>
+          <option value="" disabled selected>Select age group</option>
+          <option value="3-5 years">3-5 years</option>
+          <option value="6-8 years">6-8 years</option>
+          <option value="9-12 years">9-12 years</option>
+        </select>
+
+        <label for="num-children">Number of Children</label>
+        <input type="number" id="num-children" name="num-children" min="1" required />
+      `;
+    } else if(val === 'Birthday') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="name">Name</label>
+        <input id="name" name="name" required />
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
+
+        <label for="budget">Budget</label>
+        <input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />
+      `;
+    } else if(val === 'General Enquiry') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="budget">Budget</label>
+        <input type="text" id="budget" name="budget" placeholder="Optional" />
+
+        <label for="msg">Message</label>
+        <textarea id="msg" name="msg" required rows="4"></textarea>
+      `;
+    }
+  });
+
+  whatsappForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const type = enquiryTypeSelect.value;
+    if(!type) {
+      alert('Please select an enquiry type.');
+      return;
+    }
+    let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`;
+
+    if(type === 'General Enquiry') {
+      const budget = document.getElementById('budget').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      if(!msg) {
+        alert('Please enter your message.');
+        return;
+      }
+      if(budget) {
+        text += `%0ABudget: ${encodeURIComponent(budget)}`;
+      }
+      text += `%0A%0AMessage: ${encodeURIComponent(msg)}`;
+    } else if(type === 'Kids Baking Class') {
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value.trim();
+      const ageGroup = document.getElementById('age-group').value;
+      const numChildren = document.getElementById('num-children').value.trim();
+
+      if(!name || !date || !ageGroup || !numChildren) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      text += `%0AName: ${encodeURIComponent(name)}`;
+      text += `%0ADate: ${encodeURIComponent(date)}`;
+      text += `%0AAge Group: ${encodeURIComponent(ageGroup)}`;
+      text += `%0ANumber of Children: ${encodeURIComponent(numChildren)}`;
+    } else { // Weddings or Birthday
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value.trim();
+      const budget = document.getElementById('budget') ? document.getElementById('budget').value.trim() : '';
+
+      if(!name || !date) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      text += `%0AName: ${encodeURIComponent(name)}`;
+      text += `%0ADate: ${encodeURIComponent(date)}`;
+      if(budget) {
+        text += `%0ABudget: ${encodeURIComponent(budget)}`;
+      }
+      if(type === 'Weddings') {
+        const details = document.getElementById('details').value.trim();
+        if(details) text += `%0ADetails: ${encodeURIComponent(details)}`;
+      }
+    }
+    window.open(`https://wa.me/27799750908?text=${text}`, '_blank');
+    whatsappModal.classList.remove('active');
+    whatsappForm.reset();
+    dynamicFieldsDiv.innerHTML = '';
+    whatsappBtn.focus();
   });
 </script>
 
