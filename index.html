@@ -473,13 +473,13 @@
     { id: 'kids-baking-grid', base: 'Class' }
   ];
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     imageSections.forEach(({id, base}) => {
       let count = 1, fail = 0;
       const load = () => {
-        if (fail >= 5) return; // stop after 5 missing images in a row
+        if (fail >= 5) return;
         const img = new Image();
-        img.src = `main/${base}${count}.jpg`; // load from main folder
+        img.src = `main/${base}${count}.jpg`;  // <-- updated path to load images from main/
         img.onload = () => {
           const card = document.createElement('div');
           card.className = 'product-card';
@@ -487,9 +487,7 @@
           document.getElementById(id).appendChild(card);
           count++; fail = 0; load();
         };
-        img.onerror = () => {
-          fail++; count++; load();
-        };
+        img.onerror = () => { fail++; count++; load(); };
       };
       load();
     });
