@@ -66,6 +66,44 @@
       color: var(--light-text);
       outline: none;
     }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .product-card {
+      background-color: var(--light-text);
+      border: 1.5px solid var(--sage-green);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(156, 137, 137, 0.15);
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover,
+    .product-card:focus-within {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(156, 137, 137, 0.3);
+      outline: none;
+    }
+    .product-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .product-card h4 {
+      font-family: 'Georgia', serif;
+      font-weight: 600;
+      color: var(--dusty-rose);
+      margin-bottom: 6px;
+    }
+    .product-card p {
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      color: var(--dark-text);
+    }
     .social-icons {
       margin-top: 30px;
       text-align: center;
@@ -127,33 +165,6 @@
       margin-bottom: 15px;
       font-weight: normal;
     }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-      gap: 20px;
-    }
-    .product-card {
-      background-color: var(--light-text);
-      border: 1.5px solid var(--sage-green);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(156, 137, 137, 0.15);
-      padding: 10px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .product-card:hover,
-    .product-card:focus-within {
-      transform: scale(1.03);
-      box-shadow: 0 8px 20px rgba(156, 137, 137, 0.3);
-      outline: none;
-    }
-    .product-card img {
-      max-width: 100%;
-      border-radius: 10px;
-      display: block;
-      margin: 0 auto;
-    }
-
     /* Modal Overlay */
     .modal-overlay {
       position: fixed;
@@ -168,7 +179,6 @@
     .modal-overlay.active {
       display: flex;
     }
-
     /* Modal Content */
     .modal {
       background: var(--light-text);
@@ -238,7 +248,70 @@
     .modal .close-btn:focus {
       outline: 2px solid var(--dusty-rose);
     }
-
+    /* Cake Cart Teaser */
+    #cake-cart {
+      text-align: center;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: var(--light-text);
+      border: 1.5px solid var(--sage-green);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(156,137,137,0.15);
+      padding: 25px;
+      margin-bottom: 60px;
+    }
+    #cake-cart img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    #cake-cart h2 {
+      color: var(--dusty-rose);
+      font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+      margin-bottom: 18px;
+    }
+    #cake-cart h3 {
+      color: var(--dusty-rose);
+      font-family: 'Georgia', serif;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    #cake-cart p {
+      font-family: 'Georgia', serif;
+      color: var(--dark-text);
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    #cake-cart p.special {
+      color: var(--dusty-rose);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    #cake-cart a {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: var(--dusty-rose);
+      color: var(--light-text);
+      border-radius: 25px;
+      font-weight: 700;
+      font-family: 'Georgia', serif;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: background-color 0.3s ease;
+    }
+    #cake-cart a:hover,
+    #cake-cart a:focus {
+      background-color: var(--sage-green);
+      outline: none;
+    }
+    #cake-cart p.italic {
+      font-style: italic;
+      margin-top: 25px;
+      line-height: 1.4;
+      color: var(--dark-text);
+    }
     /* Responsive Nav for small screens */
     @media (max-width: 600px) {
       nav a {
@@ -265,7 +338,6 @@
         padding: 0 10px;
       }
     }
-
     /* Larger screens adjustments */
     @media (min-width: 1200px) {
       nav a {
@@ -301,81 +373,161 @@
 
 <main>
   <!-- Cake Cart Teaser Section -->
-  <section id="cake-cart" style="margin-bottom: 60px; text-align: center; max-width: 420px; margin-left: auto; margin-right: auto; background-color: var(--light-text); border: 1.5px solid var(--sage-green); border-radius: 12px; box-shadow: 0 4px 12px rgba(156,137,137,0.15); padding: 25px;">
-    <img src="cake-cart.png" alt="Oh My Nosh Cake Cart" style="max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;" />
-    <h2 style="color: var(--dusty-rose); font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; margin-bottom: 18px;">COMING SOON:</h2>
-    <h3 style="color: var(--dusty-rose); font-family: 'Georgia', serif; margin-bottom: 20px; font-weight: 600;">Oh My Nosh Cake Cart</h3>
-    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
-      A mobile slice of heaven is about to roll in...
-    </p>
-    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
-      Elegant design. Gourmet treats. Unforgettable moments.
-    </p>
-    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.5; margin-bottom: 15px;">
-      Perfect for birthdays, weddings, pop-ups — and all things sweet!
-    </p>
-    <p style="font-family: 'Georgia', serif; color: var(--dusty-rose); font-weight: 600; margin-bottom: 20px;">
-      Get early access & launch-day specials
-    </p>
-    <a href="javascript:void(0);" id="vipListBtn" style="display: inline-block; padding: 12px 28px; background-color: var(--dusty-rose); color: var(--light-text); border-radius: 25px; font-weight: 700; font-family: 'Georgia', serif; text-decoration: none; letter-spacing: 0.05em; transition: background-color 0.3s ease;">
-      Join the VIP List
-    </a>
-    <p style="font-family: 'Georgia', serif; color: var(--dark-text); line-height: 1.4; margin-top: 25px; font-style: italic;">
-      Stay tuned. Something seriously delicious is headed your way!
-    </p>
+  <section id="cake-cart">
+    <img src="cake-cart.png" alt="Oh My Nosh Cake Cart" />
+    <h2>COMING SOON:</h2>
+    <h3>Oh My Nosh Cake Cart</h3>
+    <p>A mobile slice of heaven is about to roll in...</p>
+    <p>Elegant design. Gourmet treats. Unforgettable moments.</p>
+    <p>Perfect for birthdays, weddings, pop-ups — and all things sweet!</p>
+    <p class="special">Get early access & launch-day specials</p>
+    <a href="javascript:void(0);" id="vipListBtn">Join the VIP List</a>
+    <p class="italic">Stay tuned. Something seriously delicious is headed your way!</p>
   </section>
 
-  <section id="cakes"><h1>Cakes</h1><div class="products-grid" id="cakes-grid"></div></section>
-  <section id="cookies"><h1>Cookies</h1><div class="products-grid" id="cookies-grid"></div></section>
-  <section id="cupcakes"><h1>Cupcakes</h1><div class="products-grid" id="cupcakes-grid"></div></section>
-  <section id="cakes-cookies"><h1>Cakes & Cookies</h1><div class="products-grid" id="cakes-cookies-grid"></div></section>
-  <section id="cake-pops"><h1>Cake Pops</h1><div class="products-grid" id="cake-pops-grid"></div></section>
-  <section id="dessert-jars"><h1>Dessert Jars</h1><div class="products-grid" id="dessert-jars-grid"></div></section>
-  <section id="kids-baking"><h2>Kids Baking Class</h2><div class="products-grid" id="kids-baking-grid"></div></section>
+  <!-- Cakes Section -->
+  <section id="cakes">
+    <h1>Cakes</h1>
+    <div class="products-grid" id="cakes-grid">
+      <div class="product-card" tabindex="0">
+        <img src="cakes/vanilla-cake.jpg" alt="Vanilla Cake" />
+        <h4>Vanilla Cake</h4>
+        <p>Classic vanilla cake with creamy buttercream.</p>
+      </div>
+      <div class="product-card" tabindex="0">
+        <img src="cakes/chocolate-cake.jpg" alt="Chocolate Cake" />
+        <h4>Chocolate Cake</h4>
+        <p>Rich chocolate cake with ganache frosting.</p>
+      </div>
+      <!-- Add more cake cards as needed -->
+    </div>
+  </section>
+
+  <!-- Cookies Section -->
+  <section id="cookies">
+    <h1>Cookies</h1>
+    <div class="products-grid" id="cookies-grid">
+      <div class="product-card" tabindex="0">
+        <img src="cookies/chocolate-chip.jpg" alt="Chocolate Chip Cookies" />
+        <h4>Chocolate Chip</h4>
+        <p>Chewy cookies loaded with chocolate chips.</p>
+      </div>
+      <div class="product-card" tabindex="0">
+        <img src="cookies/oatmeal-raisins.jpg" alt="Oatmeal Raisin Cookies" />
+        <h4>Oatmeal Raisin</h4>
+        <p>Soft oatmeal cookies with juicy raisins.</p>
+      </div>
+      <!-- Add more cookie cards as needed -->
+    </div>
+  </section>
+
+  <!-- Cupcakes Section -->
+  <section id="cupcakes">
+    <h1>Cupcakes</h1>
+    <div class="products-grid" id="cupcakes-grid">
+      <div class="product-card" tabindex="0">
+        <img src="cupcakes/red-velvet.jpg" alt="Red Velvet Cupcakes" />
+        <h4>Red Velvet</h4>
+        <p>Moist red velvet cupcakes with cream cheese frosting.</p>
+      </div>
+      <div class="product-card" tabindex="0">
+        <img src="cupcakes/lemon.jpg" alt="Lemon Cupcakes" />
+        <h4>Lemon</h4>
+        <p>Fresh lemon cupcakes with zesty icing.</p>
+      </div>
+      <!-- Add more cupcake cards as needed -->
+    </div>
+  </section>
+
+  <!-- Cakes & Cookies Section -->
+  <section id="cakes-cookies">
+    <h1>Cakes & Cookies</h1>
+    <div class="products-grid" id="cakes-cookies-grid">
+      <div class="product-card" tabindex="0">
+        <img src="cakes-cookies/choco-cookie-cake.jpg" alt="Chocolate Cookie Cake" />
+        <h4>Chocolate Cookie Cake</h4>
+        <p>A delicious blend of cookies and cake.</p>
+      </div>
+      <!-- Add more combined product cards as needed -->
+    </div>
+  </section>
+
+  <!-- Cake Pops Section -->
+  <section id="cake-pops">
+    <h1>Cake Pops</h1>
+    <div class="products-grid" id="cake-pops-grid">
+      <div class="product-card" tabindex="0">
+        <img src="cake-pops/strawberry.jpg" alt="Strawberry Cake Pops" />
+        <h4>Strawberry</h4>
+        <p>Sweet strawberry-flavored cake pops.</p>
+      </div>
+      <!-- Add more cake pop cards as needed -->
+    </div>
+  </section>
+
+  <!-- Dessert Jars Section -->
+  <section id="dessert-jars">
+    <h1>Dessert Jars</h1>
+    <div class="products-grid" id="dessert-jars-grid">
+      <div class="product-card" tabindex="0">
+        <img src="dessert-jars/tiramisu.jpg" alt="Tiramisu Jar" />
+        <h4>Tiramisu</h4>
+        <p>Classic tiramisu served in a jar.</p>
+      </div>
+      <!-- Add more dessert jar cards as needed -->
+    </div>
+  </section>
+
+  <!-- Kids Baking Class Section -->
+  <section id="kids-baking">
+    <h2>Kids Baking Class</h2>
+    <div class="products-grid" id="kids-baking-grid">
+      <div class="product-card" tabindex="0">
+        <img src="kids-baking/class1.jpg" alt="Kids Baking Class 1" />
+        <h4>Beginner Class</h4>
+        <p>Fun baking lessons for ages 5-8.</p>
+      </div>
+      <!-- Add more kids baking class cards as needed -->
+    </div>
+  </section>
 
   <section id="contact">
     <h2>Contact Us</h2>
     <div class="social-icons" role="list" aria-label="Social media contacts">
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Instagram">
-        <a href="https://www.instagram.com/ohmynoshh" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5z"/></svg>
+        <a href="https://www.instagram.com/ohmynoshsa" target="_blank" rel="noopener noreferrer">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 512 512"><path d="M349.33 69.33H162.67C111.45 69.33 69.33 111.45 69.33 162.67v186.67c0 51.22 42.12 93.34 93.34 93.34h186.67c51.22 0 93.34-42.12 93.34-93.34V162.67c0-51.22-42.12-93.34-93.34-93.34zM256 165.33c39.57 0 71.67 32.1 71.67 71.67S295.57 308.67 256 308.67 184.33 276.57 184.33 237 216.43 165.33 256 165.33zm90.67-31.67a16 16 0 110 32 16 16 0 010-32z"/></svg>
+          <span class="social-label">Instagram</span>
         </a>
-        <span class="social-label">Instagram</span>
       </div>
-
-      <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Facebook">
-        <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/></svg>
-        </a>
-        <span class="social-label">Facebook</span>
-      </div>
-
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="WhatsApp">
-        <a href="javascript:void(0);" id="whatsappBtn" aria-hidden="true" tabindex="-1">
-          <svg role="img" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.01 2.99c-7.27 0-13.15 5.88-13.15 13.15 0 2.31.61 4.56 1.77 6.55L2 30l7.5-2.48a13.05 13.05 0 006.5 1.73h.01c7.27 0 13.15-5.88 13.15-13.15S23.28 2.99 16.01 2.99z"/></svg>
+        <a href="https://wa.me/27799750908" target="_blank" rel="noopener noreferrer" id="whatsappBtn">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 448 512"><path d="M380.9 97.1C339-12 249.4 20.7 192 74.4a172.6 172.6 0 00-46 65.5 17.3 17.3 0 01-16.3 10.2c-27.6 0-52.8-10.3-72.1-27.4a77.7 77.7 0 00-29.7-19.5 29 29 0 00-36.7 23.6C-7.8 224 7.3 259.8 32 284.6c24.6 24.7 60.4 39.6 96 39.6a172.6 172.6 0 0065.5-46c53.7-57.4 86.4-147 74.4-189.2z"/></svg>
+          <span class="social-label">WhatsApp</span>
         </a>
-        <span class="social-label">WhatsApp</span>
       </div>
     </div>
   </section>
 </main>
 
-<!-- WhatsApp Modal -->
-<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="whatsappModalTitle" tabindex="-1">
+<!-- WhatsApp Enquiry Modal -->
+<div id="whatsappModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
   <div class="modal">
-    <div class="close-btn" id="closeModalBtn" role="button" tabindex="0" aria-label="Close form">&times;</div>
-    <h3 id="whatsappModalTitle">WhatsApp Enquiry</h3>
+    <button class="close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
+    <h3 id="modalTitle">Send us a WhatsApp Enquiry</h3>
     <form id="whatsappForm">
-      <label for="enquiry-type">Select Enquiry Type</label>
-      <select id="enquiry-type" required aria-required="true">
+      <label for="enquiry-type">Select enquiry type</label>
+      <select id="enquiry-type" name="enquiry-type" required>
         <option value="" disabled selected>Select an option</option>
         <option value="Weddings">Weddings</option>
         <option value="Kids Baking Class">Kids Baking Class</option>
         <option value="Birthday">Birthday</option>
-        <option value="General Enquiry">General Enquiry</option>
         <option value="VIP List">VIP List</option>
+        <option value="General Enquiry">General Enquiry</option>
       </select>
+
       <div id="dynamic-fields"></div>
+
       <button type="submit">Send via WhatsApp</button>
     </form>
   </div>
@@ -391,7 +543,8 @@
   const whatsappForm = document.getElementById('whatsappForm');
 
   // Open modal from WhatsApp icon
-  whatsappBtn.addEventListener('click', () => {
+  whatsappBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     whatsappModal.classList.add('active');
     enquiryTypeSelect.value = "";
     dynamicFieldsDiv.innerHTML = '';
