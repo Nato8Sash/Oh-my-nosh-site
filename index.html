@@ -398,13 +398,13 @@
 <div class="modal-overlay" id="simpleVipModal" role="dialog" aria-modal="true" aria-labelledby="simpleVipModalTitle" tabindex="-1">
   <div class="modal">
     <div class="close-btn" id="closeSimpleVipModalBtn" role="button" tabindex="0" aria-label="Close VIP form">×</div>
-    <h3 id="simpleVipModalTitle">Join Our VIP List</h3>
+    <h3 id="simpleVipModalTitle">Join the VIP List</h3>
     <form id="simpleVipForm">
-      <label for="vip-firstname">Name</label>
-      <input type="text" id="vip-firstname" name="vip-firstname" required />
+      <label for="simple-vip-name">Name</label>
+      <input type="text" id="simple-vip-name" name="simple-vip-name" required />
 
-      <label for="vip-surname">Surname</label>
-      <input type="text" id="vip-surname" name="vip-surname" required />
+      <label for="simple-vip-phone">Phone Number</label>
+      <input type="tel" id="simple-vip-phone" name="simple-vip-phone" placeholder="+27..." required />
 
       <button type="submit">Send via WhatsApp</button>
     </form>
@@ -412,205 +412,115 @@
 </div>
 
 <script>
-  // Modal references
-  const whatsappModal = document.getElementById('whatsappModal');
-  const vipModal = document.getElementById('vipModal');
-  const simpleVipModal = document.getElementById('simpleVipModal');
-
-  // Buttons
+  // Modal open/close logic
   const whatsappBtn = document.getElementById('whatsappBtn');
-  const joinVipBtn = document.getElementById('joinVipBtn'); // header nav - open WhatsApp modal now
-  const vipListBtn = document.getElementById('vipListBtn'); // Cake Cart button - opens simple VIP modal
-
-  // Close buttons
+  const whatsappModal = document.getElementById('whatsappModal');
   const closeModalBtn = document.getElementById('closeModalBtn');
-  const closeVipModalBtn = document.getElementById('closeVipModalBtn');
+
+  const vipListBtn = document.getElementById('vipListBtn');
+  const simpleVipModal = document.getElementById('simpleVipModal');
   const closeSimpleVipModalBtn = document.getElementById('closeSimpleVipModalBtn');
+  const joinVipBtn = document.getElementById('joinVipBtn');
 
-  // Forms
-  const whatsappForm = document.getElementById('whatsappForm');
-  const vipForm = document.getElementById('vipForm');
-  const simpleVipForm = document.getElementById('simpleVipForm');
-
-  // Open and close modal helpers
-  function openModal(modal) {
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    // Focus first input or close button for accessibility
-    const focusElem = modal.querySelector('input, select, textarea, button, .close-btn');
-    if (focusElem) focusElem.focus();
-  }
-  function closeModal(modal) {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-
-  // Event Listeners for open modal buttons
-  whatsappBtn.addEventListener('click', () => openModal(whatsappModal));
-  joinVipBtn.addEventListener('click', () => openModal(whatsappModal)); // Header nav opens WhatsApp modal now
-  vipListBtn.addEventListener('click', () => openModal(simpleVipModal)); // Cake Cart button opens simple VIP modal
-
-  // Close buttons
-  closeModalBtn.addEventListener('click', () => closeModal(whatsappModal));
-  closeVipModalBtn.addEventListener('click', () => closeModal(vipModal));
-  closeSimpleVipModalBtn.addEventListener('click', () => closeModal(simpleVipModal));
-
-  // Keyboard support for close buttons
-  [closeModalBtn, closeVipModalBtn, closeSimpleVipModalBtn].forEach(btn => {
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        btn.click();
-      }
-    });
+  whatsappBtn.addEventListener('click', () => {
+    whatsappModal.classList.add('active');
+    whatsappModal.focus();
   });
 
-  // Close modals on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (whatsappModal.classList.contains('active')) closeModal(whatsappModal);
-      if (vipModal.classList.contains('active')) closeModal(vipModal);
-      if (simpleVipModal.classList.contains('active')) closeModal(simpleVipModal);
-    }
+  closeModalBtn.addEventListener('click', () => {
+    whatsappModal.classList.remove('active');
+  });
+  whatsappModal.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') whatsappModal.classList.remove('active');
   });
 
-  // WhatsApp Enquiry modal dynamic fields
-  const enquiryTypeSelect = document.getElementById('enquiry-type');
-  const dynamicFieldsDiv = document.getElementById('dynamic-fields');
+  vipListBtn.addEventListener('click', () => {
+    simpleVipModal.classList.add('active');
+    simpleVipModal.focus();
+  });
+  joinVipBtn.addEventListener('click', () => {
+    simpleVipModal.classList.add('active');
+    simpleVipModal.focus();
+  });
+  closeSimpleVipModalBtn.addEventListener('click', () => {
+    simpleVipModal.classList.remove('active');
+  });
+  simpleVipModal.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') simpleVipModal.classList.remove('active');
+  });
 
-  enquiryTypeSelect.addEventListener('change', () => {
-    const val = enquiryTypeSelect.value;
-    dynamicFieldsDiv.innerHTML = '';
+  // Dynamic fields for WhatsApp form based on enquiry type
+  const enquiryType = document.getElementById('enquiry-type');
+  const dynamicFields = document.getElementById('dynamic-fields');
 
+  enquiryType.addEventListener('change', () => {
+    dynamicFields.innerHTML = ''; // Clear previous fields
+    const val = enquiryType.value;
     if (val === 'Weddings') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="wedding-date">Date</label>
+      dynamicFields.innerHTML = `
+        <label for="wedding-date">Wedding Date</label>
         <input type="date" id="wedding-date" name="wedding-date" required />
-
-        <label for="wedding-message">Message</label>
-        <textarea id="wedding-message" name="wedding-message" rows="3" placeholder="Tell us more..."></textarea>
+        <label for="guest-count">Guest Count</label>
+        <input type="number" id="guest-count" name="guest-count" min="1" required />
       `;
     } else if (val === 'Kids Baking Class') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="class-date">Date</label>
-        <input type="date" id="class-date" name="class-date" required />
-
-        <label for="class-message">Message</label>
-        <textarea id="class-message" name="class-message" rows="3" placeholder="Any special requests?"></textarea>
+      dynamicFields.innerHTML = `
+        <label for="child-name">Child's Name</label>
+        <input type="text" id="child-name" name="child-name" required />
+        <label for="child-age">Child's Age</label>
+        <input type="number" id="child-age" name="child-age" min="1" max="18" required />
       `;
     } else if (val === 'Birthday') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="birthday-date">Date</label>
+      dynamicFields.innerHTML = `
+        <label for="birthday-date">Birthday Date</label>
         <input type="date" id="birthday-date" name="birthday-date" required />
-
-        <label for="birthday-message">Message</label>
-        <textarea id="birthday-message" name="birthday-message" rows="3" placeholder="Let us know the details!"></textarea>
-      `;
-    } else if (val === 'General Enquiry') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="general-message">Message</label>
-        <textarea id="general-message" name="general-message" rows="4" placeholder="Write your enquiry here..." required></textarea>
+        <label for="birthday-age">Age Turning</label>
+        <input type="number" id="birthday-age" name="birthday-age" min="1" required />
       `;
     }
   });
 
-  // WhatsApp Enquiry form submit
+  // WhatsApp form submission
+  const whatsappForm = document.getElementById('whatsappForm');
   whatsappForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const enquiryType = enquiryTypeSelect.value;
-    if (!enquiryType) {
-      alert('Please select an enquiry type.');
-      return;
-    }
-
-    let message = `Hello Oh My Nosh,%0A%0AI have an enquiry about ${encodeURIComponent(enquiryType)}.%0A`;
-
-    if (enquiryType === 'Weddings') {
+    const enquiry = enquiryType.value;
+    let msg = `Hello! I have an enquiry regarding *${enquiry}*.%0A`;
+    if(enquiry === 'Weddings') {
       const date = document.getElementById('wedding-date').value;
-      const msg = document.getElementById('wedding-message').value.trim();
-      if (!date) {
-        alert('Please select a date.');
-        return;
-      }
-      message += `Date: ${encodeURIComponent(date)}%0A`;
-      if (msg) message += `Message: ${encodeURIComponent(msg)}%0A`;
-    } else if (enquiryType === 'Kids Baking Class') {
-      const date = document.getElementById('class-date').value;
-      const msg = document.getElementById('class-message').value.trim();
-      if (!date) {
-        alert('Please select a date.');
-        return;
-      }
-      message += `Date: ${encodeURIComponent(date)}%0A`;
-      if (msg) message += `Message: ${encodeURIComponent(msg)}%0A`;
-    } else if (enquiryType === 'Birthday') {
+      const guests = document.getElementById('guest-count').value;
+      msg += `Wedding Date: ${date}%0AGuest Count: ${guests}`;
+    } else if (enquiry === 'Kids Baking Class') {
+      const name = document.getElementById('child-name').value;
+      const age = document.getElementById('child-age').value;
+      msg += `Child's Name: ${name}%0AChild's Age: ${age}`;
+    } else if (enquiry === 'Birthday') {
       const date = document.getElementById('birthday-date').value;
-      const msg = document.getElementById('birthday-message').value.trim();
-      if (!date) {
-        alert('Please select a date.');
-        return;
-      }
-      message += `Date: ${encodeURIComponent(date)}%0A`;
-      if (msg) message += `Message: ${encodeURIComponent(msg)}%0A`;
-    } else if (enquiryType === 'General Enquiry') {
-      const msg = document.getElementById('general-message').value.trim();
-      if (!msg) {
-        alert('Please enter your message.');
-        return;
-      }
-      message += `Message: ${encodeURIComponent(msg)}%0A`;
+      const age = document.getElementById('birthday-age').value;
+      msg += `Birthday Date: ${date}%0AAge Turning: ${age}`;
+    } else {
+      msg += "Please provide more details.";
     }
-
-    const whatsappUrl = `https://wa.me/+27799750908?text=${message}`;
-    window.open(whatsappUrl, '_blank');
-    closeModal(whatsappModal);
-    whatsappForm.reset();
-    dynamicFieldsDiv.innerHTML = '';
+    const phone = "+27799750908"; // Your WhatsApp number with country code, no spaces
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
   });
 
-  // Old VIP form submit (if you want to keep it)
-  vipForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('vip-name').value.trim();
-    const phone = document.getElementById('vip-phone').value.trim();
-    const msg = document.getElementById('vip-message').value.trim();
-
-    if (!name || !phone) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-
-    let message = `Hello Oh My Nosh,%0A%0AI would like to join the VIP list.%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}`;
-    if (msg) message += `%0AMessage: ${encodeURIComponent(msg)}`;
-
-    const whatsappUrl = `https://wa.me/+27799750908?text=${message}`;
-    window.open(whatsappUrl, '_blank');
-    closeModal(vipModal);
-    vipForm.reset();
-  });
-
-  // New Simple VIP form submit (Cake Cart VIP)
+  // Simple VIP form submission
+  const simpleVipForm = document.getElementById('simpleVipForm');
   simpleVipForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const firstName = document.getElementById('vip-firstname').value.trim();
-    const surname = document.getElementById('vip-surname').value.trim();
-
-    if (!firstName || !surname) {
-      alert('Please fill in both Name and Surname.');
+    const name = document.getElementById('simple-vip-name').value.trim();
+    const phone = document.getElementById('simple-vip-phone').value.trim();
+    if(!name || !phone) {
+      alert("Please enter both your name and phone number.");
       return;
     }
-
-    const message = `Hello Oh My Nosh,%0A%0AI would like to join the VIP list.%0AName: ${encodeURIComponent(firstName)}%0ASurname: ${encodeURIComponent(surname)}`;
-    const whatsappUrl = `https://wa.me/+27799750908?text=${message}`;
-
-    window.open(whatsappUrl, '_blank');
-    closeModal(simpleVipModal);
-    simpleVipForm.reset();
+    const msg = `Hello! I want to join the Oh My Nosh VIP List.%0AName: ${name}%0APhone: ${phone}`;
+    const waNumber = "+27799750908"; // Your WhatsApp number with country code
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, '_blank');
   });
-
-  // Example function to load your products dynamically (if you want)
-  // For demo, will leave empty grids for now
 </script>
-
 </body>
 </html>
