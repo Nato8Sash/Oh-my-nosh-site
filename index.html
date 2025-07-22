@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const load = () => {
         if (fail >= 5) return;
         const img = new Image();
-        img.src = `main/${base}${count}.jpg`;  // <-- updated path to load images from main/
+        img.src = `${base}${count}.jpg`;  // <-- updated path to load images from main/
         img.onload = () => {
           const card = document.createElement('div');
           card.className = 'product-card';
