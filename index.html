@@ -360,31 +360,32 @@
 </div>
 
 <script>
-  // Smart product image loader
-  const sections = [
-    {id:'cakes', prefix:'cake'},
-    {id:'cookies', prefix:'cookie'},
-    {id:'cupcakes', prefix:'cupcake'},
-    {id:'cakes-cookies', prefix:'cake-cookie'},
-    {id:'cake-pops', prefix:'cakepop'},
-    {id:'dessert-jars', prefix:'dessert'},
-    {id:'kids-baking', prefix:'kids-baking'}
-  ];
-  sections.forEach(section=>{
-    const container = document.getElementById(`${section.id}-grid`);
-    for(let i=1;i<=5;i++){
-      const imgPath=`${section.prefix}${i}.jpg`;
-      const img = new Image();
-      img.src = imgPath;
-      img.onload = ()=>{
-        const card=document.createElement('div');
-        card.className='product-card';
-        card.innerHTML=`<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
-        container.appendChild(card);
-      };
-      img.onerror = ()=>{}; // skip missing images
-    }
-  });
+  // Smart product image loader (images in same folder as index.html)
+const sections = [
+  {id:'cakes', prefix:'cake'},
+  {id:'cookies', prefix:'cookie'},
+  {id:'cupcakes', prefix:'cupcake'},
+  {id:'cakes-cookies', prefix:'cake-cookie'},
+  {id:'cake-pops', prefix:'cakepop'},
+  {id:'dessert-jars', prefix:'dessert'},
+  {id:'kids-baking', prefix:'kids-baking'}
+];
+
+sections.forEach(section => {
+  const container = document.getElementById(`${section.id}-grid`);
+  for(let i = 1; i <= 5; i++){
+    const imgPath = `${section.prefix}${i}.jpg`; // removed "main/" folder
+    const img = new Image();
+    img.src = imgPath;
+    img.onload = () => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
+      container.appendChild(card);
+    };
+    img.onerror = () => {}; // skip missing images
+  }
+});
 
   // WhatsApp modal functionality
   const whatsappBtn = document.getElementById('whatsappBtn');
