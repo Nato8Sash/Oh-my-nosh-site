@@ -356,109 +356,17 @@
     if (e.target === vipModal) closeVipModalBtn.click();
   });
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && vipModal.classList.contains('active')) closeVipModalBtn.click();
-  });
-
-  enquiryTypeSelect.addEventListener('change', function() {
-    const val = this.value;
-    dynamicFieldsDiv.innerHTML = '';
-
-    if(val === 'Weddings') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="name">Name</label>
-        <input id="name" name="name" required />
-        <label for="date">Wedding Date</label>
-        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-        <label for="budget">Budget</label>
-        <input type="text" id="budget" name="budget" placeholder="e.g. R5000 - R10000" />
-        <label for="details">Details (optional)</label>
-        <textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>
-      `;
-    } else if(val === 'Kids Baking Class') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="name">Name</label>
-        <input id="name" name="name" required />
-        <label for="date">Date</label>
-        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-        <label for="age-group">Age Group</label>
-        <select id="age-group" name="age-group" required>
-          <option value="" disabled selected>Select age group</option>
-          <option value="3-5 years">3-5 years</option>
-          <option value="6-8 years">6-8 years</option>
-          <option value="9-12 years">9-12 years</option>
-        </select>
-        <label for="num-children">Number of Children</label>
-        <input type="number" id="num-children" name="num-children" min="1" required />
-      `;
-    } else if(val === 'Birthday') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="name">Name</label>
-        <input id="name" name="name" required />
-        <label for="date">Date</label>
-        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-        <label for="budget">Budget</label>
-        <input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />
-      `;
-    } else if(val === 'Cake Cart') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="name">Name & Surname</label>
-        <input id="name" name="name" required />
-        <label for="date">Date of Event / Occasion</label>
-        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-      `;
-    } else if(val === 'General Enquiry') {
-      dynamicFieldsDiv.innerHTML = `
-        <label for="budget">Budget</label>
-        <input type="text" id="budget" name="budget" placeholder="Optional" />
-        <label for="msg">Message</label>
-        <textarea id="msg" name="msg" required rows="4"></textarea>
-      `;
-    }
-  });
-
-  whatsappForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const type = enquiryTypeSelect.value;
-    if(!type) { alert('Please select an enquiry type.'); return; }
-
-    let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`
-
-    if(type === 'Cake Cart') {
-      const name = document.getElementById('name').value.trim();
-      const date = document.getElementById('date').value.trim();
-      if(!name || !date) { alert('Please fill in all required fields.'); return; }
-      text += `%0AName & Surname: ${encodeURIComponent(name)}`;
-      text += `%0ADate of Event/Occasion: ${encodeURIComponent(date)}`;
-    } else if(type === 'Weddings') {
-      const name = document.getElementById('name').value.trim();
-      const date = document.getElementById('date').value.trim();
-      const budget = document.getElementById('budget').value.trim();
-      const details = document.getElementById('details').value.trim();
-      text += `%0AName: ${encodeURIComponent(name)}%0AWedding Date: ${encodeURIComponent(date)}`;
-      if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
-      if(details) text += `%0ADetails: ${encodeURIComponent(details)}`;
-    } else if(type === 'Kids Baking Class') {
-      const name = document.getElementById('name').value.trim();
-      const date = document.getElementById('date').value.trim();
-      const ageGroup = document.getElementById('age-group').value;
-      const numChildren = document.getElementById('num-children').value;
-      text += `%0AName: ${encodeURIComponent(name)}%0ADate: ${encodeURIComponent(date)}`;
-      text += `%0AAge Group: ${encodeURIComponent(ageGroup)}%0ANumber of Children: ${encodeURIComponent(numChildren)}`;
-    } else if(type === 'Birthday') {
-      const name = document.getElementById('name').value.trim();
-      const date = document.getElementById('date').value.trim();
-      const budget = document.getElementById('budget').value.trim();
-      text += `%0AName: ${encodeURIComponent(name)}%0ADate: ${encodeURIComponent(date)}`;
-      if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
-    } else if(type === 'General Enquiry') {
-      const budget = document.getElementById('budget').value.trim();
-      const msg = document.getElementById('msg').value.trim();
-      if(msg) text += `%0AMessage: ${encodeURIComponent(msg)}`;
-      if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
+    if(e.key === '
+        .catch(() => {
+          missingCount++;
+          if (missingCount >= 5) {
+            stop = true;
+          }
+          checkNext();
+        });
     }
 
-    const whatsappUrl = `https://wa.me/27824502527?text=${text}`;
-    window.open(whatsappUrl, '_blank');
+    checkNext();
   });
 </script>
 
