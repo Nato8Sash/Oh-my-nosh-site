@@ -266,7 +266,7 @@
 <section id="cake-cart-section" aria-label="Cake Cart Launch">
   <h2>Our Elegant Cake Cart</h2>
   <img src="cake-cart.png" alt="Elegant white cake cart" />
-  <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Join Our VIP List</button>
+  <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Order Now</button>
 </section>
 
 <main>
@@ -309,7 +309,7 @@
 <div class="modal-overlay" id="vipModal" role="dialog" aria-modal="true" aria-labelledby="vipModalTitle" tabindex="-1">
   <div class="modal">
     <button class="close-btn" id="closeVipModalBtn" aria-label="Close VIP form">×</button>
-    <h3 id="vipModalTitle">Join the Cake Cart VIP List</h3>
+    <h3 id="vipModalTitle">Contact Oh My Nosh</h3>
     <form id="whatsappForm">
       <label for="enquiry-type">Select Enquiry Type</label>
       <select id="enquiry-type" required aria-required="true">
@@ -317,6 +317,7 @@
         <option value="Weddings">Weddings</option>
         <option value="Kids Baking Class">Kids Baking Class</option>
         <option value="Birthday">Birthday</option>
+        <option value="Cake Cart">Cake Cart</option>
         <option value="General Enquiry">General Enquiry</option>
       </select>
       <div id="dynamic-fields"></div>
@@ -332,23 +333,28 @@
   const enquiryTypeSelect = document.getElementById('enquiry-type');
   const dynamicFieldsDiv = document.getElementById('dynamic-fields');
   const whatsappForm = document.getElementById('whatsappForm');
+  const joinVipBtn = document.getElementById('join-vip-btn');
 
+  // Open modal
   whatsappBtn.addEventListener('click', () => {
     vipModal.classList.add('active');
     vipModal.focus();
   });
+  joinVipBtn.addEventListener('click', () => {
+    vipModal.classList.add('active');
+    vipModal.focus();
+  });
 
+  // Close modal
   closeVipModalBtn.addEventListener('click', () => {
     vipModal.classList.remove('active');
     whatsappForm.reset();
     dynamicFieldsDiv.innerHTML = '';
     whatsappBtn.focus();
   });
-
   vipModal.addEventListener('click', (e) => {
     if (e.target === vipModal) closeVipModalBtn.click();
   });
-
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && vipModal.classList.contains('active')) closeVipModalBtn.click();
   });
@@ -393,6 +399,13 @@
         <label for="budget">Budget</label>
         <input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />
       `;
+    } else if(val === 'Cake Cart') {
+      dynamicFieldsDiv.innerHTML = `
+        <label for="name">Name & Surname</label>
+        <input id="name" name="name" required />
+        <label for="date">Date of Event / Occasion</label>
+        <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
+      `;
     } else if(val === 'General Enquiry') {
       dynamicFieldsDiv.innerHTML = `
         <label for="budget">Budget</label>
@@ -410,42 +423,44 @@
 
     let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`
 
-    if(type === 'General Enquiry') {
+    if(type === 'Cake Cart') {
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value.trim();
+      if(!name || !date) { alert('Please fill in all required fields.'); return; }
+      text += `%0AName & Surname: ${encodeURIComponent(name)}`;
+      text += `%0ADate of Event/Occasion: ${encodeURIComponent(date)}`;
+    } else if(type === 'Weddings') {
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value.trim();
       const budget = document.getElementById('budget').value.trim();
-      const msg = document.getElementById('msg').value.trim();
-      if(!msg) { alert('Please enter your message.'); return; }
+      const details = document.getElementById('details').value.trim();
+      text += `%0AName: ${encodeURIComponent(name)}%0AWedding Date: ${encodeURIComponent(date)}`;
       if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
-      text += `%0A%0AMessage: ${encodeURIComponent(msg)}`;
+      if(details) text += `%0ADetails: ${encodeURIComponent(details)}`;
     } else if(type === 'Kids Baking Class') {
       const name = document.getElementById('name').value.trim();
       const date = document.getElementById('date').value.trim();
       const ageGroup = document.getElementById('age-group').value;
-      const numChildren = document.getElementById('num-children').value.trim();
-      if(!name || !date || !ageGroup || !numChildren) { alert('Please fill in all required fields.'); return; }
-      text += `%0AName: ${encodeURIComponent(name)}`;
-      text += `%0ADate: ${encodeURIComponent(date)}`;
-      text += `%0AAge Group: ${encodeURIComponent(ageGroup)}`;
-      text += `%0ANumber of Children: ${encodeURIComponent(numChildren)}`;
-    } else {
+      const numChildren = document.getElementById('num-children').value;
+      text += `%0AName: ${encodeURIComponent(name)}%0ADate: ${encodeURIComponent(date)}`;
+      text += `%0AAge Group: ${encodeURIComponent(ageGroup)}%0ANumber of Children: ${encodeURIComponent(numChildren)}`;
+    } else if(type === 'Birthday') {
       const name = document.getElementById('name').value.trim();
       const date = document.getElementById('date').value.trim();
-      const budget = document.getElementById('budget') ? document.getElementById('budget').value.trim() : '';
-      if(!name || !date) { alert('Please fill in all required fields.'); return; }
-      text += `%0AName: ${encodeURIComponent(name)}`;
-      text += `%0ADate: ${encodeURIComponent(date)}`;
+      const budget = document.getElementById('budget').value.trim();
+      text += `%0AName: ${encodeURIComponent(name)}%0ADate: ${encodeURIComponent(date)}`;
       if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
-      if(type === 'Weddings') {
-        const details = document.getElementById('details').value.trim();
-        if(details) text += `%0ADetails: ${encodeURIComponent(details)}`;
-      }
+    } else if(type === 'General Enquiry') {
+      const budget = document.getElementById('budget').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      if(msg) text += `%0AMessage: ${encodeURIComponent(msg)}`;
+      if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
     }
 
-    window.open(`https://wa.me/27799750908?text=${text}`, '_blank');
-    vipModal.classList.remove('active');
-    whatsappForm.reset();
-    dynamicFieldsDiv.innerHTML = '';
-    whatsappBtn.focus();
+    const whatsappUrl = `https://wa.me/27824502527?text=${text}`;
+    window.open(whatsappUrl, '_blank');
   });
 </script>
+
 </body>
 </html>
