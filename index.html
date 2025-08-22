@@ -144,6 +144,30 @@
       border-radius: 15px;
       box-shadow: 0 6px 20px rgba(192, 128, 129, 0.25);
     }
+    #cake-cart-section p.description {
+      font-size: 1.1rem;
+      color: var(--dark-text);
+      margin: 10px 0 20px;
+    }
+    #cake-cart-section ul.cart-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 400px;
+      text-align: left;
+      font-size: 1rem;
+    }
+    #cake-cart-section ul.cart-steps li {
+      padding: 6px 0;
+      position: relative;
+      padding-left: 22px;
+    }
+    #cake-cart-section ul.cart-steps li::before {
+      content: "🍰";
+      position: absolute;
+      left: 0;
+    }
+
     #join-vip-btn {
       background-color: var(--dusty-rose);
       color: var(--light-text);
@@ -266,7 +290,16 @@
 <section id="cake-cart-section" aria-label="Cake Cart Launch">
   <h2>Our Elegant Cake Cart</h2>
   <img src="cake-cart.png" alt="Elegant white cake cart" />
+  <p class="description">Order your custom cake experience and watch your favourite flavours come to life. It's fun, fast, and utterly delicious!</p>
   <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Order Now</button>
+  
+  <h3>How The Cart Works</h3>
+  <ul class="cart-steps">
+    <li>Pick your cake flavour</li>
+    <li>Pick your icing flavour</li>
+    <li>Pick any 3 toppings</li>
+    <li>Pick your sauce</li>
+  </ul>
 </section>
 
 <main>
@@ -327,6 +360,33 @@
 </div>
 
 <script>
+  // Smart product image loader
+  const sections = [
+    {id:'cakes', prefix:'cake'},
+    {id:'cookies', prefix:'cookie'},
+    {id:'cupcakes', prefix:'cupcake'},
+    {id:'cakes-cookies', prefix:'cake-cookie'},
+    {id:'cake-pops', prefix:'cakepop'},
+    {id:'dessert-jars', prefix:'dessert'},
+    {id:'kids-baking', prefix:'kids-baking'}
+  ];
+  sections.forEach(section=>{
+    const container = document.getElementById(`${section.id}-grid`);
+    for(let i=1;i<=5;i++){
+      const imgPath=`main/${section.prefix}${i}.jpg`;
+      const img = new Image();
+      img.src = imgPath;
+      img.onload = ()=>{
+        const card=document.createElement('div');
+        card.className='product-card';
+        card.innerHTML=`<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
+        container.appendChild(card);
+      };
+      img.onerror = ()=>{}; // skip missing images
+    }
+  });
+
+  // WhatsApp modal functionality
   const whatsappBtn = document.getElementById('whatsappBtn');
   const vipModal = document.getElementById('vipModal');
   const closeVipModalBtn = document.getElementById('closeVipModalBtn');
@@ -336,37 +396,79 @@
   const joinVipBtn = document.getElementById('join-vip-btn');
 
   // Open modal
-  whatsappBtn.addEventListener('click', () => {
-    vipModal.classList.add('active');
-    vipModal.focus();
-  });
-  joinVipBtn.addEventListener('click', () => {
-    vipModal.classList.add('active');
-    vipModal.focus();
+  [whatsappBtn, joinVipBtn].forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      vipModal.classList.add('active');
+      vipModal.focus();
+    });
   });
 
   // Close modal
-  closeVipModalBtn.addEventListener('click', () => {
+  closeVipModalBtn.addEventListener('click', ()=>{
     vipModal.classList.remove('active');
     whatsappForm.reset();
-    dynamicFieldsDiv.innerHTML = '';
+    dynamicFieldsDiv.innerHTML='';
     whatsappBtn.focus();
   });
-  vipModal.addEventListener('click', (e) => {
-    if (e.target === vipModal) closeVipModalBtn.click();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === '
-        .catch(() => {
-          missingCount++;
-          if (missingCount >= 5) {
-            stop = true;
-          }
-          checkNext();
-        });
-    }
+  vipModal.addEventListener('click', e=>{ if(e.target===vipModal) closeVipModalBtn.click(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && vipModal.classList.contains('active')) closeVipModalBtn.click(); });
 
-    checkNext();
+  // Dynamic fields
+  enquiryTypeSelect.addEventListener('change', function() {
+    const val = this.value;
+    dynamicFieldsDiv.innerHTML='';
+    const today = new Date().toISOString().split('T')[0];
+    if(val==='Weddings'){
+      dynamicFieldsDiv.innerHTML=`<label for="name">Name</label><input id="name" name="name" required /><label for="date">Wedding Date</label><input type="date" id="date" name="date" required min="${today}" /><label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="e.g. R5000 - R10000" /><label for="details">Details (optional)</label><textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>`;
+    } else if(val==='Kids Baking Class'){
+      dynamicFieldsDiv.innerHTML=`<label for="name">Name</label><input id="name" name="name" required /><label for="date">Date</label><input type="date" id="date" name="date" required min="${today}" /><label for="age-group">Age Group</label><select id="age-group" name="age-group" required><option value="" disabled selected>Select age group</option><option value="3-5 years">3-5 years</option><option value="6-8 years">6-8 years</option><option value="9-12 years">9-12 years</option></select><label for="num-children">Number of Children</label><input type="number" id="num-children" name="num-children" min="1" required />`;
+    } else if(val==='Birthday'){
+      dynamicFieldsDiv.innerHTML=`<label for="name">Name</label><input id="name" name="name" required /><label for="date">Date</label><input type="date" id="date" name="date" required min="${today}" /><label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />`;
+    } else if(val==='Cake Cart'){
+      dynamicFieldsDiv.innerHTML=`<label for="name">Name & Surname</label><input id="name" name="name" required /><label for="date">Date of Event / Occasion</label><input type="date" id="date" name="date" required min="${today}" />`;
+    } else if(val==='General Enquiry'){
+      dynamicFieldsDiv.innerHTML=`<label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="Optional" /><label for="msg">Message</label><textarea id="msg" name="msg" required rows="4"></textarea>`;
+    }
+  });
+
+  whatsappForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const type=enquiryTypeSelect.value;
+    if(!type){ alert('Please select an enquiry type.'); return; }
+    let text=`Hello Oh My Nosh! I have an enquiry about *${type}*.`
+
+    if(type==='Cake Cart'){
+      const name=document.getElementById('name').value.trim();
+      const date=document.getElementById('date').value.trim();
+      if(!name||!date){ alert('Please fill in all required fields.'); return; }
+      text+=`%0AName & Surname: ${encodeURIComponent(name)}%0ADate of Event/Occasion: ${encodeURIComponent(date)}`;
+    } else if(type==='Weddings'){
+      const name=document.getElementById('name').value.trim();
+      const date=document.getElementById('date').value.trim();
+      const budget=document.getElementById('budget').value.trim();
+      const details=document.getElementById('details').value.trim();
+      text+=`%0AName: ${encodeURIComponent(name)}%0AWedding Date: ${encodeURIComponent(date)}`;
+      if(budget) text+=`%0ABudget: ${encodeURIComponent(budget)}`;
+      if(details) text+=`%0ADetails: ${encodeURIComponent(details)}`;
+    } else if(type==='Kids Baking Class'){
+      const name=document.getElementById('name').value.trim();
+      const date=document.getElementById('date').value.trim();
+      const ageGroup=document.getElementById('age-group').value;
+      const numChildren=document.getElementById('num-children').value;
+      text+=`%0AName: ${encodeURIComponent(name)}%0ADate: ${encodeURIComponent(date)}%0AAge Group: ${encodeURIComponent(ageGroup)}%0ANumber of Children: ${encodeURIComponent(numChildren)}`;
+    } else if(type==='Birthday'){
+      const name=document.getElementById('name').value.trim();
+      const date=document.getElementById('date').value.trim();
+      const budget=document.getElementById('budget').value.trim();
+      text+=`%0AName: ${encodeURIComponent(name)}%0ADate: ${encodeURIComponent(date)}`;
+      if(budget) text+=`%0ABudget: ${encodeURIComponent(budget)}`;
+    } else if(type==='General Enquiry'){
+      const budget=document.getElementById('budget').value.trim();
+      const msg=document.getElementById('msg').value.trim();
+      if(msg) text+=`%0AMessage: ${encodeURIComponent(msg)}`;
+      if(budget) text+=`%0ABudget: ${encodeURIComponent(budget)}`;
+    }
+    window.open(`https://wa.me/27824502527?text=${text}`, '_blank');
   });
 </script>
 
