@@ -12,11 +12,7 @@
       --dark-text: #4b4b3f;
       --light-text: #ffffff;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Georgia', serif;
       background-color: var(--cream);
@@ -24,14 +20,8 @@
       line-height: 1.6;
       padding: 10px;
     }
-    a {
-      color: var(--dusty-rose);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: var(--sage-green);
-    }
+    a { color: var(--dusty-rose); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--sage-green); }
     header {
       background-color: var(--sage-green);
       padding: 20px 0 10px;
@@ -39,10 +29,7 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       position: relative;
     }
-    header img {
-      max-width: 180px;
-      height: auto;
-    }
+    header img { max-width: 180px; height: auto; }
     nav {
       margin-top: 10px;
       display: flex;
@@ -61,8 +48,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       transition: background-color 0.3s ease, color 0.3s ease;
     }
-    nav a:hover,
-    nav a:focus {
+    nav a:hover, nav a:focus {
       background-color: var(--dusty-rose);
       color: var(--light-text);
       outline: none;
@@ -86,18 +72,11 @@
       user-select: none;
       transition: color 0.3s ease;
     }
-    .social-icon-wrapper:hover,
-    .social-icon-wrapper:focus {
+    .social-icon-wrapper:hover, .social-icon-wrapper:focus {
       color: var(--sage-green);
       outline: none;
     }
-    .social-icons a {
-      color: inherit;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-    }
+    .social-icons a { color: inherit; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
     .social-icons svg {
       width: 40px;
       height: 40px;
@@ -105,23 +84,15 @@
       filter: grayscale(80%);
       transition: filter 0.3s ease, transform 0.3s ease;
     }
-    .social-icon-wrapper:hover svg,
-    .social-icon-wrapper:focus svg {
-      filter: none;
-      transform: scale(1.15);
-    }
-    .social-label {
-      margin-top: 6px;
-      font-size: 0.9rem;
-    }
+    .social-icon-wrapper:hover svg, .social-icon-wrapper:focus svg { filter: none; transform: scale(1.15); }
+    .social-label { margin-top: 6px; font-size: 0.9rem; }
+
     main {
       max-width: 960px;
       margin: 40px auto 80px;
       padding: 0 15px;
     }
-    section {
-      margin-bottom: 60px;
-    }
+    section { margin-bottom: 60px; }
     h1, h2 {
       font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
       color: var(--dusty-rose);
@@ -142,8 +113,7 @@
       text-align: center;
       transition: transform 0.3s ease;
     }
-    .product-card:hover,
-    .product-card:focus-within {
+    .product-card:hover, .product-card:focus-within {
       transform: scale(1.03);
       box-shadow: 0 8px 20px rgba(156, 137, 137, 0.3);
       outline: none;
@@ -166,30 +136,13 @@
       box-shadow: 0 6px 18px rgba(192, 128, 129, 0.3);
       position: relative;
     }
-    #cake-cart-section h2 {
-      color: var(--dusty-rose);
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
+    #cake-cart-section h2 { color: var(--dusty-rose); font-size: 2rem; margin-bottom: 10px; }
     #cake-cart-section img {
       max-width: 320px;
       margin: 20px auto;
       display: block;
       border-radius: 15px;
       box-shadow: 0 6px 20px rgba(192, 128, 129, 0.25);
-    }
-    #countdown {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--sage-green);
-      margin: 15px 0;
-    }
-    #now-live {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--dusty-rose);
-      margin: 15px 0;
-      display: none;
     }
     #join-vip-btn {
       background-color: var(--dusty-rose);
@@ -203,8 +156,7 @@
       transition: background-color 0.3s ease;
       margin-top: 20px;
     }
-    #join-vip-btn:hover,
-    #join-vip-btn:focus {
+    #join-vip-btn:hover, #join-vip-btn:focus {
       background-color: var(--sage-green);
       outline: none;
     }
@@ -220,9 +172,7 @@
       align-items: center;
       padding: 15px;
     }
-    .modal-overlay.active {
-      display: flex;
-    }
+    .modal-overlay.active { display: flex; }
     .modal {
       background: var(--light-text);
       border-radius: 15px;
@@ -232,18 +182,9 @@
       box-shadow: 0 8px 22px rgba(192, 128, 129, 0.4);
       position: relative;
     }
-    .modal h3 {
-      margin-bottom: 20px;
-      color: var(--dusty-rose);
-      font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-      text-align: center;
-    }
-    .modal form label {
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: block;
-    }
-    .modal form input {
+    .modal h3 { margin-bottom: 20px; color: var(--dusty-rose); font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; text-align: center; }
+    .modal form label { font-weight: 600; margin-bottom: 6px; display: block; }
+    .modal form input, .modal form select, .modal form textarea {
       width: 100%;
       padding: 10px 14px;
       margin-bottom: 20px;
@@ -253,7 +194,7 @@
       font-family: inherit;
       transition: border-color 0.3s ease;
     }
-    .modal form input:focus {
+    .modal form input:focus, .modal form select:focus, .modal form textarea:focus {
       outline: none;
       border-color: var(--dusty-rose);
       box-shadow: 0 0 8px var(--dusty-rose);
@@ -271,8 +212,7 @@
       transition: background-color 0.3s ease;
       width: 100%;
     }
-    .modal form button:hover,
-    .modal form button:focus {
+    .modal form button:hover, .modal form button:focus {
       background-color: var(--sage-green);
       outline: none;
     }
@@ -286,79 +226,22 @@
       cursor: pointer;
       user-select: none;
     }
-    .modal .close-btn:focus {
-      outline: 2px solid var(--dusty-rose);
-    }
+    .modal .close-btn:focus { outline: 2px solid var(--dusty-rose); }
 
-    /* WhatsApp Modal */
-    #whatsappModal .modal form label,
-    #whatsappModal .modal form input,
-    #whatsappModal .modal form select,
-    #whatsappModal .modal form textarea,
-    #whatsappModal .modal form button {
-      font-family: inherit;
-    }
-    #whatsappModal .modal form select,
-    #whatsappModal .modal form textarea {
-      width: 100%;
-      padding: 10px 14px;
-      margin-bottom: 20px;
-      border: 1.5px solid var(--sage-green);
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    #whatsappModal .modal form select:focus,
-    #whatsappModal .modal form textarea:focus {
-      outline: none;
-      border-color: var(--dusty-rose);
-      box-shadow: 0 0 8px var(--dusty-rose);
-    }
-
-    /* Responsive Nav for small screens */
+    /* Responsive */
     @media (max-width: 600px) {
-      nav a {
-        font-size: 1rem;
-        margin: 5px 8px;
-        padding: 8px 12px;
-      }
-      .products-grid {
-        grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
-        gap: 15px;
-      }
-      .social-icons {
-        gap: 30px;
-      }
-      .social-icons svg {
-        width: 32px;
-        height: 32px;
-      }
-      .social-label {
-        font-size: 0.85rem;
-      }
-      main {
-        margin: 20px auto 60px;
-        padding: 0 10px;
-      }
-      #cake-cart-section img {
-        max-width: 100%;
-      }
+      nav a { font-size: 1rem; margin: 5px 8px; padding: 8px 12px; }
+      .products-grid { grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 15px; }
+      .social-icons { gap: 30px; }
+      .social-icons svg { width: 32px; height: 32px; }
+      .social-label { font-size: 0.85rem; }
+      main { margin: 20px auto 60px; padding: 0 10px; }
+      #cake-cart-section img { max-width: 100%; }
     }
-
-    /* Larger screens adjustments */
     @media (min-width: 1200px) {
-      nav a {
-        font-size: 1.15rem;
-        margin: 0 20px;
-        padding: 10px 16px;
-      }
-      .social-icons svg {
-        width: 44px;
-        height: 44px;
-      }
-      .social-label {
-        font-size: 1rem;
-      }
+      nav a { font-size: 1.15rem; margin: 0 20px; padding: 10px 16px; }
+      .social-icons svg { width: 44px; height: 44px; }
+      .social-label { font-size: 1rem; }
     }
   </style>
 </head>
@@ -379,15 +262,13 @@
   </nav>
 </header>
 
-  <!-- Cake Cart Launch Section -->
-  <section id="cake-cart-section" aria-label="Cake Cart Launch">
-    <h2>Our Cake Cart Launch is Coming Soon!</h2>
-    <img src="cake-cart.png" alt="Elegant white cake cart" />
-    <div id="countdown" aria-live="polite" aria-atomic="true">Loading countdown...</div>
-    <div id="now-live" role="alert">🎉 The Cake Cart is Now Live! 🎉</div>
-    <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Join Our VIP List</button>
-  </section>
-  
+<!-- Cake Cart Section -->
+<section id="cake-cart-section" aria-label="Cake Cart Launch">
+  <h2>Our Elegant Cake Cart</h2>
+  <img src="cake-cart.png" alt="Elegant white cake cart" />
+  <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Join Our VIP List</button>
+</section>
+
 <main>
   <section id="cakes"><h1>Cakes</h1><div class="products-grid" id="cakes-grid"></div></section>
   <section id="cookies"><h1>Cookies</h1><div class="products-grid" id="cookies-grid"></div></section>
@@ -402,21 +283,21 @@
     <div class="social-icons" role="list" aria-label="Social media contacts">
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Instagram">
         <a href="https://www.instagram.com/ohmynoshh" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5z"/></svg>
+          <svg role="img" viewBox="0 0 24 24"><path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm4.25 3a4.25 4.25 0 100 8.5 4.25 4.25 0 000-8.5z"/></svg>
         </a>
         <span class="social-label">Instagram</span>
       </div>
 
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Facebook">
         <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/></svg>
+          <svg role="img" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/></svg>
         </a>
         <span class="social-label">Facebook</span>
       </div>
 
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="WhatsApp">
         <a href="javascript:void(0);" id="whatsappBtn" aria-hidden="true" tabindex="-1">
-          <svg role="img" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.01 2.99c-7.27 0-13.15 5.88-13.15 13.15 0 2.31.61 4.56 1.77 6.55L2 30l7.5-2.48a13.05 13.05 0 006.5 1.73h.01c7.27 0 13.15-5.88 13.15-13.15S23.28 2.99 16.01 2.99z"/></svg>
+          <svg role="img" viewBox="0 0 32 32"><path d="M16.01 2.99c-7.27 0-13.15 5.88-13.15 13.15 0 2.31.61 4.56 1.77 6.55L2 30l7.5-2.48a13.05 13.05 0 006.5 1.73h.01c7.27 0 13.15-5.88 13.15-13.15S23.28 2.99 16.01 2.99z"/></svg>
         </a>
         <span class="social-label">WhatsApp</span>
       </div>
@@ -429,23 +310,6 @@
   <div class="modal">
     <button class="close-btn" id="closeVipModalBtn" aria-label="Close VIP form">×</button>
     <h3 id="vipModalTitle">Join the Cake Cart VIP List</h3>
-    <form id="vipForm">
-      <label for="vip-name">Name</label>
-      <input type="text" id="vip-name" name="vip-name" required autocomplete="name" />
-
-      <label for="vip-email">Email</label>
-      <input type="email" id="vip-email" name="vip-email" required autocomplete="email" />
-
-      <button type="submit">Join VIP List</button>
-    </form>
-  </div>
-</div>
-
-<!-- WhatsApp Modal -->
-<div class="modal-overlay" id="whatsappModal" role="dialog" aria-modal="true" aria-labelledby="whatsappModalTitle" tabindex="-1">
-  <div class="modal">
-    <button class="close-btn" id="closeModalBtn" aria-label="Close WhatsApp form">×</button>
-    <h3 id="whatsappModalTitle">WhatsApp Enquiry</h3>
     <form id="whatsappForm">
       <label for="enquiry-type">Select Enquiry Type</label>
       <select id="enquiry-type" required aria-required="true">
@@ -462,120 +326,31 @@
 </div>
 
 <script>
-  // Auto image loader for product grids
-  const imageSections = [
-    { id: 'cakes-grid', base: 'Cake' },
-    { id: 'cookies-grid', base: 'Cookies' },
-    { id: 'cupcakes-grid', base: 'Cupcake' },
-    { id: 'cakes-cookies-grid', base: 'Cake&Cookies' },
-    { id: 'cake-pops-grid', base: 'CakePops' },
-    { id: 'dessert-jars-grid', base: 'DessertJars' },
-    { id: 'kids-baking-grid', base: 'Class' }
-  ];
-
-document.addEventListener('DOMContentLoaded', () => {
-    imageSections.forEach(({id, base}) => {
-      let count = 1, fail = 0;
-      const load = () => {
-        if (fail >= 5) return;
-        const img = new Image();
-        img.src = `${base}${count}.jpg`;  // <-- updated path to load images from main/
-        img.onload = () => {
-          const card = document.createElement('div');
-          card.className = 'product-card';
-          card.appendChild(img);
-          document.getElementById(id).appendChild(card);
-          count++; fail = 0; load();
-        };
-        img.onerror = () => { fail++; count++; load(); };
-      };
-      load();
-    });
-  });
-
-  // Cake Cart Countdown & Live toggle
-  const launchDate = new Date('2025-08-04T12:00:00'); // Adjust launch date/time here
-  const countdownEl = document.getElementById('countdown');
-  const nowLiveEl = document.getElementById('now-live');
-
-  function updateCountdown() {
-    const now = new Date();
-    const diff = launchDate - now;
-    if (diff <= 0) {
-      countdownEl.style.display = 'none';
-      nowLiveEl.style.display = 'block';
-      clearInterval(countdownInterval);
-      return;
-    }
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const seconds = Math.floor((diff % (1000*60)) / 1000);
-
-    countdownEl.textContent = `Launch in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-  updateCountdown();
-  const countdownInterval = setInterval(updateCountdown, 1000);
-
-  // VIP Modal controls
-  const vipBtn = document.getElementById('join-vip-btn');
-  const vipModal = document.getElementById('vipModal');
-  const closeVipBtn = document.getElementById('closeVipModalBtn');
-  const vipForm = document.getElementById('vipForm');
-
-  vipBtn.addEventListener('click', () => {
-    vipModal.classList.add('active');
-    vipBtn.setAttribute('aria-expanded', 'true');
-    vipModal.querySelector('input').focus();
-  });
-  closeVipBtn.addEventListener('click', () => {
-    vipModal.classList.remove('active');
-    vipBtn.setAttribute('aria-expanded', 'false');
-    vipForm.reset();
-    vipBtn.focus();
-  });
-  vipModal.addEventListener('click', e => {
-    if(e.target === vipModal) closeVipBtn.click();
-  });
-  document.addEventListener('keydown', e => {
-    if(e.key === 'Escape' && vipModal.classList.contains('active')) {
-      closeVipBtn.click();
-    }
-  });
-  vipForm.addEventListener('submit', e => {
-    e.preventDefault();
-    alert(`Thanks for joining the VIP list, ${vipForm['vip-name'].value.trim()}! We will contact you at ${vipForm['vip-email'].value.trim()}.`);
-    vipForm.reset();
-    closeVipBtn.click();
-  });
-
-  // WhatsApp Modal controls
   const whatsappBtn = document.getElementById('whatsappBtn');
-  const whatsappModal = document.getElementById('whatsappModal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
+  const vipModal = document.getElementById('vipModal');
+  const closeVipModalBtn = document.getElementById('closeVipModalBtn');
   const enquiryTypeSelect = document.getElementById('enquiry-type');
   const dynamicFieldsDiv = document.getElementById('dynamic-fields');
   const whatsappForm = document.getElementById('whatsappForm');
 
   whatsappBtn.addEventListener('click', () => {
-    whatsappModal.classList.add('active');
-    whatsappModal.focus();
+    vipModal.classList.add('active');
+    vipModal.focus();
   });
-  closeModalBtn.addEventListener('click', () => {
-    whatsappModal.classList.remove('active');
+
+  closeVipModalBtn.addEventListener('click', () => {
+    vipModal.classList.remove('active');
     whatsappForm.reset();
     dynamicFieldsDiv.innerHTML = '';
     whatsappBtn.focus();
   });
-  whatsappModal.addEventListener('click', (e) => {
-    if (e.target === whatsappModal) {
-      closeModalBtn.click();
-    }
+
+  vipModal.addEventListener('click', (e) => {
+    if (e.target === vipModal) closeVipModalBtn.click();
   });
+
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && whatsappModal.classList.contains('active')) {
-      closeModalBtn.click();
-    }
+    if(e.key === 'Escape' && vipModal.classList.contains('active')) closeVipModalBtn.click();
   });
 
   enquiryTypeSelect.addEventListener('change', function() {
@@ -586,13 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
       dynamicFieldsDiv.innerHTML = `
         <label for="name">Name</label>
         <input id="name" name="name" required />
-
         <label for="date">Wedding Date</label>
         <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-
         <label for="budget">Budget</label>
         <input type="text" id="budget" name="budget" placeholder="e.g. R5000 - R10000" />
-
         <label for="details">Details (optional)</label>
         <textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>
       `;
@@ -600,10 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
       dynamicFieldsDiv.innerHTML = `
         <label for="name">Name</label>
         <input id="name" name="name" required />
-
         <label for="date">Date</label>
         <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-
         <label for="age-group">Age Group</label>
         <select id="age-group" name="age-group" required>
           <option value="" disabled selected>Select age group</option>
@@ -611,7 +381,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="6-8 years">6-8 years</option>
           <option value="9-12 years">9-12 years</option>
         </select>
-
         <label for="num-children">Number of Children</label>
         <input type="number" id="num-children" name="num-children" min="1" required />
       `;
@@ -619,10 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
       dynamicFieldsDiv.innerHTML = `
         <label for="name">Name</label>
         <input id="name" name="name" required />
-
         <label for="date">Date</label>
         <input type="date" id="date" name="date" required min="${new Date().toISOString().split('T')[0]}" />
-
         <label for="budget">Budget</label>
         <input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />
       `;
@@ -630,7 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
       dynamicFieldsDiv.innerHTML = `
         <label for="budget">Budget</label>
         <input type="text" id="budget" name="budget" placeholder="Optional" />
-
         <label for="msg">Message</label>
         <textarea id="msg" name="msg" required rows="4"></textarea>
       `;
@@ -640,63 +406,46 @@ document.addEventListener('DOMContentLoaded', () => {
   whatsappForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const type = enquiryTypeSelect.value;
-    if(!type) {
-      alert('Please select an enquiry type.');
-      return;
-    }
-    let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`;
+    if(!type) { alert('Please select an enquiry type.'); return; }
+
+    let text = `Hello Oh My Nosh! I have an enquiry about *${type}*.`
 
     if(type === 'General Enquiry') {
       const budget = document.getElementById('budget').value.trim();
       const msg = document.getElementById('msg').value.trim();
-      if(!msg) {
-        alert('Please enter your message.');
-        return;
-      }
-      if(budget) {
-        text += `%0ABudget: ${encodeURIComponent(budget)}`;
-      }
+      if(!msg) { alert('Please enter your message.'); return; }
+      if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
       text += `%0A%0AMessage: ${encodeURIComponent(msg)}`;
     } else if(type === 'Kids Baking Class') {
       const name = document.getElementById('name').value.trim();
       const date = document.getElementById('date').value.trim();
       const ageGroup = document.getElementById('age-group').value;
       const numChildren = document.getElementById('num-children').value.trim();
-
-      if(!name || !date || !ageGroup || !numChildren) {
-        alert('Please fill in all required fields.');
-        return;
-      }
+      if(!name || !date || !ageGroup || !numChildren) { alert('Please fill in all required fields.'); return; }
       text += `%0AName: ${encodeURIComponent(name)}`;
       text += `%0ADate: ${encodeURIComponent(date)}`;
       text += `%0AAge Group: ${encodeURIComponent(ageGroup)}`;
       text += `%0ANumber of Children: ${encodeURIComponent(numChildren)}`;
-    } else { // Weddings or Birthday
+    } else {
       const name = document.getElementById('name').value.trim();
       const date = document.getElementById('date').value.trim();
       const budget = document.getElementById('budget') ? document.getElementById('budget').value.trim() : '';
-
-      if(!name || !date) {
-        alert('Please fill in all required fields.');
-        return;
-      }
+      if(!name || !date) { alert('Please fill in all required fields.'); return; }
       text += `%0AName: ${encodeURIComponent(name)}`;
       text += `%0ADate: ${encodeURIComponent(date)}`;
-      if(budget) {
-        text += `%0ABudget: ${encodeURIComponent(budget)}`;
-      }
+      if(budget) text += `%0ABudget: ${encodeURIComponent(budget)}`;
       if(type === 'Weddings') {
         const details = document.getElementById('details').value.trim();
         if(details) text += `%0ADetails: ${encodeURIComponent(details)}`;
       }
     }
+
     window.open(`https://wa.me/27799750908?text=${text}`, '_blank');
-    whatsappModal.classList.remove('active');
+    vipModal.classList.remove('active');
     whatsappForm.reset();
     dynamicFieldsDiv.innerHTML = '';
     whatsappBtn.focus();
   });
 </script>
-
 </body>
 </html>
