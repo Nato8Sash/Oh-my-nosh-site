@@ -349,6 +349,7 @@
       <select id="enquiry-type" required aria-required="true">
         <option value="" disabled selected>Select an option</option>
         <option value="Weddings">Weddings</option>
+        <option value="Kids
         <option value="Kids Baking Class">Kids Baking Class</option>
         <option value="Birthday">Birthday</option>
         <option value="Cake Cart">Cake Cart</option>
@@ -361,50 +362,51 @@
 </div>
 
 <script>
-  // Smart product image loader (images in "main/" folder)
-  const sections = [
-    {id:'cakes', prefix:'Cake'},
-    {id:'cookies', prefix:'Cookies'},
-    {id:'cupcakes', prefix:'Cupcake'},
-    {id:'cakes-cookies', prefix:'Cake&Cookies'},
-    {id:'cake-pops', prefix:'CakePops'},
-    {id:'dessert-jars', prefix:'DessertJars'},
-    {id:'kids-baking', prefix:'Class'}
-  ];
+  // Wait for DOM to load
+  window.addEventListener("DOMContentLoaded", () => {
+    // Smart product image loader (images in "main/" folder)
+    const sections = [
+      {id:'cakes', prefix:'Cake'},
+      {id:'cookies', prefix:'Cookies'},
+      {id:'cupcakes', prefix:'Cupcake'},
+      {id:'cakes-cookies', prefix:'Cake&Cookies'},
+      {id:'cake-pops', prefix:'CakePops'},
+      {id:'dessert-jars', prefix:'DessertJars'},
+      {id:'kids-baking', prefix:'Class'}
+    ];
 
-  sections.forEach(section => {
-    const container = document.getElementById(`${section.id}-grid`);
-    let missingCount = 0;
+    sections.forEach(section => {
+      const container = document.getElementById(`${section.id}-grid`);
+      let missingCount = 0;
 
-    for(let i = 1; i <= 50; i++){   // check up to 20
-      if(missingCount >= 5) break; // stop if 5 in a row missing
-      const imgPath = `main/${section.prefix}${i}.jpg`; // ✅ restored "main/"
+      for(let i = 1; i <= 50; i++){  
+        if(missingCount >= 5) break; // stop if 5 in a row missing
+        const imgPath = `main/${section.prefix}${i}.jpg`;
 
-      const img = new Image();
-      img.src = imgPath;
+        const img = new Image();
+        img.src = imgPath;
 
-      img.onload = () => {
-        missingCount = 0; // reset if found
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
-        container.appendChild(card);
-      };
+        img.onload = () => {
+          missingCount = 0; // reset if found
+          const card = document.createElement('div');
+          card.className = 'product-card';
+          card.innerHTML = `<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
+          container.appendChild(card);
+        };
 
-      img.onerror = () => { missingCount++; };
-    }
+        img.onerror = () => { missingCount++; };
+      }
+    });
   });
-  
-</script>
 
   // WhatsApp modal functionality
   const whatsappBtn = document.getElementById('whatsappBtn');
+  const joinVipBtn = document.getElementById('join-vip-btn');
   const vipModal = document.getElementById('vipModal');
   const closeVipModalBtn = document.getElementById('closeVipModalBtn');
   const enquiryTypeSelect = document.getElementById('enquiry-type');
   const dynamicFieldsDiv = document.getElementById('dynamic-fields');
   const whatsappForm = document.getElementById('whatsappForm');
-  const joinVipBtn = document.getElementById('join-vip-btn');
 
   // Open modal
   [whatsappBtn, joinVipBtn].forEach(btn=>{
@@ -430,18 +432,40 @@
     dynamicFieldsDiv.innerHTML='';
     const today = new Date().toISOString().split('T')[0];
     if(val==='Weddings'){
-      dynamicFieldsDiv.innerHTML=`<label for="name">Name</label><input id="name" name="name" required /><label for="date">Wedding Date</label><input type="date" id="date" name="date" required min="${today}" /><label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="e.g. R5000 - R10000" /><label for="details">Details (optional)</label><textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>`;
+      dynamicFieldsDiv.innerHTML=`
+        <label for="name">Name</label><input id="name" name="name" required />
+        <label for="date">Wedding Date</label><input type="date" id="date" name="date" required min="${today}" />
+        <label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="e.g. R5000 - R10000" />
+        <label for="details">Details (optional)</label><textarea id="details" name="details" rows="3" placeholder="Additional information"></textarea>`;
     } else if(val==='Kids Baking Class'){
-      dynamicFieldsDiv.innerHTML=`<label for="name">Name</label><input id="name" name="name" required /><label for="date">Date</label><input type="date" id="date" name="date" required min="${today}" /><label for="age-group">Age Group</label><select id="age-group" name="age-group" required><option value="" disabled selected>Select age group</option><option value="3-5 years">3-5 years</option><option value="6-8 years">6-8 years</option><option value="9-12 years">9-12 years</option></select><label for="num-children">Number of Children</label><input type="number" id="num-children" name="num-children" min="1" required />`;
+      dynamicFieldsDiv.innerHTML=`
+        <label for="name">Name</label><input id="name" name="name" required />
+        <label for="date">Date</label><input type="date" id="date" name="date" required min="${today}" />
+        <label for="age-group">Age Group</label>
+        <select id="age-group" name="age-group" required>
+          <option value="" disabled selected>Select age group</option>
+          <option value="3-5 years">3-5 years</option>
+          <option value="6-8 years">6-8 years</option>
+          <option value="9-12 years">9-12 years</option>
+        </select>
+        <label for="num-children">Number of Children</label><input type="number" id="num-children" name="num-children" min="1" required />`;
     } else if(val==='Birthday'){
-      dynamicFieldsDiv.innerHTML=`<label for="name">Name</label><input id="name" name="name" required /><label for="date">Date</label><input type="date" id="date" name="date" required min="${today}" /><label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />`;
+      dynamicFieldsDiv.innerHTML=`
+        <label for="name">Name</label><input id="name" name="name" required />
+        <label for="date">Date</label><input type="date" id="date" name="date" required min="${today}" />
+        <label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="e.g. R3000 - R7000" />`;
     } else if(val==='Cake Cart'){
-      dynamicFieldsDiv.innerHTML=`<label for="name">Name & Surname</label><input id="name" name="name" required /><label for="date">Date of Event / Occasion</label><input type="date" id="date" name="date" required min="${today}" />`;
+      dynamicFieldsDiv.innerHTML=`
+        <label for="name">Name & Surname</label><input id="name" name="name" required />
+        <label for="date">Date of Event / Occasion</label><input type="date" id="date" name="date" required min="${today}" />`;
     } else if(val==='General Enquiry'){
-      dynamicFieldsDiv.innerHTML=`<label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="Optional" /><label for="msg">Message</label><textarea id="msg" name="msg" required rows="4"></textarea>`;
+      dynamicFieldsDiv.innerHTML=`
+        <label for="budget">Budget</label><input type="text" id="budget" name="budget" placeholder="Optional" />
+        <label for="msg">Message</label><textarea id="msg" name="msg" required rows="4"></textarea>`;
     }
   });
 
+  // WhatsApp form submit
   whatsappForm.addEventListener('submit', function(e){
     e.preventDefault();
     const type=enquiryTypeSelect.value;
