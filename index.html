@@ -339,10 +339,10 @@
   </section>
 </main>
 
-<!-- VIP Modal -->
+<!-- VIP / WhatsApp Modal -->
 <div class="modal-overlay" id="vipModal" role="dialog" aria-modal="true" aria-labelledby="vipModalTitle" tabindex="-1">
   <div class="modal">
-    <button class="close-btn" id="closeVipModalBtn" aria-label="Close VIP form">×</button>
+    <button class="close-btn" id="closeVipModalBtn" aria-label="Close form">×</button>
     <h3 id="vipModalTitle">Contact Oh My Nosh</h3>
     <form id="whatsappForm">
       <label for="enquiry-type">Select Enquiry Type</label>
@@ -361,77 +361,109 @@
 </div>
 
 <script>
-  // DOM ready
-  window.addEventListener("DOMContentLoaded", () => {
-
-    // Load product images dynamically
-    const sections = [
-      {id:'cakes', prefix:'Cake'},
-      {id:'cookies', prefix:'Cookies'},
-      {id:'cupcakes', prefix:'Cupcake'},
-      {id:'cakes-cookies', prefix:'Cake&Cookies'},
-      {id:'cake-pops', prefix:'CakePops'},
-      {id:'dessert-jars', prefix:'DessertJars'},
-      {id:'kids-baking', prefix:'Class'}
-    ];
-
-    sections.forEach(section => {
-      const container = document.getElementById(`${section.id}-grid`);
-      for(let i = 1; i <= 50; i++){
-        const imgPath = `${section.prefix}${i}.jpg`;
-        const img = new Image();
-        img.src = imgPath;
-        img.onload = () => {
-          const card = document.createElement('div');
-          card.className = 'product-card';
-          card.innerHTML = `<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
-          container.appendChild(card);
-        };
-      }
-    });
-
-    // VIP Modal
-    const vipBtn = document.getElementById("join-vip-btn");
-    const vipModal = document.getElementById("vipModal");
-    const closeVipBtn = document.getElementById("closeVipModalBtn");
-
-    vipBtn.addEventListener("click", () => {
-      vipModal.classList.add("active");
-      vipBtn.setAttribute("aria-expanded","true");
-      vipModal.focus();
-    });
-    closeVipBtn.addEventListener("click", () => {
-      vipModal.classList.remove("active");
-      vipBtn.setAttribute("aria-expanded","false");
-    });
-    vipModal.addEventListener("click", e => { if(e.target === vipModal) closeVipBtn.click(); });
-
-    // WhatsApp Form
-    const form = document.getElementById("whatsappForm");
-    const enquiryType = document.getElementById("enquiry-type");
-    const dynamicFields = document.getElementById("dynamic-fields");
-
-    enquiryType.addEventListener("change", () => {
-      dynamicFields.innerHTML = "";
-      if(enquiryType.value === "Cake Cart"){
-        const label = document.createElement("label");
-        label.textContent = "Your Cake Flavour";
-        const input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "e.g. Chocolate, Vanilla";
-        input.required = true;
-        dynamicFields.appendChild(label);
-        dynamicFields.appendChild(input);
-      }
-    });
-
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const message = `Hello! I would like to enquire about ${enquiryType.value}.`;
-      window.open(`https://wa.me/27721234567?text=${encodeURIComponent(message)}`, "_blank");
-    });
-
+window.addEventListener("DOMContentLoaded", () => {
+  // Load products dynamically
+  const sections = [
+    {id:'cakes', prefix:'Cake'},
+    {id:'cookies', prefix:'Cookies'},
+    {id:'cupcakes', prefix:'Cupcake'},
+    {id:'cakes-cookies', prefix:'Cake&Cookies'},
+    {id:'cake-pops', prefix:'CakePops'},
+    {id:'dessert-jars', prefix:'DessertJars'},
+    {id:'kids-baking', prefix:'Class'}
+  ];
+  sections.forEach(section => {
+    const container = document.getElementById(`${section.id}-grid`);
+    for(let i=1;i<=50;i++){
+      const imgPath = `${section.prefix}${i}.jpg`;
+      const img = new Image();
+      img.src = imgPath;
+      img.onload = () => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
+        container.appendChild(card);
+      };
+    }
   });
+
+  // Modal open/close
+  const vipBtn = document.getElementById("join-vip-btn");
+  const whatsappBtn = document.getElementById("whatsappBtn");
+  const vipModal = document.getElementById("vipModal");
+  const closeVipBtn = document.getElementById("closeVipModalBtn");
+  const enquiryType = document.getElementById("enquiry-type");
+  const dynamicFields = document.getElementById("dynamic-fields");
+
+  function openModal(type=''){
+    vipModal.classList.add("active");
+    vipModal.focus();
+    if(type) enquiryType.value = type;
+    updateDynamicFields();
+  }
+
+  vipBtn.addEventListener("click", ()=>openModal("Cake Cart"));
+  whatsappBtn.addEventListener("click", ()=>openModal());
+  closeVipBtn.addEventListener("click", ()=>vipModal.classList.remove("active"));
+  vipModal.addEventListener("click", e => { if(e.target===vipModal) closeVipBtn.click(); });
+
+  enquiryType.addEventListener("change", updateDynamicFields);
+
+  function updateDynamicFields(){
+    const type = enquiryType.value;
+    dynamicFields.innerHTML = "";
+    if(type==="Cake Cart"){
+      dynamicFields.innerHTML = `
+        <label>Your Name</label>
+        <input type="text" placeholder="Full Name" required />
+        <label>Date of Event</label>
+        <input type="date" required />
+        <label>Nature of Event</label>
+        <input type="text" placeholder="Birthday, Wedding, etc." required />
+      `;
+    } else if(type==="Birthday" || type==="Weddings" || type==="General Enquiry"){
+      dynamicFields.innerHTML = `
+        <label>Your Name</label>
+        <input type="text" placeholder="Full Name" required />
+        <label>Date of Event</label>
+        <input type="date" required />
+        <label>Details</label>
+        <textarea placeholder="Add any extra details..." required></textarea>
+      `;
+    } else if(type==="Kids Baking Class"){
+      dynamicFields.innerHTML = `
+        <label>Your Name</label>
+        <input type="text" placeholder="Full Name" required />
+        <label>Age Group</label>
+        <select required>
+          <option value="" disabled selected>Select Age Group</option>
+          <option value="2-4">2-4</option>
+          <option value="5-7">5-7</option>
+          <option value="8-10">8-10</option>
+          <option value="11-13">11-13</option>
+          <option value="14+">14+</option>
+        </select>
+        <label>Date of Class</label>
+        <input type="date" required />
+        <label>Any Notes</label>
+        <textarea placeholder="Add any extra notes..." required></textarea>
+      `;
+    }
+  }
+
+  // WhatsApp form submission
+  const form = document.getElementById("whatsappForm");
+  form.addEventListener("submit", e=>{
+    e.preventDefault();
+    const type = enquiryType.value;
+    let details = "";
+    const inputs = dynamicFields.querySelectorAll("input, select, textarea");
+    inputs.forEach(i=>details += `${i.previousElementSibling.textContent}: ${i.value}\n`);
+    const message = `Hello! I would like to enquire about ${type}.\n${details}`;
+    window.open(`https://wa.me/27721234567?text=${encodeURIComponent(message)}`, "_blank");
+  });
+
+});
 </script>
 
 </body>
