@@ -137,13 +137,19 @@
       position: relative;
     }
     #cake-cart-section h2 { color: var(--dusty-rose); font-size: 2rem; margin-bottom: 10px; }
-    #cake-cart-section img {
-      max-width: 320px;
-      margin: 20px auto;
-      display: block;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(192, 128, 129, 0.25);
+    .carousel { position: relative; max-width: 360px; margin: 20px auto; overflow: hidden; border-radius: 15px; box-shadow: 0 6px 20px rgba(192, 128, 129, 0.25); }
+    .carousel-images { display: flex; transition: transform 0.5s ease-in-out; }
+    .carousel-images img { width: 100%; flex-shrink: 0; }
+    .carousel button {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.5); color: white; border: none; cursor: pointer; padding: 10px; border-radius: 50%;
     }
+    .carousel .prev { left: 10px; }
+    .carousel .next { right: 10px; }
+    .dots { display: flex; justify-content: center; margin-top: 10px; }
+    .dot { height: 12px; width: 12px; margin: 0 4px; background: #ccc; border-radius: 50%; display: inline-block; cursor: pointer; }
+    .dot.active { background: var(--dusty-rose); }
+
     #cake-cart-section p.description {
       font-size: 1.1rem;
       color: var(--dark-text);
@@ -289,7 +295,15 @@
 <!-- Cake Cart Section -->
 <section id="cake-cart-section" aria-label="Cake Cart Launch">
   <h2>Our Elegant Cake Cart</h2>
-  <img src="cake-cart.png" alt="Elegant white cake cart" />
+  <div class="carousel">
+    <div class="carousel-images">
+      <img src="cake-cart.png" alt="Elegant white cake cart" />
+      <img src="CatalogueCakeCart.png" alt="Cake cart catalogue" />
+    </div>
+    <button class="prev" aria-label="Previous slide">&#10094;</button>
+    <button class="next" aria-label="Next slide">&#10095;</button>
+  </div>
+  <div class="dots"></div>
   <p class="description">Order your custom cake experience and watch your favourite flavours come to life. It's fun, fast, and utterly delicious!</p>
   <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Order Now</button>
   
@@ -314,6 +328,7 @@
 
   <section id="contact">
     <h2>Contact Us</h2>
+    <p>Based in Johannesburg, South Africa. Delivery charges apply.</p>
     <div class="social-icons" role="list" aria-label="Social media contacts">
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Instagram">
         <a href="https://www.instagram.com/ohmynoshh" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
@@ -340,131 +355,69 @@
 </main>
 
 <!-- VIP / WhatsApp Modal -->
-<div class="modal-overlay" id="vipModal" role="dialog" aria-modal="true" aria-labelledby="vipModalTitle" tabindex="-1">
+<div class="modal-overlay" id="vipModal" role="dialog" aria-modal="true" aria-labelledby="vipModalTitle">
   <div class="modal">
-    <button class="close-btn" id="closeVipModalBtn" aria-label="Close form">×</button>
-    <h3 id="vipModalTitle">Contact Oh My Nosh</h3>
-    <form id="whatsappForm">
-      <label for="enquiry-type">Select Enquiry Type</label>
-      <select id="enquiry-type" required aria-required="true">
-        <option value="" disabled selected>Select an option</option>
-        <option value="Weddings">Weddings</option>
-        <option value="Kids Baking Class">Kids Baking Class</option>
-        <option value="Birthday">Birthday</option>
-        <option value="Cake Cart">Cake Cart</option>
-        <option value="General Enquiry">General Enquiry</option>
-      </select>
-      <div id="dynamic-fields"></div>
+    <span class="close-btn" onclick="document.getElementById('vipModal').classList.remove('active')">&times;</span>
+    <h3 id="vipModalTitle">Place Your Order</h3>
+    <form>
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+      <label for="details">Order Details</label>
+      <textarea id="details" name="details" rows="4" required></textarea>
       <button type="submit">Send via WhatsApp</button>
     </form>
   </div>
 </div>
-
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-  // Load products dynamically
-  const sections = [
-    {id:'cakes', prefix:'Cake'},
-    {id:'cookies', prefix:'Cookies'},
-    {id:'cupcakes', prefix:'Cupcake'},
-    {id:'cakes-cookies', prefix:'Cake&Cookies'},
-    {id:'cake-pops', prefix:'CakePops'},
-    {id:'dessert-jars', prefix:'DessertJars'},
-    {id:'kids-baking', prefix:'Class'}
-  ];
-  sections.forEach(section => {
-    const container = document.getElementById(`${section.id}-grid`);
-    for(let i=1;i<=50;i++){
-      const imgPath = `${section.prefix}${i}.jpg`;
-      const img = new Image();
-      img.src = imgPath;
-      img.onload = () => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `<img src="${imgPath}" alt="${section.prefix} ${i}" />`;
-        container.appendChild(card);
-      };
-    }
+  
+  <script>
+  // Back-to-top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTop.style.display = 'block';
+    else backToTop.style.display = 'none';
   });
+  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-  // Modal open/close
-  const vipBtn = document.getElementById("join-vip-btn");
-  const whatsappBtn = document.getElementById("whatsappBtn");
-  const vipModal = document.getElementById("vipModal");
-  const closeVipBtn = document.getElementById("closeVipModalBtn");
-  const enquiryType = document.getElementById("enquiry-type");
-  const dynamicFields = document.getElementById("dynamic-fields");
-
-  function openModal(type=''){
-    vipModal.classList.add("active");
-    vipModal.focus();
-    if(type) enquiryType.value = type;
-    updateDynamicFields();
-  }
-
-  vipBtn.addEventListener("click", ()=>openModal("Cake Cart"));
-  whatsappBtn.addEventListener("click", ()=>openModal());
-  closeVipBtn.addEventListener("click", ()=>vipModal.classList.remove("active"));
-  vipModal.addEventListener("click", e => { if(e.target===vipModal) closeVipBtn.click(); });
-
-  enquiryType.addEventListener("change", updateDynamicFields);
-
-  function updateDynamicFields(){
-    const type = enquiryType.value;
-    dynamicFields.innerHTML = "";
-    if(type==="Cake Cart"){
-      dynamicFields.innerHTML = `
-        <label>Your Name</label>
-        <input type="text" placeholder="Full Name" required />
-        <label>Date of Event</label>
-        <input type="date" required />
-        <label>Nature of Event</label>
-        <input type="text" placeholder="Birthday, Wedding, etc." required />
-      `;
-    } else if(type==="Birthday" || type==="Weddings" || type==="General Enquiry"){
-      dynamicFields.innerHTML = `
-        <label>Your Name</label>
-        <input type="text" placeholder="Full Name" required />
-        <label>Date of Event</label>
-        <input type="date" required />
-        <label>Details</label>
-        <textarea placeholder="Add any extra details..." required></textarea>
-      `;
-    } else if(type==="Kids Baking Class"){
-      dynamicFields.innerHTML = `
-        <label>Your Name</label>
-        <input type="text" placeholder="Full Name" required />
-        <label>Age Group</label>
-        <select required>
-          <option value="" disabled selected>Select Age Group</option>
-          <option value="2-4">2-4</option>
-          <option value="5-7">5-7</option>
-          <option value="8-10">8-10</option>
-          <option value="11-13">11-13</option>
-          <option value="14+">14+</option>
-        </select>
-        <label>Date of Class</label>
-        <input type="date" required />
-        <label>Any Notes</label>
-        <textarea placeholder="Add any extra notes..." required></textarea>
-      `;
+  // Fireworks effect over Cake Cart
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = 300;
+  function random(min,max){return Math.random()*(max-min)+min;}
+  function Firework(x,y){
+    this.x=x;this.y=y;this.sparks=[];
+    for(let i=0;i<100;i++){
+      this.sparks.push({
+        x:x,y:y,
+        vx:random(-3,3),vy:random(-3,3),
+        alpha:1
+      });
     }
   }
-
-  // WhatsApp form submission
-  const form = document.getElementById("whatsappForm");
-  form.addEventListener("submit", e=>{
-    e.preventDefault();
-    const type = enquiryType.value;
-    let details = "";
-    const inputs = dynamicFields.querySelectorAll("input, select, textarea");
-    inputs.forEach(i=>details += `${i.previousElementSibling.textContent}: ${i.value}\n`);
-    const message = `Hello! I would like to enquire about ${type}.\n${details}`;
-    window.open(`https://wa.me/27721234567?text=${encodeURIComponent(message)}`, "_blank");
-  });
-
-});
+  Firework.prototype.update=function(){
+    this.sparks.forEach(s=>{
+      s.x+=s.vx;s.y+=s.vy;s.alpha-=0.01;
+    });
+  }
+  Firework.prototype.draw=function(){
+    this.sparks.forEach(s=>{
+      if(s.alpha>0){
+        ctx.fillStyle=`rgba(255,200,100,${s.alpha})`;
+        ctx.fillRect(s.x,s.y,2,2);
+      }
+    });
+  }
+  let fireworks=[];
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(Math.random()<0.05){
+      fireworks.push(new Firework(random(0,canvas.width),random(0,canvas.height)));
+    }
+    fireworks.forEach(fw=>{fw.update();fw.draw();});
+    fireworks=fireworks.filter(fw=>fw.sparks.some(s=>s.alpha>0));
+    requestAnimationFrame(animate);
+  }
+  animate();
 </script>
-
 </body>
 </html>
