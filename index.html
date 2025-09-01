@@ -137,13 +137,40 @@
       position: relative;
     }
     #cake-cart-section h2 { color: var(--dusty-rose); font-size: 2rem; margin-bottom: 10px; }
-    #cake-cart-section img {
+
+    /* Carousel */
+    .carousel {
+      position: relative;
       max-width: 320px;
       margin: 20px auto;
-      display: block;
+      overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 6px 20px rgba(192, 128, 129, 0.25);
     }
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .carousel-inner img {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 15px;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.3);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
     #cake-cart-section p.description {
       font-size: 1.1rem;
       color: var(--dark-text);
@@ -240,33 +267,33 @@
       background-color: var(--sage-green);
       outline: none;
     }
-    .modal .close-btn {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--dusty-rose);
-      cursor: pointer;
-      user-select: none;
-    }
-    .modal .close-btn:focus { outline: 2px solid var(--dusty-rose); }
+          .modal .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--dusty-rose);
+        cursor: pointer;
+        user-select: none;
+      }
+      .modal .close-btn:focus { outline: 2px solid var(--dusty-rose); }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      nav a { font-size: 1rem; margin: 5px 8px; padding: 8px 12px; }
-      .products-grid { grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 15px; }
-      .social-icons { gap: 30px; }
-      .social-icons svg { width: 32px; height: 32px; }
-      .social-label { font-size: 0.85rem; }
-      main { margin: 20px auto 60px; padding: 0 10px; }
-      #cake-cart-section img { max-width: 100%; }
-    }
-    @media (min-width: 1200px) {
-      nav a { font-size: 1.15rem; margin: 0 20px; padding: 10px 16px; }
-      .social-icons svg { width: 44px; height: 44px; }
-      .social-label { font-size: 1rem; }
-    }
+      /* Responsive */
+      @media (max-width: 600px) {
+        nav a { font-size: 1rem; margin: 5px 8px; padding: 8px 12px; }
+        .products-grid { grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 15px; }
+        .social-icons { gap: 30px; }
+        .social-icons svg { width: 32px; height: 32px; }
+        .social-label { font-size: 0.85rem; }
+        main { margin: 20px auto 60px; padding: 0 10px; }
+        #cake-cart-section img { max-width: 100%; }
+      }
+      @media (min-width: 1200px) {
+        nav a { font-size: 1.15rem; margin: 0 20px; padding: 10px 16px; }
+        .social-icons svg { width: 44px; height: 44px; }
+        .social-label { font-size: 1rem; }
+      }
   </style>
 </head>
 <body>
@@ -289,7 +316,18 @@
 <!-- Cake Cart Section -->
 <section id="cake-cart-section" aria-label="Cake Cart Launch">
   <h2>Our Elegant Cake Cart</h2>
-  <img src="cake-cart.png" alt="Elegant white cake cart" />
+
+  <!-- Carousel -->
+  <div class="carousel" aria-label="Cake Cart Images">
+    <div class="carousel-inner" id="carouselInner">
+      <img src="cake-cart1.png" alt="Elegant white cake cart view 1" />
+      <img src="cake-cart2.png" alt="Elegant white cake cart view 2" />
+      <img src="cake-cart3.png" alt="Elegant white cake cart view 3" />
+    </div>
+    <button class="carousel-btn prev" aria-label="Previous Image">&#10094;</button>
+    <button class="carousel-btn next" aria-label="Next Image">&#10095;</button>
+  </div>
+
   <p class="description">Order your custom cake experience and watch your favourite flavours come to life. It's fun, fast, and utterly delicious!</p>
   <button id="join-vip-btn" aria-haspopup="dialog" aria-controls="vipModal" aria-expanded="false">Order Now</button>
   
@@ -321,14 +359,12 @@
         </a>
         <span class="social-label">Instagram</span>
       </div>
-
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="Facebook">
         <a href="https://www.facebook.com/share/1A6DKycvdV/" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
           <svg role="img" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.75v-2.88h1.75v-2.2c0-1.73 1.04-2.69 2.64-2.69.77 0 1.58.14 1.58.14v1.74h-.89c-.88 0-1.15.54-1.15 1.1v1.33h1.96l-.31 2.88h-1.65v6.99A10 10 0 0022 12z"/></svg>
         </a>
         <span class="social-label">Facebook</span>
       </div>
-
       <div class="social-icon-wrapper" role="listitem" tabindex="0" aria-label="WhatsApp">
         <a href="javascript:void(0);" id="whatsappBtn" aria-hidden="true" tabindex="-1">
           <svg role="img" viewBox="0 0 32 32"><path d="M16.01 2.99c-7.27 0-13.15 5.88-13.15 13.15 0 2.31.61 4.56 1.77 6.55L2 30l7.5-2.48a13.05 13.05 0 006.5 1.73h.01c7.27 0 13.15-5.88 13.15-13.15S23.28 2.99 16.01 2.99z"/></svg>
@@ -462,6 +498,26 @@ window.addEventListener("DOMContentLoaded", () => {
     const message = `Hello! I would like to enquire about ${type}.\n${details}`;
     window.open(`https://wa.me/27721234567?text=${encodeURIComponent(message)}`, "_blank");
   });
+
+  // Carousel JS
+  const carouselInner = document.getElementById("carouselInner");
+  const prevBtn = document.querySelector(".carousel-btn.prev");
+  const nextBtn = document.querySelector(".carousel-btn.next");
+  let carouselIndex = 0;
+
+  function showSlide(index){
+    const total = carouselInner.children.length;
+    if(index < 0) carouselIndex = total -1;
+    else if(index >= total) carouselIndex = 0;
+    else carouselIndex = index;
+    carouselInner.style.transform = `translateX(-${carouselIndex * 100}%)`;
+  }
+
+  prevBtn.addEventListener("click", ()=>showSlide(carouselIndex-1));
+  nextBtn.addEventListener("click", ()=>showSlide(carouselIndex+1));
+
+  // Optional: auto-slide every 5 seconds
+  setInterval(()=>showSlide(carouselIndex+1), 5000);
 
 });
 </script>
